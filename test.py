@@ -6,5 +6,7 @@ def hello_world():
     return 'hello test'
 if __name__ == '__main__':
     app.run()
+
+print('ola amigows')
     
 print("chaos")
