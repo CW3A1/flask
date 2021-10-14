@@ -65,5 +65,10 @@ def test():
     print(resp.json())
     return jsonify(resp.json())
 
+@app.route('/api/pushurl/<id>/<status>')
+def pushJSONtoDB(id, status):
+    requests.post('http://localhost:11001/api/push', json={"id": int(id), "status": int(status)})
+    return requests.get("http://localhost:11001/api/column/all").json()
+
 if __name__ == '__main__':
     app.run(debug=True)
