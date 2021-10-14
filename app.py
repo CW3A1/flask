@@ -1,15 +1,14 @@
 # Importing Flask
 from flask import Flask, render_template, redirect, url_for, request,session, flash
 from datetime import timedelta
-from flask_socketio import SocketIO, emit
-from blueprint import second
-
+from flask_socketio import SocketIO, emit, send
 # Defining different Flask-folders and names
 
 app = Flask(__name__, template_folder='HTML_Templates',static_folder='Style')
 app.secret_key = 'PNOISFUCKINGAWESOME'
 app.permanent_session_lifetime = timedelta(days=0,hours=0,minutes=5)
-
+TEMPLATES_AUTO_RELOAD = True
+socketio = SocketIO(app)
 # Defining different HTML pages with their corresponding app routes
 
 # Main page
@@ -67,8 +66,14 @@ def logout():
     session.pop('email', None)
     return redirect(url_for('login'))
 
+# SocketIO implementation
+@socketio.on('message')
+def handle_message(msg):
+    print('received message: ' + msg)
+
+
 # Trying multiple scripts using Blueprint
 
 # Making sure the app runs on startup
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app,debug=True)
