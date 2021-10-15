@@ -1,5 +1,5 @@
 from os import environ
-from flask import Flask, json, render_template, redirect, url_for, request,session, flash, jsonify
+from flask import Flask, json, render_template, redirect, url_for, request, session, flash
 from datetime import timedelta
 import requests, environment
 
