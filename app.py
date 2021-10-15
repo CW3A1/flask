@@ -1,6 +1,7 @@
-from flask import Flask, render_template, redirect, url_for, request,session, flash, jsonify
+from os import environ
+from flask import Flask, json, render_template, redirect, url_for, request,session, flash, jsonify
 from datetime import timedelta
-import requests
+import requests, environment
 
 app = Flask(__name__, template_folder='HTML_Templates',static_folder='Style')
 app.secret_key = 'PNOISFUCKINGAWESOME'
@@ -58,17 +59,3 @@ def logout():
     session.pop('user', None)
     session.pop('email', None)
     return redirect(url_for('login'))
-
-@app.route('/api')
-def test():
-    resp = requests.get("http://localhost:11001/api/column/all")
-    print(resp.json())
-    return jsonify(resp.json())
-
-@app.route('/api/pushurl/<id>/<status>')
-def pushJSONtoDB(id, status):
-    requests.post('http://localhost:11001/api/push', json={"id": int(id), "status": int(status)})
-    return requests.get("http://localhost:11001/api/column/all").json()
-
-if __name__ == '__main__':
-    app.run(debug=True)
