@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>Test Site</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='CSS/main.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
 <header>
@@ -21,4 +21,5 @@
 {% endblock %}
 </div>
 </body>
+<script type=text/javascript src="{{url_for('static', filename='js/test.js') }}"></script>
 </html>

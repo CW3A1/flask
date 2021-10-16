@@ -3,7 +3,7 @@ from flask import Flask, json, render_template, redirect, url_for, request, sess
 from datetime import timedelta
 import requests, environment
 
-app = Flask(__name__, template_folder='HTML_Templates',static_folder='Style')
+app = Flask(__name__, template_folder='html_templates',static_folder='static')
 app.secret_key = 'PNOISFUCKINGAWESOME'
 app.permanent_session_lifetime = timedelta(days=0,hours=0,minutes=5)
 TEMPLATES_AUTO_RELOAD = True
