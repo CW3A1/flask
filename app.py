@@ -2,15 +2,32 @@ from os import environ
 from flask import Flask, json, render_template, redirect, url_for, request, session, flash
 from datetime import timedelta
 import requests, environment
+import time
+import threading
+
 
 app = Flask(__name__, template_folder='html_templates',static_folder='static')
 app.secret_key = 'PNOISFUCKINGAWESOME'
 app.permanent_session_lifetime = timedelta(days=0,hours=0,minutes=5)
 TEMPLATES_AUTO_RELOAD = True
+dataBase = {}
+
+def refresh():
+    threading.Timer(5, refresh).start()
+    dataBase = requests.get('https://pno3cwa2.student.cs.kuleuven.be/api/scheduler/status/beveren').json()
+    global statusBeveren
+    statusBeveren = dataBase['beveren']
+    print(statusBeveren)
+
+refresh()
 
 @app.route('/')
 def home():
     return render_template('home.html')
+
+@app.route('/status')
+def status():
+    return render_template('status.html',status_beveren=statusBeveren)
 
 @app.route('/about')
 def about():
@@ -59,3 +76,8 @@ def logout():
     session.pop('user', None)
     session.pop('email', None)
     return redirect(url_for('login'))
+
+
+
+
+
