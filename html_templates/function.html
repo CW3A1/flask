@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Function</title>
+    </head>
+    <body>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class=flashes>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        <h1> Please enter 4 pairs of X and Y</h1>
+        <form action="#" method="post">
+            <p>Please enter X1</p>
+            <input type="number" step="any" name="X1" value="X1">
+            <p>Please enter Y1</p>
+            <input type="number" step="any" name="Y1" value="Y1">
+            <p>Please enter X2</p>
+            <input type="number" step="any" name="X2" value="X2">
+            <p>Please enter Y2</p>
+            <input type="number" step="any" name="Y2" value="Y2">
+            <p>Please enter X3</p>
+            <input type="number" step="any" name="X3" value="X3">
+            <p>Please enter Y3</p>
+            <input type="number" step="any" name="Y3" value="Y3">
+            <p>Please enter X4</p>
+            <input type="number" step="any" name="X4" value="X4">
+            <p>Please enter Y4</p>
+            <input type="number" step="any" name="Y4" value="Y4">
+            <p> </p>
+            <p> Please make sure that you filled in every pair</p>
+            <input type="submit" name="submit" value="Submit my pairs">
+        </form>
+    </body>

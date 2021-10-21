@@ -4,6 +4,7 @@ from datetime import timedelta
 import requests, environment
 import time
 import threading
+import json
 
 
 app = Flask(__name__, template_folder='html_templates',static_folder='static')
@@ -17,9 +18,8 @@ def refresh():
     dataBase = requests.get('https://pno3cwa2.student.cs.kuleuven.be/api/scheduler/status/beveren').json()
     global statusBeveren
     statusBeveren = dataBase['beveren']
-    print(statusBeveren)
 
-refresh()
+
 
 @app.route('/')
 def home():
@@ -28,6 +28,36 @@ def home():
 @app.route('/status')
 def status():
     return render_template('status.html',status_beveren=statusBeveren)
+
+@app.route('/function',methods=['POST','GET'])
+def function():
+    if request.method == 'POST':
+        X1 = request.form['X1']
+        Y1 = request.form['Y1']
+        X2 = request.form['X2']
+        Y2 = request.form['Y2']
+        X3 = request.form['X3']
+        Y3 = request.form['Y3']
+        X4 = request.form['X4']
+        Y4 = request.form['Y4']
+        print(X1,X2,X3,X4,Y1,Y2,Y3,Y4)
+        if X1==X2 or X1==X3 or X1==X4 or X2==X3 or X2==X4 or X3==X4:
+            flash('Wrong input! (2 or more points have same X-value)','error')
+            return render_template('function.html')
+        else:
+            flash('Input has been received allow up to 20 seconds to calculate result')
+            r = requests.post('https://pno3cwa2.student.cs.kuleuven.be/api/task/add', json={1: [X1,Y1], 2: [X2,Y2], 3: [X3,Y3], 4: [X4,Y4]})
+            if r.ok:
+                time.sleep(2)
+                n = r.json()
+                jsonData = requests.get(f'https://pno3cwa2.student.cs.kuleuven.be/api/task/status/{[i for i in n][0]}').json()
+                a, b, c, d = [round(num, 3) for num in json.loads(jsonData[[i for i in n][0]]['result'])]
+            return render_template('functionresult.html',avar=a,bvar=b,cvar=c,dvar=d)
+    return render_template('function.html')
+
+
+
+
 
 @app.route('/about')
 def about():
@@ -76,8 +106,3 @@ def logout():
     session.pop('user', None)
     session.pop('email', None)
     return redirect(url_for('login'))
-
-
-
-
-
