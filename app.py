@@ -45,12 +45,15 @@ def function():
             flash('Wrong input! (2 or more points have same X-value)','error')
             return render_template('function.html')
         else:
-            flash('Input has been received allow up to 20 seconds to calculate result')
+            flash('Input has been received allow up to 2 seconds to calculate result')
             r = requests.post('https://pno3cwa2.student.cs.kuleuven.be/api/task/add', json={1: [X1,Y1], 2: [X2,Y2], 3: [X3,Y3], 4: [X4,Y4]})
             if r.ok:
-                time.sleep(2)
                 n = r.json()
-                jsonData = requests.get(f'https://pno3cwa2.student.cs.kuleuven.be/api/task/status/{[i for i in n][0]}').json()
+                while True:
+                    jsonData = requests.get(f'https://pno3cwa2.student.cs.kuleuven.be/api/task/status/{[i for i in n][0]}').json()
+                    state = jsonData[[i for i in n][0]]['status']
+                    if state==1:
+                        break
                 a, b, c, d = [round(num, 3) for num in json.loads(jsonData[[i for i in n][0]]['result'])]
             return render_template('functionresult.html',avar=a,bvar=b,cvar=c,dvar=d)
     return render_template('function.html')
