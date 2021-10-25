@@ -1,0 +1,18 @@
+Index: HTML_Templates/SOCKET IO TEST/templates/socket-site.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <title>Socket testing</title>\r\n</head>\r\n<body>\r\n<form>\r\n    <input id=\"input1\" type=\"text\">\r\n    <input id=\"input2\" type=\"text\">\r\n    <input type=\"submit\">\r\n</form>\r\n\r\n<script type=\"text/javascript\">\r\n$(document).ready(function(){\r\n\r\n    var socket = io.connect('http://127.0.0.1:5000/');\r\n\r\n    socket.on('connect',function() {\r\n        socket.send('User has connected!');\r\n       });\r\n\r\n    socket.on('message',function(msg) {\r\n    $(\"message\").append('<li>'+msg+'</li>');\r\n    });\r\n\r\n\r\n\r\n    });\r\n</script>\r\n\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/HTML_Templates/SOCKET IO TEST/templates/socket-site.html b/HTML_Templates/SOCKET IO TEST/templates/socket-site.html
+--- a/HTML_Templates/SOCKET IO TEST/templates/socket-site.html	(revision f67b40fe41fbb8bd8e529b23aef3762cd6371ae0)
++++ b/HTML_Templates/SOCKET IO TEST/templates/socket-site.html	(date 1634223870605)
+@@ -12,6 +12,7 @@
+ </form>
+ 
+ <script type="text/javascript">
++alert('yo')
+ $(document).ready(function(){
+ 
+     var socket = io.connect('http://127.0.0.1:5000/');
