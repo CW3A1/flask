@@ -71,7 +71,7 @@ def login():
     r = requests.post('https://pno3cwa2.student.cs.kuleuven.be/api/user/auth', )
 @app.route('/register', methods=['POST','GET'])
 def register():
-
+    pass
 @app.route('/logout')
 def logout():
     if 'user' in session:
