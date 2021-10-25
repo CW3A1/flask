@@ -1,5 +1,5 @@
 from os import environ
-from flask import Flask, json, render_template, redirect, url_for, request, flash
+from flask import Flask, json, render_template, redirect, url_for, request, flash, make_response
 from datetime import timedelta
 import requests, environment
 import time
@@ -45,12 +45,18 @@ def function():
             flash('Wrong input! (2 or more points have same X-value)','error')
             return render_template('function.html')
         else:
-            r = requests.post('https://pno3cwa2.student.cs.kuleuven.be/api/task/add', json={1: [X1,Y1], 2: [X2,Y2], 3: [X3,Y3], 4: [X4,Y4]})
+            if request.cookies.get('jwt'):
+                r = requests.post('https://pno3cwa2.student.cs.kuleuven.be/api/task/add', json={1: [X1,Y1], 2: [X2,Y2], 3: [X3,Y3], 4: [X4,Y4]},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
+            else:
+                r = requests.post('https://pno3cwa2.student.cs.kuleuven.be/api/task/add',json={1: [X1, Y1], 2: [X2, Y2], 3: [X3, Y3], 4: [X4, Y4]})
             if r.ok:
                 n = r.json()
                 start = time.time_ns()
                 while True:
-                    jsonData = requests.get(f'https://pno3cwa2.student.cs.kuleuven.be/api/task/status/{[i for i in n][0]}').json()
+                    if request.cookies.get('jwt'):
+                        jsonData = requests.get(f'https://pno3cwa2.student.cs.kuleuven.be/api/task/status/{[i for i in n][0]}',headers={'Authorization': 'Bearer '+request.cookies.get('jwt')}).json()
+                    else:
+                        jsonData = requests.get(f'https://pno3cwa2.student.cs.kuleuven.be/api/task/status/{[i for i in n][0]}').json()
                     state = jsonData[[i for i in n][0]]['status']
                     if state==1:
                         break
@@ -68,7 +74,21 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         pswd = request.form['password']
-    r = requests.post('https://pno3cwa2.student.cs.kuleuven.be/api/user/auth', )
+        r = requests.post('https://pno3cwa2.student.cs.kuleuven.be/api/user/auth',json={'email': email,'password': pswd})
+        if r.ok:
+            n = r.json()
+            if 'error' in n:
+                flash(n['error'],'error')
+                return render_template('login.html')
+            else:
+                resp = make_response()
+                resp.set_cookie('jwt',value=n['jwt'])
+                resp.headers.add('location',url_for('home'))
+                return resp, 302
+    return render_template('login.html')
+
+
+
 @app.route('/register', methods=['POST','GET'])
 def register():
     pass
