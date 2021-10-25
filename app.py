@@ -1,5 +1,5 @@
 from os import environ
-from flask import Flask, json, render_template, redirect, url_for, request, session, flash
+from flask import Flask, json, render_template, redirect, url_for, request, flash
 from datetime import timedelta
 import requests, environment
 import time
@@ -63,47 +63,14 @@ def function():
     return render_template('function.html')
 
 
-
-
-
-@app.route('/about')
-def about():
-    return render_template('about.html')
-
-@app.route('/admin')
-def admin():
-    return redirect(url_for('user',variable='Admin'))
-
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
-        session.permanent = False
-        user = request.form['username']
-        session['user'] =user
-        flash('Login succesful!')
-        return redirect(url_for('user'))
-    else:
-        if 'user' in session:
-            flash('Already logged In!')
-            return redirect(url_for('user'))
-        else:
-            flash('You are not logged in!')
-            return render_template('login.html')
-
-@app.route('/user', methods=['POST','GET'])
-def user():
-    email = None
-    if 'user' in session:
-        user = session['user']
-        if request.method == 'POST':
-            email = request.form['email']
-            session['email'] = email
-        else:
-            if 'email' in session:
-                email = session['email']
-        return render_template('user.html', email = email)
-    else:
-        return redirect(url_for('login'))
+        email = request.form['email']
+        pswd = request.form['password']
+    r = requests.post('https://pno3cwa2.student.cs.kuleuven.be/api/user/auth', )
+@app.route('/register', methods=['POST','GET'])
+def register():
 
 @app.route('/logout')
 def logout():
