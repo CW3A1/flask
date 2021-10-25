@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7dea9815-d49b-4f32-ad62-28c15ff3132d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/html_templates/TEMPLATE.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html_templates/home_ingelogd.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html_templates/javascript.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html_templates/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html_templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/html_templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html_templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/html_templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html_templates/tussentijdsverlag website/TEMPLATE.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/html_templates/tussentijdsverlag website/home.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/html_templates/tussentijdsverlag website/home_ingelogd.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/html_templates/tussentijdsverlag website/javascript.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/html_templates/tussentijdsverlag website/logo.png" beforeDir="false" />
-    </list>
+    <list default="true" id="7dea9815-d49b-4f32-ad62-28c15ff3132d" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -304,7 +291,21 @@
       <option name="project" value="LOCAL" />
       <updated>1635172985337</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="logo">
+      <created>1635175093815</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1635175093815</updated>
+    </task>
+    <task id="LOCAL-00017" summary="logo">
+      <created>1635175296136</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1635175296136</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="UnknownFeatures">
