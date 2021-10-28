@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7dea9815-d49b-4f32-ad62-28c15ff3132d" name="Default Changelist" comment="logo">
+    <list default="true" id="7dea9815-d49b-4f32-ad62-28c15ff3132d" name="Default Changelist" comment="Html aanpassingen">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html_templates/TEMPLATE.html" beforeDir="false" afterPath="$PROJECT_DIR$/html_templates/TEMPLATE.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/html_templates/home_ingelogd.html" beforeDir="false" afterPath="$PROJECT_DIR$/html_templates/home_ingelogd.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html_templates/niet_ingelogd/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/html_templates/niet_ingelogd/home.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -330,7 +327,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635175935820</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Html aanpassingen">
+      <created>1635428460515</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1635428460515</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -387,6 +391,7 @@
     <MESSAGE value="login" />
     <MESSAGE value="logo" />
     <MESSAGE value="poesh" />
-    <option name="LAST_COMMIT_MESSAGE" value="poesh" />
+    <MESSAGE value="Html aanpassingen" />
+    <option name="LAST_COMMIT_MESSAGE" value="Html aanpassingen" />
   </component>
 </project>
