@@ -104,7 +104,7 @@ def register():
         pswd = request.form['password']
         r = requests.post('https://pno3cwa2.student.cs.kuleuven.be/api/user/add', json={'email': email, 'password': pswd})
         if r.ok:
-            n = r.json
+            n = r.json()
             if 'error' in n:
                 flash(n['error'], 'error')
                 return render_template('register.html')
