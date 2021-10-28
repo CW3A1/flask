@@ -99,7 +99,21 @@ def login():
 
 @app.route('/register', methods=['POST','GET'])
 def register():
-
+    if request.method == 'POST':
+        email = request.form['email']
+        pswd = request.form['password']
+        r = requests.post('https://pno3cwa2.student.cs.kuleuven.be/api/user/add', json={'email': email, 'password': pswd})
+        if r.ok:
+            n = r.json
+            if 'error' in n:
+                flash(n['error'], 'error')
+                return render_template('register.html')
+            else:
+                resp = make_response()
+                resp.set_cookie('jwt', value=n['jwt'])
+                resp.headers.add('location', url_for('home'))
+                return resp, 302
+    return render_template('register.html')
 
 @app.route('/logout')
 def logout():
