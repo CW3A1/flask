@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Function result</title>
-</head>
+{% extends "template.html" %}
+{% block content %}
 <body>
     <h2>The result of the calculation is:</h2>
     <h1>{{avar}}*x^3 + {{bvar}}*x^2 + {{cvar}}*x + {{dvar}}</h1>
 </body>
-</html>
+{% endblock %}

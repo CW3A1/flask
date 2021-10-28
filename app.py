@@ -1,37 +1,44 @@
-from os import environ
-from flask import Flask, json, render_template, redirect, url_for, request, flash, make_response
-from datetime import timedelta
-import requests, environment
-import time
-import threading
 import json
+import threading
+import time
+from uuid import uuid4
 
+import requests
 
-app = Flask(__name__, template_folder='html_templates',static_folder='static')
-app.secret_key = 'PNOISFUCKINGAWESOME'
-app.permanent_session_lifetime = timedelta(days=0,hours=0,minutes=5)
-TEMPLATES_AUTO_RELOAD = True
-dataBase = {}
+from flask import (Flask, flash, json, make_response,
+                   render_template, request, url_for)
+
+app = Flask(__name__)
+app.secret_key = uuid4().hex
 
 @app.context_processor
-def injectVars():
+def injectVariables():
     return dict(loggedIn=True if request.cookies.get("jwt") else False)
 
-def refresh():
-    threading.Timer(5, refresh).start()
-    dataBase = requests.get('https://pno3cwa2.student.cs.kuleuven.be/api/scheduler/status/beveren').json()
-    global statusBeveren
-    statusBeveren = dataBase['beveren']
+# def refresh():
+#     threading.Timer(5, refresh).start()
+#     dataBase = requests.get('https://pno3cwa2.student.cs.kuleuven.be/api/scheduler/status/beveren').json()
+#     global statusBeveren
+#     statusBeveren = dataBase['beveren']
 
+@app.after_request
+def securityHeaders(response):
+    response.headers.add("Access-Control-Allow-Origin", "http://localhost:5000")
+    response.headers.add("Access-Control-Allow-Origin", "http://localhost:11000")
+    response.headers.add("Access-Control-Allow-Origin", "https://pno3cwa1.student.cs.kuleuven.be")
+    return response
 
+@app.errorhandler(404)
+def not_found():
+    return render_template("404.html")
+
+@app.route('/robots.txt')
+def robots():
+    return app.send_static_file('robots.txt')
 
 @app.route('/')
 def home():
-    return render_template('niet_ingelogd/home.html')
-
-@app.route('/status')
-def status():
-    return render_template('status.html',status_beveren=statusBeveren)
+    return render_template('home.html')
 
 @app.route('/function',methods=['POST','GET'])
 def function():
@@ -47,7 +54,7 @@ def function():
         print(X1,X2,X3,X4,Y1,Y2,Y3,Y4)
         if X1==X2 or X1==X3 or X1==X4 or X2==X3 or X2==X4 or X3==X4:
             flash('Wrong input! (2 or more points have same X-value)','error')
-            return render_template('home_ingelogd.html')
+            return render_template('function.html')
         else:
             if request.cookies.get('jwt'):
                 r = requests.post('https://pno3cwa2.student.cs.kuleuven.be/api/task/add', json={1: [X1,Y1], 2: [X2,Y2], 3: [X3,Y3], 4: [X4,Y4]},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
@@ -58,49 +65,45 @@ def function():
                 start = time.time_ns()
                 while True:
                     if request.cookies.get('jwt'):
-                        jsonData = requests.get(f'https://pno3cwa2.student.cs.kuleuven.be/api/task/status/{[i for i in n][0]}',headers={'Authorization': 'Bearer '+request.cookies.get('jwt')}).json()
+                        jsonData=requests.get(f'https://pno3cwa2.student.cs.kuleuven.be/api/task/status/{[i for i in n][0]}',headers={'Authorization': 'Bearer '+request.cookies.get('jwt')}).json()
                     else:
-                        jsonData = requests.get(f'https://pno3cwa2.student.cs.kuleuven.be/api/task/status/{[i for i in n][0]}').json()
+                        jsonData=requests.get(f'https://pno3cwa2.student.cs.kuleuven.be/api/task/status/{[i for i in n][0]}').json()
                     state = jsonData[[i for i in n][0]]['status']
                     if state==1:
                         break
-                    if time.time_ns() - start > 30000000000:
-                        time.sleep(0.4)
+                    if time.time_ns() - start < 30*1e9:
+                        time.sleep(0.35)
                     else:
                         time.sleep(1)
                 a, b, c, d = [round(num, 3) for num in json.loads(jsonData[[i for i in n][0]]['result'])]
-            return render_template('functionresult.html',avar=a,bvar=b,cvar=c,dvar=d)
-    return render_template('home_ingelogd.html')
-
+            return render_template('result.html', avar=a, bvar=b, cvar=c, dvar=d)
+    return render_template('function.html')
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
-        email = request.form['email']
-        pswd = request.form['password']
-        r = requests.post('https://pno3cwa2.student.cs.kuleuven.be/api/user/auth',json={'email': email,'password': pswd})
+        email=request.form['email']
+        pswd=request.form['password']
+        r = requests.post('https://pno3cwa2.student.cs.kuleuven.be/api/user/auth', json={'email': email, 'password': pswd})
         if r.ok:
             n = r.json()
             if 'error' in n:
-                flash(n['error'],'error')
+                flash(n['error'], 'error')
                 return render_template('login.html')
             else:
                 resp = make_response()
                 resp.set_cookie('jwt',value=n['jwt'])
-                resp.headers.add('location',url_for('home'))
+                resp.headers.add('location', url_for('home'))
                 return resp, 302
     return render_template('login.html')
-
-
 
 @app.route('/register', methods=['POST','GET'])
 def register():
     pass
+
 @app.route('/logout')
 def logout():
-    if 'user' in session:
-        user = session['user']
-        flash('You have been logged out!', 'info')
-    session.pop('user', None)
-    session.pop('email', None)
-    return redirect(url_for('login'))
+    resp = make_response()
+    resp.set_cookie('jwt', '', expires=0)
+    resp.headers.add('location', url_for('home'))
+    return resp, 302
