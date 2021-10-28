@@ -13,7 +13,9 @@ app.secret_key = uuid4().hex
 
 @app.context_processor
 def injectVariables():
-    return dict(loggedIn=True if request.cookies.get("jwt") else False)
+    def firstLetterCap(s):
+        return s.capitalize()
+    return dict(loggedIn=True if request.cookies.get("jwt") else False, firstLetterCap=firstLetterCap)
 
 # def refresh():
 #     threading.Timer(5, refresh).start()

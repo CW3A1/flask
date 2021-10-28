@@ -2,6 +2,17 @@
 {% block content %}
 <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
   <div class="max-w-md w-full space-y-8">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+      <strong class="font-bold">Error:</strong>
+      <span class="block sm:inline">{{ firstLetterCap(message) }}!</span>
+    </div>
+    <br>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
     <div>
       <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
         Sign in to your account
