@@ -23,7 +23,7 @@ def refresh():
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('/niet_ingelogd/home.html')
 
 @app.route('/status')
 def status():
