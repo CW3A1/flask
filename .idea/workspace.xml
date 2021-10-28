@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="7dea9815-d49b-4f32-ad62-28c15ff3132d" name="Default Changelist" comment="logo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/html_templates/TEMPLATE.html" beforeDir="false" afterPath="$PROJECT_DIR$/html_templates/TEMPLATE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html_templates/home.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/html_templates/home_ingelogd.html" beforeDir="false" afterPath="$PROJECT_DIR$/html_templates/home_ingelogd.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/html_templates/niet_ingelogd/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/html_templates/niet_ingelogd/home.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,9 +38,13 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/app.py" root0="SKIP_INSPECTION" />
+  </component>
   <component name="ProjectId" id="1zBI62FNUVcZmQ2XySJn4bHnrO6" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="false" id="Update" />
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -168,9 +174,9 @@
     </configuration>
     <list>
       <item itemvalue="Python.Python" />
-      <item itemvalue="Python.test" />
-      <item itemvalue="Python.socket-server" />
       <item itemvalue="Python.app" />
+      <item itemvalue="Python.socket-server" />
+      <item itemvalue="Python.test" />
       <item itemvalue="Python.webscraper_testen" />
     </list>
     <recent_temporary>
@@ -356,6 +362,11 @@
                 </map>
               </option>
             </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State />
           </value>
         </entry>
       </map>
