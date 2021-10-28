@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7dea9815-d49b-4f32-ad62-28c15ff3132d" name="Default Changelist" comment="Html aanpassingen">
+    <list default="true" id="7dea9815-d49b-4f32-ad62-28c15ff3132d" name="Default Changelist" comment="minder white">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/function.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/function.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/template.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/template.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -343,7 +341,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635429441640</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="minder white">
+      <created>1635433952523</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1635433952523</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -401,6 +406,7 @@
     <MESSAGE value="logo" />
     <MESSAGE value="poesh" />
     <MESSAGE value="Html aanpassingen" />
-    <option name="LAST_COMMIT_MESSAGE" value="Html aanpassingen" />
+    <MESSAGE value="minder white" />
+    <option name="LAST_COMMIT_MESSAGE" value="minder white" />
   </component>
 </project>
