@@ -99,7 +99,7 @@ def login():
 
 @app.route('/register', methods=['POST','GET'])
 def register():
-    pass
+
 
 @app.route('/logout')
 def logout():
