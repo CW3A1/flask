@@ -5,7 +5,7 @@ from uuid import uuid4
 
 import requests
 
-from flask import (Flask, flash, json, make_response,
+from flask import (Flask, Response, flash, json, make_response,
                    render_template, request, url_for)
 
 app = Flask(__name__)
@@ -31,12 +31,12 @@ def securityHeaders(response):
     return response
 
 @app.errorhandler(404)
-def not_found():
-    return render_template("404.html")
+def not_found(e):
+    return render_template("404.html", title="404")
 
 @app.route('/robots.txt')
 def robots():
-    return app.send_static_file('robots.txt')
+    return Response("User-agent: *\nDisallow: /", mimetype="text/plain")
 
 @app.route('/')
 def home():
