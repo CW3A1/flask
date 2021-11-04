@@ -30,6 +30,10 @@ def securityHeaders(response):
     response.headers.add("Access-Control-Allow-Origin", "https://pno3cwa1.student.cs.kuleuven.be")
     return response
 
+@app.route('/OpenFOAM')
+def openfoam():
+    return render_template('openfoam.html')
+
 @app.errorhandler(404)
 def not_found(e):
     return render_template("404.html", title="404")
