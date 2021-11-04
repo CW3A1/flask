@@ -30,7 +30,12 @@ def securityHeaders(response):
     response.headers.add("Access-Control-Allow-Origin", "https://pno3cwa1.student.cs.kuleuven.be")
     return response
 
-@app.route('/OpenFOAM')
+@app.route('/')
+def home():
+    return render_template('home.html')
+
+@app.route('/')
+@app.route('/openfoam')
 def openfoam():
     return render_template('openfoam.html')
 
@@ -42,9 +47,6 @@ def not_found(e):
 def robots():
     return Response("User-agent: *\nDisallow: /", mimetype="text/plain")
 
-@app.route('/')
-def home():
-    return render_template('home.html')
 
 @app.route('/function',methods=['POST','GET'])
 def function():
