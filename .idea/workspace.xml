@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7dea9815-d49b-4f32-ad62-28c15ff3132d" name="Default Changelist" comment="dat maakt niet uit">
+    <list default="true" id="7dea9815-d49b-4f32-ad62-28c15ff3132d" name="Default Changelist" comment="oui">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -383,7 +383,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635435537771</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="oui">
+      <created>1636383008639</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1636383008639</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -445,6 +452,7 @@
     <MESSAGE value="logout" />
     <MESSAGE value="register pagina" />
     <MESSAGE value="dat maakt niet uit" />
-    <option name="LAST_COMMIT_MESSAGE" value="dat maakt niet uit" />
+    <MESSAGE value="oui" />
+    <option name="LAST_COMMIT_MESSAGE" value="oui" />
   </component>
 </project>
