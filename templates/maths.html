@@ -1,12 +1,13 @@
 {% extends "template.html" %}
 {% block content %}
+<script src="tabs.js" defer></script>
+<link href="styles.css" rel="stylesheet">
 
 <!-- component -->
 <div class="fixed bottom-4 left-1/2 transform -translate-x-1/2 inline-flex left-0 mx-auto justify-between bg-blue-600 w-11/12 rounded-3xl">
     <a
-      aria-current="page"
+      data-tab-target="#tab1"
       class="inline-flex flex-col items-center text-xs font-medium py-3 px-4 text-white flex-grow"
-      href="#"
     >
     <h1 class="text-white font-serif text-lg">
         Integrate
@@ -23,6 +24,7 @@
     </a>
     
     <a
+      data-tab-target="#tab2"
       class="inline-flex flex-col items-center text-xs font-medium text-blue-400 py-3 px-4 flex-grow"
     >
       <h1 class="text-white font-serif text-lg">
@@ -66,12 +68,12 @@
           clip-rule="evenodd"
         ></path>
       </svg>
-    <a
+      <a
       class="inline-flex flex-col items-center text-xs font-medium text-blue-400 py-3 px-4 flex-grow"
       href="#"
     >
       <svg
-        class="w-7 h-7"
+      class="w-7 h-7"
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
@@ -86,6 +88,18 @@
     </a>
   </div>
 
+  <div class="tab-contents">
+    <div id="tab1" data-tab-content>
+      <h1>
+        Integrate
+      </h1>
+    </div>
+    <div id="tab2" data-tab-content>
+      <h1>
+        Differentiate
+      </h1>
+    </div>
 
+  </div>
 
 {% endblock %}
