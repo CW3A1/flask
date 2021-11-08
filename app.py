@@ -5,7 +5,7 @@ from uuid import uuid4
 
 import requests
 
-from flask import (Flask, flash, json, make_response,
+from flask import (Flask, Response, flash, json, make_response,
                    render_template, request, url_for)
 
 app = Flask(__name__)
@@ -30,17 +30,23 @@ def securityHeaders(response):
     response.headers.add("Access-Control-Allow-Origin", "https://pno3cwa1.student.cs.kuleuven.be")
     return response
 
-@app.errorhandler(404)
-def not_found():
-    return render_template("404.html")
-
-@app.route('/robots.txt')
-def robots():
-    return app.send_static_file('robots.txt')
-
 @app.route('/')
 def home():
     return render_template('home.html')
+
+@app.route('/')
+@app.route('/openfoam')
+def openfoam():
+    return render_template('openfoam.html')
+
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("404.html", title="404")
+
+@app.route('/robots.txt')
+def robots():
+    return Response("User-agent: *\nDisallow: /", mimetype="text/plain")
+
 
 @app.route('/function',methods=['POST','GET'])
 def function():
