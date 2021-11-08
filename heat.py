@@ -6,7 +6,7 @@ from matplotlib.animation import FuncAnimation
 print("2D heat equation solver")
 
 plate_length = 50
-max_iter_time = 50
+max_iter_time = 200
 
 alpha = 2
 delta_x = 1
@@ -64,6 +64,6 @@ def animate(k):
     plotheatmap(u[k], k)
 
 anim = animation.FuncAnimation(plt.figure(), animate, interval=1, frames=max_iter_time, repeat=False)
-anim.save("heat_equation_solution.gif")
+anim.save("static/heat_equation_solution.gif")
 
 print("Done!")

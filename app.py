@@ -107,7 +107,9 @@ def integral():
     return render_template('integraltest.html')
 
 
-
+@app.route('/gif')
+def gif():
+    return render_template('giftest.html')
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -152,3 +154,5 @@ def logout():
     resp.set_cookie('jwt', '', expires=0)
     resp.headers.add('location', url_for('home'))
     return resp, 302
+
+app.run(debug=True)
