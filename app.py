@@ -81,6 +81,25 @@ def function():
             return render_template('result.html', avar=a, bvar=b, cvar=c, dvar=d)
     return render_template('function.html')
 
+@app.route('/math/integral',methods=['POST','GET'])
+def integral():
+    if request.method == 'POST':
+        function = request.form['f']
+        bg = request.form['bovengrens']
+        og = request.form['ondergrens']
+        print(function,bg,og)
+        if request.cookies.get('jwt'):
+            r = requests.post('https://pno3cwa2.student.cs.kuleuven.be/api/task/add', json={'operation': 'int', 'options': {'function': function, 'b': bg, 'a': og}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
+        else:
+            r = requests.post('https://pno3cwa2.student.cs.kuleuven.be/api/task/add', json={'operation': 'int', 'options': {'function': function, 'b': bg, 'a': og}})
+        if r.ok:
+            n = r.json()
+    return render_template('integraltest.html')
+
+
+
+
+
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
