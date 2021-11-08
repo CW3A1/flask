@@ -39,6 +39,10 @@ def home():
 def openfoam():
     return render_template('openfoam.html')
 
+@app.route('/maths')
+def maths():
+    return render_template('maths.html')
+
 @app.errorhandler(404)
 def not_found(e):
     return render_template("404.html", title="404")
