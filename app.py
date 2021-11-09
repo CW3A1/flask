@@ -110,7 +110,7 @@ def integral():
 @app.route('/gif')
 def gif():
     return render_template('giftest.html')
-
+# Dit is een test
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
