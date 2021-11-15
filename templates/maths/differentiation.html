@@ -1,18 +1,18 @@
 {% extends "template.html" %}
 {% block content %}
-<div class="login_form border-2 border-blue-900 p-10 pt-5 shadow-sm mx-auto flex rounded" style="width: 1000px;position: relative;top:100px;">
+<div class="login_form border-2 border-blue-500 p-10 pt-5 shadow-sm mx-auto flex rounded" style="width: 700px;position: relative;top:100px;">
     <div class="sec flex-1">
         <form method='POST' action="#">
             <span class="flex shadow-md mb-5 text-xs">
-                <span class="bg-blue-900 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Function</span>
-                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="f" type="text" required placeholder="    e.g. x^2-3*x=12 " name="f" value="f">
+                <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Function</span>
+                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="f" type="text" required placeholder="    e.g. x^2-3*x=12 " name="f">
             </span>
             <span class="flex shadow-md mb-5 text-xs">
-                <span class="bg-blue-900 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Point</span>
+                <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Point</span>
                     <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="og" type="number" required placeholder="    e.g. 1" name="og" value="og">
             </span>
-            <span class="border-2 border-blue-900 hover:bg-blue-900 hover:text-white mt-3 text-blue-400 block text-center p-3 px-4 text-sm rounded cursor-pointer font-bold">
-                <button type="submit">DIFFERENTIATE</button>
+            <span class="border-2 border-blue-500 hover:bg-blue-500 hover:text-white mt-3 text-blue-500 block text-center p-3 px-4 text-sm rounded cursor-pointer font-bold">
+                <button type="submit" href="{{ url_for('differentiation') }}">DIFFERENTIATE</button>
             </span>
         </form>
     </div>
