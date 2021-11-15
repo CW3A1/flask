@@ -105,6 +105,7 @@ def integral():
             n = r.json()
             result = n['result']
             error = n['error']
+            #lol
             return render_template('results/resultintegral.html', result=result, error=error)
     return render_template('maths/integration.html')
 
