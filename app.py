@@ -91,7 +91,7 @@ def function():
             return render_template('results/result.html', avar=a, bvar=b, cvar=c, dvar=d)
     return render_template('maths/function.html')
 
-@app.route('/math/integral',methods=['POST','GET'])
+@app.route('/math/integration',methods=['POST','GET'])
 def integral():
     if request.method == 'POST':
         function = request.form['f']
@@ -105,9 +105,25 @@ def integral():
             n = r.json()
             result = n['result']
             error = n['error']
-            #lol
             return render_template('results/resultintegral.html', result=result, error=error)
     return render_template('maths/integration.html')
+
+
+@app.route('/math/differentiation',methods=['POST','GET'])
+def integral():
+    if request.method == 'POST':
+        function = request.form['f']
+        punt = request.form['a']
+        orde = request.form['orde']
+        if request.cookies.get('jwt'):
+            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/differentiation', json={'operation': 'int', 'options': {'f': function, 'a': punt, 'order': orde}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
+        else:
+            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/differentiation', json={'operation': 'int', 'options': {'f': function, 'a': punt, 'a': orde}})
+        if r.ok:
+            n = r.json()
+            result = n['result']
+            return render_template('results/resultdifferentiation.html', result=result)
+    return render_template('maths/differentiation.html')
 
 
 @app.route('/gif')
