@@ -1,0 +1,32 @@
+{% extends "template.html" %}
+{% block content %}
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+<style>
+.animate-spin {
+    animation: spin 1s linear infinite;
+    @keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+    }
+}
+</style>
+<body>
+    <button type="button" class="bg-rose-600" disabled>
+        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+        Processing
+    </button>
+    <h1>{{taskid}}</h1>
+    <h3>Elapsed time:</h3>
+    <h1 id="pending"></h1>
+    <p id="status"></p>
+</body>
+<script src="{{url_for('static', filename='pending.js')}}"></script>
+<script src="{{url_for('static', filename='websocket.js')}}"></script>
+{% endblock %}
