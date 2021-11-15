@@ -96,8 +96,10 @@ def function():
 def integration():
     if request.method == 'POST':
         function = request.form['f']
-        bg = request.form['bovengrens']
-        og = request.form['ondergrens']
+        print(function)
+        bg = request.form['bg']
+        og = request.form['og']
+        print(function,bg,og)
         if request.cookies.get('jwt'):
             r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/integration', json={'operation': 'int', 'options': {'f': function, 'b': bg, 'a': og}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
@@ -106,6 +108,7 @@ def integration():
             n = r.json()
             result = n['result']
             error = n['error']
+            print(result,error)
             return render_template('results/resultintegral.html', result=result, error=error)
     return render_template('maths/integration.html')
 
