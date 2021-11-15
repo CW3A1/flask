@@ -92,7 +92,7 @@ def function():
     return render_template('maths/function.html')
 
 @app.route('/math/integration',methods=['POST','GET'])
-def integral():
+def integration():
     if request.method == 'POST':
         function = request.form['f']
         bg = request.form['bovengrens']
@@ -110,20 +110,41 @@ def integral():
 
 
 @app.route('/math/differentiation',methods=['POST','GET'])
-def integral():
+def differentiation():
     if request.method == 'POST':
         function = request.form['f']
         punt = request.form['a']
         orde = request.form['orde']
         if request.cookies.get('jwt'):
-            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/differentiation', json={'operation': 'int', 'options': {'f': function, 'a': punt, 'order': orde}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
+            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/differentiation', json={'operation': 'diff', 'options': {'f': function, 'a': punt, 'order': orde}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
-            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/differentiation', json={'operation': 'int', 'options': {'f': function, 'a': punt, 'a': orde}})
+            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/differentiation', json={'operation': 'diff', 'options': {'f': function, 'a': punt, 'a': orde}})
         if r.ok:
             n = r.json()
             result = n['result']
             return render_template('results/resultdifferentiation.html', result=result)
-    return render_template('maths/differentiation.html')
+    return render_template('maths/differentiation.html', f = function, a= punt, result=result)
+
+@app.route('/math/optimization',methods=['POST','GET'])
+def optimization():
+    if request.method == 'POST':
+        xlower = request.form['xl']
+        xupper = request.form['xu']
+        ylower = request.form['yl']
+        yupper = request.form['yu']
+        function = request.form['f']
+        if request.cookies.get('jwt'):
+            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/optimization', json={'operation': 'opt', 'options': {'f': function, 'xu': xupper, 'xl': xlower, 'yu': yupper, 'yl': ylower}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
+        else:
+            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/optimization', json={'operation': 'opt', 'options': {'f': function, 'xu': xupper, 'xl': xlower, 'yu': yupper, 'yl': ylower}})
+        if r.ok:
+            n = r.json()
+            vector = n['vector']
+            vectorx = vector[0]
+            vectory = vector[1]
+            vectorz = vector[2]
+            return render_template('results/resultoptmization.html', result=result)
+    return render_template('maths/optimization.html', f = function, a= punt, result=result)
 
 
 @app.route('/gif')
