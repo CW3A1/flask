@@ -39,9 +39,9 @@ def home():
 def openfoam():
     return render_template('openfoam.html')
 
-@app.route('/maths')
+@app.route('/maths/differentiation')
 def maths():
-    return render_template('maths.html')
+    return render_template('maths/differentiation.html')
 
 @app.errorhandler(404)
 def not_found(e):
@@ -66,7 +66,7 @@ def function():
         print(X1,X2,X3,X4,Y1,Y2,Y3,Y4)
         if X1==X2 or X1==X3 or X1==X4 or X2==X3 or X2==X4 or X3==X4:
             flash('Wrong input! (2 or more points have same X-value)','error')
-            return render_template('function.html')
+            return render_template('maths/function.html')
         else:
             if request.cookies.get('jwt'):
                 r = requests.post('https://pno3cwa2.student.cs.kuleuven.be/api/task/add', json={1: [X1,Y1], 2: [X2,Y2], 3: [X3,Y3], 4: [X4,Y4]},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
@@ -88,8 +88,8 @@ def function():
                     else:
                         time.sleep(1)
                 a, b, c, d = [round(num, 3) for num in json.loads(jsonData[[i for i in n][0]]['result'])]
-            return render_template('result.html', avar=a, bvar=b, cvar=c, dvar=d)
-    return render_template('function.html')
+            return render_template('results/result.html', avar=a, bvar=b, cvar=c, dvar=d)
+    return render_template('maths/function.html')
 
 @app.route('/math/integral',methods=['POST','GET'])
 def integral():
@@ -97,14 +97,17 @@ def integral():
         function = request.form['f']
         bg = request.form['bovengrens']
         og = request.form['ondergrens']
-        print(function,bg,og)
         if request.cookies.get('jwt'):
-            r = requests.post('https://pno3cwa2.student.cs.kuleuven.be/api/task/add', json={'operation': 'int', 'options': {'function': function, 'b': bg, 'a': og}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
+            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/integration', json={'operation': 'int', 'options': {'f': function, 'b': bg, 'a': og}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
-            r = requests.post('https://pno3cwa2.student.cs.kuleuven.be/api/task/add', json={'operation': 'int', 'options': {'function': function, 'b': bg, 'a': og}})
+            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/integration', json={'operation': 'int', 'options': {'f': function, 'b': bg, 'a': og}})
         if r.ok:
             n = r.json()
-    return render_template('integraltest.html')
+            result = n['result']
+            error = n['error']
+            #lol
+            return render_template('results/resultintegral.html', result=result, error=error)
+    return render_template('maths/integration.html')
 
 
 @app.route('/gif')
