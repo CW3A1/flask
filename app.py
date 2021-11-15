@@ -7,6 +7,7 @@ import requests
 
 from flask import (Flask, Response, flash, json, make_response,
                    render_template, request, url_for)
+from orjson import loads
 
 app = Flask(__name__)
 app.secret_key = uuid4().hex
@@ -143,9 +144,23 @@ def optimization():
             vectorx = vector[0]
             vectory = vector[1]
             vectorz = vector[2]
-            return render_template('results/resultoptmization.html', result=result)
+            return render_template('results/resultoptimization.html', result=result)
     return render_template('maths/optimization.html', f = function, a= punt, result=result)
 
+@app.route('/math/lagrange_interpolation',methods=['POST','GET'])
+def lagrange_interpolation():
+    if request.method == 'POST':
+        vectora = loads("[" + request.form['a'] + "]")
+        vectorb = loads("[" + request.form['b'] + "]")
+        if request.cookies.get('jwt'):
+            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/integration', json={'operation': 'int', 'options': {'a': vectora, 'b': vectorb}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
+        else:
+            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/integration', json={'operation': 'int', 'options': {'a': vectora, 'b': vectorb}})
+        if r.ok:
+            n = r.json()
+            result = n['result']
+            return render_template('results/resultlagrange_interpolation.html', result=result)
+    return render_template('maths/lagrange_interpolation.html')
 
 @app.route('/gif')
 def gif():
