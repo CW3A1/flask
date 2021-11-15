@@ -32,7 +32,6 @@ def securityHeaders(response):
     return response
 
 @app.route('/')
-@app.route('/')
 def home():
     return render_template('home.html')
 
@@ -127,6 +126,11 @@ def lagrange_interpolation():
             result = n['result']
             return render_template('results/resultlloading.html', result=result)
     return render_template('maths/lagrange_interpolation.html')
+
+@app.route('/status/<task_id>')
+def status(task_id):
+    r = requests.get("https://pno3cwa2.student.cs.kuleuven.be/api/scheduler/status?pc="+task_id)
+    return r.json()
 
 @app.route('/gif')
 def gif():
