@@ -64,7 +64,6 @@ def integration():
             r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/integration', json={'operation': 'int', 'options': {'f': function, 'b': bg, 'a': og}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
             r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/integration', json={'operation': 'int', 'options': {'f': function, 'b': bg, 'a': og}})
-        return render_template('results/resultloading.html', taskid = "lol")
         if r.ok:
             n = r.json()
             result = n['result']
