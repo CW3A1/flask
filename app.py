@@ -40,9 +40,9 @@ def home():
 def openfoam():
     return render_template('openfoam.html')
 
-@app.route('/maths/differentiation')
+@app.route('/test')
 def maths():
-    return render_template('maths/differentiation.html')
+    return render_template('results/resultdifferentiation.html', result = 'kaas', f = 'banaan', a = '0')
 
 @app.errorhandler(404)
 def not_found(e):
