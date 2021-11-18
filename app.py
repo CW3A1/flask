@@ -1,3 +1,4 @@
+
 import json
 import threading
 import time
@@ -42,7 +43,7 @@ def openfoam():
 
 @app.route('/test')
 def maths():
-    return render_template('results/resultdifferentiation.html', result = 'kaas', f = 'banaan', a = '0')
+    return render_template("404.html", title="404")
 
 @app.errorhandler(404)
 def not_found(e):
@@ -102,6 +103,8 @@ def optimization():
         ylower = request.form['yl']
         yupper = request.form['yu']
         function = request.form['f']
+        if xlower > xupper or ylower > yupper:
+            return render_template('universalerror.html')
         if request.cookies.get('jwt'):
             r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/optimization', json={'operation': 'opt', 'options': {'f': function, 'xu': xupper, 'xl': xlower, 'yu': yupper, 'yl': ylower}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
