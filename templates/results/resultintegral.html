@@ -1,9 +1,11 @@
 {% extends "template.html" %}
 {% block content %}
 <body>
-    <h2>The result of the calculation is:</h2>
-    <h1>{{result}}</h1>
-    <h3>With an error of approximately</h3>
-    <h1>{{error}}</h1>
+<span class="flex shadow-md mb-5 text-xs">
+    <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">The result of the calculation is:<span>
+        <h1>{{reslut}}</h1>
+    <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">With an error of approximately:<span>
+        <h1>{{error}}</h1>
+</span>
 </body>
 {% endblock %}
