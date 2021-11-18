@@ -63,8 +63,6 @@ def robots():
 def integration():
     if request.method == 'POST':
         function = request.form['f']
-        
-        print(function)
         bg = request.form['bg']
         og = request.form['og']
         print(function,bg,og)
@@ -170,7 +168,21 @@ def status(task_id):
     if operation == 'taprox':
         return render_template('results/resulttaylor_approximation.html', options = options, result = result)
 
-
+@app.route('/math/heat_equation',methods=['POST','GET'])
+def heat_equation():
+    if request.method == 'POST':
+        function = request.form['f']
+        punt = request.form['og']
+        orde = request.form['orde']
+        if request.cookies.get('jwt'):
+            r = requests.post(db_url, json={'operation': 'diff', 'options': {'f': function, 'a': punt, 'order': orde}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
+        else:
+            r = requests.post(db_url, json={'operation': 'diff', 'options': {'f': function, 'a': punt, 'order': orde}})
+        if r.ok:
+            n = r.json()
+            result = n['result']
+            return render_template('results/resultloading.html', result=result)
+    return render_template('maths/differentiation.html')
 @app.route('/gif')
 def gif():
     return render_template('giftest.html')
