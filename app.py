@@ -79,17 +79,21 @@ def integration():
 def differentiation():
     if request.method == 'POST':
         function = request.form['f']
-        punt = request.form['a']
+        punt = request.form['og']
         orde = request.form['orde']
         if request.cookies.get('jwt'):
             r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/differentiation', json={'operation': 'diff', 'options': {'f': function, 'a': punt, 'order': orde}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
-            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/differentiation', json={'operation': 'diff', 'options': {'f': function, 'a': punt, 'a': orde}})
+            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/differentiation', json={'operation': 'diff', 'options': {'f': function, 'a': punt, 'order': orde}})
         if r.ok:
             n = r.json()
             result = n['result']
             return render_template('results/resultloading.html', result=result)
     return render_template('maths/differentiation.html')
+
+@app.route('/math/results/resultdifferentiation')
+def resultdifferentiation():
+    return render_template('maths/results/resultdifferentiation')
 
 @app.route('/math/optimization',methods=['POST','GET'])
 def optimization():
@@ -105,12 +109,9 @@ def optimization():
             r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/optimization', json={'operation': 'opt', 'options': {'f': function, 'xu': xupper, 'xl': xlower, 'yu': yupper, 'yl': ylower}})
         if r.ok:
             n = r.json()
-            vector = n['vector']
-            vectorx = vector[0]
-            vectory = vector[1]
-            vectorz = vector[2]
+            result = n['result']
             return render_template('results/resultloading.html', result=result)
-    return render_template('maths/optimization.html', f = function, a= punt, result=result)
+    return render_template('maths/optimization.html')
 
 @app.route('/math/lagrange_interpolation',methods=['POST','GET'])
 def lagrange_interpolation():
@@ -130,16 +131,30 @@ def lagrange_interpolation():
 @app.route('/status/<task_id>')
 def status(task_id):
     r = requests.get("https://pno3cwa2.student.cs.kuleuven.be/api/task/status?task_id="+task_id)
-    n = r.json()
+    n = {
+  "task_id": "000",
+  "status": "0",
+  "pc": "string",
+  "input_values": {
+    "operation": "diff",
+    "options": {
+      "f": "sin(x)",
+      "a": 1.5,
+      "order": 1
+    }
+  },
+  "result": '0.07073',
+  "uuid": "string"
+}
     operation = n['input_values']['operation']
     options = n['input_values']['options']
     result = n['result']
     if 'error' in n['result']:
         return 'There was an error running your task, No result found.'
     if operation == 'int':
-        return render_template('resultintegral.html', options = options, result = result)
+        return render_template('results/resultintegral.html', options = options, result = result)
     if operation == 'diff':
-        return render_template('resultdifferentiation.html', options = options, result = result)
+        return render_template('results/resultdifferentiation.html', options = options, result = result)
 
 
 @app.route('/gif')
