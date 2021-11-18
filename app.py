@@ -7,6 +7,7 @@ import requests
 
 from flask import (Flask, Response, flash, json, make_response,
                    render_template, request, url_for)
+from orjson import loads
 
 app = Flask(__name__)
 app.secret_key = uuid4().hex
@@ -51,52 +52,14 @@ def not_found(e):
 def robots():
     return Response("User-agent: *\nDisallow: /", mimetype="text/plain")
 
-
-@app.route('/function',methods=['POST','GET'])
-def function():
-    if request.method == 'POST':
-        X1 = request.form['X1']
-        Y1 = request.form['Y1']
-        X2 = request.form['X2']
-        Y2 = request.form['Y2']
-        X3 = request.form['X3']
-        Y3 = request.form['Y3']
-        X4 = request.form['X4']
-        Y4 = request.form['Y4']
-        print(X1,X2,X3,X4,Y1,Y2,Y3,Y4)
-        if X1==X2 or X1==X3 or X1==X4 or X2==X3 or X2==X4 or X3==X4:
-            flash('Wrong input! (2 or more points have same X-value)','error')
-            return render_template('maths/function.html')
-        else:
-            if request.cookies.get('jwt'):
-                r = requests.post('https://pno3cwa2.student.cs.kuleuven.be/api/task/add', json={1: [X1,Y1], 2: [X2,Y2], 3: [X3,Y3], 4: [X4,Y4]},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
-            else:
-                r = requests.post('https://pno3cwa2.student.cs.kuleuven.be/api/task/add',json={1: [X1, Y1], 2: [X2, Y2], 3: [X3, Y3], 4: [X4, Y4]})
-            if r.ok:
-                n = r.json()
-                start = time.time_ns()
-                while True:
-                    if request.cookies.get('jwt'):
-                        jsonData=requests.get(f'https://pno3cwa2.student.cs.kuleuven.be/api/task/status/{[i for i in n][0]}',headers={'Authorization': 'Bearer '+request.cookies.get('jwt')}).json()
-                    else:
-                        jsonData=requests.get(f'https://pno3cwa2.student.cs.kuleuven.be/api/task/status/{[i for i in n][0]}').json()
-                    state = jsonData[[i for i in n][0]]['status']
-                    if state==1:
-                        break
-                    if time.time_ns() - start < 30*1e9:
-                        time.sleep(0.35)
-                    else:
-                        time.sleep(1)
-                a, b, c, d = [round(num, 3) for num in json.loads(jsonData[[i for i in n][0]]['result'])]
-            return render_template('results/result.html', avar=a, bvar=b, cvar=c, dvar=d)
-    return render_template('maths/function.html')
-
 @app.route('/math/integration',methods=['POST','GET'])
 def integration():
     if request.method == 'POST':
         function = request.form['f']
-        bg = request.form['bovengrens']
-        og = request.form['ondergrens']
+        print(function)
+        bg = request.form['bg']
+        og = request.form['og']
+        print(function,bg,og)
         if request.cookies.get('jwt'):
             r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/integration', json={'operation': 'int', 'options': {'f': function, 'b': bg, 'a': og}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
@@ -105,7 +68,9 @@ def integration():
             n = r.json()
             result = n['result']
             error = n['error']
-            return render_template('results/resultintegral.html', result=result, error=error)
+            taskid = n['result']
+            print(result,error)
+            return render_template('results/resultloading.html', taskid = taskid)
     return render_template('maths/integration.html')
 
 
@@ -122,8 +87,8 @@ def differentiation():
         if r.ok:
             n = r.json()
             result = n['result']
-            return render_template('results/resultdifferentiation.html', result=result)
-    return render_template('maths/differentiation.html', f = function, a= punt, result=result)
+            return render_template('results/resultloading.html', result=result)
+    return render_template('maths/differentiation.html')
 
 @app.route('/math/optimization',methods=['POST','GET'])
 def optimization():
@@ -143,8 +108,37 @@ def optimization():
             vectorx = vector[0]
             vectory = vector[1]
             vectorz = vector[2]
-            return render_template('results/resultoptmization.html', result=result)
+            return render_template('results/resultloading.html', result=result)
     return render_template('maths/optimization.html', f = function, a= punt, result=result)
+
+@app.route('/math/lagrange_interpolation',methods=['POST','GET'])
+def lagrange_interpolation():
+    if request.method == 'POST':
+        vectora = loads("[" + request.form['a'] + "]")
+        vectorb = loads("[" + request.form['b'] + "]")
+        if request.cookies.get('jwt'):
+            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/integration', json={'operation': 'int', 'options': {'a': vectora, 'b': vectorb}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
+        else:
+            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/integration', json={'operation': 'int', 'options': {'a': vectora, 'b': vectorb}})
+        if r.ok:
+            n = r.json()
+            result = n['result']
+            return render_template('results/resultlloading.html', result=result)
+    return render_template('maths/lagrange_interpolation.html')
+
+@app.route('/status/<task_id>')
+def status(task_id):
+    r = requests.get("https://pno3cwa2.student.cs.kuleuven.be/api/task/status?task_id="+task_id)
+    n = r.json()
+    operation = n['input_values']['operation']
+    options = n['input_values']['options']
+    result = n['result']
+    if 'error' in n['result']:
+        return 'There was an error running your task, No result found.'
+    if operation == 'int':
+        return render_template('resultintegral.html', options = options, result = result)
+    if operation == 'diff':
+        return render_template('resultdifferentiation.html', options = options, result = result)
 
 
 @app.route('/gif')

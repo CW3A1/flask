@@ -1,15 +1,24 @@
 {% extends "template.html" %}
 {% block content %}
-<div class="login_form border-2 border-indigo-500 p-10 pt-5 shadow-sm mx-auto flex rounded" style="width: 500px;">
+<div class="login_form border-2 border-orange-500 p-10 pt-5 shadow-sm mx-auto flex rounded" style="width: 1000px;position: relative;top:100px;">
     <div class="sec flex-1">
-        <span class="flex shadow-md mb-5 text-xs">
-            <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">Function</span><input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" type="text" placeholder="someonespecial@example.com">
-        </span>
-        <span class="flex shadow-md mb-5 text-xs">
-            <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">Bovengrens</span><input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full">
-            <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">Ondergrens</span><input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full">
-        </span>
-        <span class="border-2 border-indigo-500 hover:bg-indigo-500 hover:text-gray-100 mt-3 text-indigo-500 block text-center p-3 px-4 text-sm rounded cursor-pointer font-bold">Login</span>
+        <form method='POST' action="#">
+            <span class="flex shadow-md mb-5 text-xs">
+                <span class="bg-indigo-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Function</span>
+                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="f" type="number" required placeholder="    e.g. x^2-3*x " name="f" value="f">
+            </span>
+            <span class="flex shadow-md mb-5 text-xs">
+                <span class="bg-green-300 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Ondergrens</span>
+                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="og" type="number" required placeholder="    e.g. 1" name="og" value="og">
+            </span>
+            <span class="flex shadow-md mb-5 text-xs">
+                <span class="bg-yellow-400 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Bovengrens</span>
+                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="bg" type="number" required placeholder="    e.g. 5" name="bg" value="bg">
+            </span>
+            
+                <button href="{{ url_for('integration') }}" class="border-2 border-pink-500 hover:bg-green-700 hover:text-gray-100 text-blue-400 block text-center p-3 px-4 text-sm rounded w-full cursor-pointer font-bold" type="submit">INTEGRATE</button>
+            
+        </form>
     </div>
 </div>
 {% endblock %}
