@@ -78,12 +78,12 @@ def integration():
 def differentiation():
     if request.method == 'POST':
         function = request.form['f']
-        punt = request.form['a']
+        punt = request.form['og']
         orde = request.form['orde']
         if request.cookies.get('jwt'):
             r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/differentiation', json={'operation': 'diff', 'options': {'f': function, 'a': punt, 'order': orde}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
-            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/differentiation', json={'operation': 'diff', 'options': {'f': function, 'a': punt, 'a': orde}})
+            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/differentiation', json={'operation': 'diff', 'options': {'f': function, 'a': punt, 'order': orde}})
         if r.ok:
             n = r.json()
             result = n['result']
@@ -133,7 +133,21 @@ def lagrange_interpolation():
 @app.route('/status/<task_id>')
 def status(task_id):
     r = requests.get("https://pno3cwa2.student.cs.kuleuven.be/api/task/status?task_id="+task_id)
-    n = r.json()
+    n = {
+  "task_id": "string",
+  "status": "0",
+  "pc": "string",
+  "input_values": {
+    "operation": "diff",
+    "options": {
+      "f": "sin(x)",
+      "a": 0,
+      "order": 1
+    }
+  },
+  "result": {},
+  "uuid": "string"
+}
     operation = n['input_values']['operation']
     options = n['input_values']['options']
     result = n['result']
