@@ -1,9 +1,9 @@
 {% extends "template.html" %}
 {% block content %}
 <body>
-    <h2>The result of the calculation is:</h2>
-    <h1>{{result}}</h1>
+    <h2>The integral of {{options['f']}} with b = {{options['bovengrens']}} and a = {{options['ondergrens']}} is:</h2>
+    <h1>{{result['result']}}</h1>
     <h3>With an error of approximately</h3>
-    <h1>{{error}}</h1>
+    <h1>{{result['error']}}</h1>
 </body>
 {% endblock %}

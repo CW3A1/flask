@@ -64,7 +64,6 @@ def integration():
             r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/integration', json={'operation': 'int', 'options': {'f': function, 'b': bg, 'a': og}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
             r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/integration', json={'operation': 'int', 'options': {'f': function, 'b': bg, 'a': og}})
-        return render_template('results/resultloading.html', taskid = "lol")
         if r.ok:
             n = r.json()
             result = n['result']
@@ -129,8 +128,18 @@ def lagrange_interpolation():
 
 @app.route('/status/<task_id>')
 def status(task_id):
-    r = requests.get("https://pno3cwa2.student.cs.kuleuven.be/api/scheduler/status?pc="+task_id)
-    return r.json()
+    r = requests.get("https://pno3cwa2.student.cs.kuleuven.be/api/task/status?task_id="+task_id)
+    n = r.json()
+    operation = n['input_values']['operation']
+    options = n['input_values']['options']
+    result = n['result']
+    if 'error' in n['result']:
+        return 'There was an error running your task, No result found.'
+    if operation == 'int':
+        return render_template('resultintegral.html', options = options, result = result)
+    if operation == 'diff':
+        return render_template('resultdifferentiation.html', options = options, result = result)
+
 
 @app.route('/gif')
 def gif():
