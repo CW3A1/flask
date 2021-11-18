@@ -1,7 +1,13 @@
 {% extends "template.html" %}
 {% block content %}
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+<div class="flex items-center justify-center space-x-2 animate-bounce" style="position: relative;top:200px">
+    <div class="w-8 h-8 bg-blue-400 rounded-full"></div>
+    <div class="w-8 h-8 bg-blue-400 rounded-full"></div>
+    <div class="w-8 h-8 bg-blue-400 rounded-full"></div>
+</div>
 <style>
+    
 .animate-spin {
     animation: spin 1s linear infinite;
     @keyframes spin {
