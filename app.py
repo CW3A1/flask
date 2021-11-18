@@ -1,3 +1,4 @@
+
 import json
 import threading
 import time
@@ -6,7 +7,7 @@ from uuid import uuid4
 import requests
 
 from flask import (Flask, Response, flash, json, make_response,
-                   render_template, request, url_for)
+                   render_template, request, url_for, redirect)
 from orjson import loads
 
 app = Flask(__name__)
@@ -42,7 +43,7 @@ def openfoam():
 
 @app.route('/test')
 def maths():
-    return render_template('results/resultdifferentiation.html', result = 'kaas', f = 'banaan', a = '0')
+    return render_template("404.html", title="404")
 
 @app.errorhandler(404)
 def not_found(e):
@@ -70,7 +71,6 @@ def integration():
             result = n['result']
             error = n['error']
             taskid = n['result']
-            print(result,error)
             return render_template('results/resultloading.html', taskid = taskid)
     return render_template('maths/integration.html')
 
@@ -93,7 +93,7 @@ def differentiation():
 
 @app.route('/math/results/resultdifferentiation')
 def resultdifferentiation():
-    return render_template('maths/results/resultdifferentiation')
+    return render_template('results/resultdifferentiation.html')
 
 @app.route('/math/optimization',methods=['POST','GET'])
 def optimization():
@@ -103,6 +103,9 @@ def optimization():
         ylower = request.form['yl']
         yupper = request.form['yu']
         function = request.form['f']
+        if xlower > xupper or ylower > yupper:
+            flash('Lower X or Y limit was greater than upper X or Y limit! ')
+            return redirect(url_for('optimization'))
         if request.cookies.get('jwt'):
             r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/optimization', json={'operation': 'opt', 'options': {'f': function, 'xu': xupper, 'xl': xlower, 'yu': yupper, 'yl': ylower}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
@@ -155,6 +158,12 @@ def status(task_id):
         return render_template('results/resultintegral.html', options = options, result = result)
     if operation == 'diff':
         return render_template('results/resultdifferentiation.html', options = options, result = result)
+    if operation == 'opt':
+        return render_template('results/resultoptimization.html', options = options, result = result)
+    if operation == 'lint':
+        return render_template('results/resultlagrange_interpolation.html', options = options, result = result)
+    if operation == 'taprox':
+        return render_template('results/resulttaylor_approximation.html', options = options, result = result)
 
 
 @app.route('/gif')
