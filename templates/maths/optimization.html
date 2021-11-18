@@ -12,23 +12,23 @@
                 X-axis area
             </h1>
             <span class="flex shadow-md mb-5 text-xs">
-                <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Ondergrens</span>
-                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="og" type="number" required placeholder="    e.g. 1" name="ogx" value="ogx">
+                <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Lower limit</span>
+                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="xl" type="number" step='any' required placeholder="    e.g. -1" name="xl" value="xl">
             </span>
             <span class="flex shadow-md mb-5 text-xs">
-                <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Bovengrens</span>
-                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="bg" type="number" required placeholder="    e.g. 5" name="bgx" value="bgx">
+                <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Upper limit</span>
+                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="xu" type="number" step='any' required placeholder="    e.g. 1" name="xu" value="xu">
             </span>
             <h1 class="text-gray-800 font-serif text-2xl text-center">
                 Y-axis area
             </h1>
             <span class="flex shadow-md mb-5 text-xs">
-                <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Ondergrens</span>
-                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="og" type="number" required placeholder="    e.g. 1" name="ogy" value="ogy">
+                <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Lower limit</span>
+                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="yl" type="number" step='any' required placeholder="    e.g. -2" name="yl" value="yl">
             </span>
             <span class="flex shadow-md mb-5 text-xs">
-                <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Bovengrens</span>
-                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="bg" type="number" required placeholder="    e.g. 5" name="bgy" value="bgy">
+                <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Upper limit</span>
+                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="yu" type="number" step='any' required placeholder="    e.g. 5" name="yu" value="yu">
             </span>
             
                 <button href="{{ url_for('optimization') }}" class="border-2 border-blue-500 hover:bg-blue-500 hover:text-white text-blue-500 block text-center p-3 px-4 text-sm rounded w-full cursor-pointer font-bold" type="submit">OPTIMIZE</button>
