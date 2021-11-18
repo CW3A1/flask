@@ -104,7 +104,7 @@ def optimization():
         yupper = request.form['yu']
         function = request.form['f']
         if xlower > xupper or ylower > yupper:
-            return render_template('universalerror.html')
+            return render_template('maths/optimization.html',error_message = 'Lower X or Y limit was greater than upper X or Y limit! ')
         if request.cookies.get('jwt'):
             r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/optimization', json={'operation': 'opt', 'options': {'f': function, 'xu': xupper, 'xl': xlower, 'yu': yupper, 'yl': ylower}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:

@@ -1,5 +1,6 @@
 {% extends "template.html" %}
 {% block content %}
+<h1 class='text-red-500 text-center rounded'>{{error_message}}</h1>
 
 <div class="login_form border-2 border-blue-500 p-10 pt-5 shadow-sm mx-auto flex rounded" style="width: 1000px;position: relative;top:100px;">
     <div class="sec flex-1">
@@ -36,9 +37,5 @@
         </form>
     </div>
 </div>
-
-
-
-
 
 {% endblock %}
