@@ -7,7 +7,7 @@ import requests
 
 from flask import (Flask, Response, flash, json, make_response,
                    render_template, request, url_for, redirect)
-from orjson import loads
+from json import loads
 
 app = Flask(__name__)
 app.secret_key = uuid4().hex
