@@ -24,6 +24,8 @@ def injectVariables():
 #     global statusBeveren
 #     statusBeveren = dataBase['beveren']
 
+db_url = "http://pno3cwa2.student.cs.kuleuven.be/api/task/add"
+
 @app.after_request
 def securityHeaders(response):
     response.headers.add("Access-Control-Allow-Origin", "http://localhost:5000")
@@ -62,9 +64,9 @@ def integration():
         og = request.form['og']
         print(function,bg,og)
         if request.cookies.get('jwt'):
-            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/integration', json={'operation': 'int', 'options': {'f': function, 'b': bg, 'a': og}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
+            r = requests.post(db_url, json={'operation': 'int', 'options': {'f': function, 'b': bg, 'a': og}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
-            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/integration', json={'operation': 'int', 'options': {'f': function, 'b': bg, 'a': og}})
+            r = requests.post(db_url, json={'operation': 'int', 'options': {'f': function, 'b': bg, 'a': og}})
         if r.ok:
             n = r.json()
             result = n['result']
@@ -81,9 +83,9 @@ def differentiation():
         punt = request.form['og']
         orde = request.form['orde']
         if request.cookies.get('jwt'):
-            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/differentiation', json={'operation': 'diff', 'options': {'f': function, 'a': punt, 'order': orde}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
+            r = requests.post(db_url, json={'operation': 'diff', 'options': {'f': function, 'a': punt, 'order': orde}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
-            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/differentiation', json={'operation': 'diff', 'options': {'f': function, 'a': punt, 'order': orde}})
+            r = requests.post(db_url, json={'operation': 'diff', 'options': {'f': function, 'a': punt, 'order': orde}})
         if r.ok:
             n = r.json()
             result = n['result']
@@ -102,9 +104,9 @@ def optimization():
             flash('Lower X or Y limit was greater than upper X or Y limit! ')
             return redirect(url_for('optimization'))
         if request.cookies.get('jwt'):
-            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/optimization', json={'operation': 'opt', 'options': {'f': function, 'xu': xupper, 'xl': xlower, 'yu': yupper, 'yl': ylower}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
+            r = requests.post(db_url, json={'operation': 'opt', 'options': {'f': function, 'xu': xupper, 'xl': xlower, 'yu': yupper, 'yl': ylower}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
-            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/optimization', json={'operation': 'opt', 'options': {'f': function, 'xu': xupper, 'xl': xlower, 'yu': yupper, 'yl': ylower}})
+            r = requests.post(db_url, json={'operation': 'opt', 'options': {'f': function, 'xu': xupper, 'xl': xlower, 'yu': yupper, 'yl': ylower}})
         if r.ok:
             n = r.json()
             result = n['result']
@@ -118,9 +120,9 @@ def lagrange_interpolation():
         vectorb = loads("[" + request.form['yval'] + "]")
         print(vectora, vectorb)
         if request.cookies.get('jwt'):
-            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/lagrange_interpolation', json={'operation': 'lint', 'options': {'a': vectora, 'b': vectorb}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
+            r = requests.post(db_url, json={'operation': 'lint', 'options': {'a': vectora, 'b': vectorb}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
-            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/lagrange_interpolation', json={'operation': 'lint', 'options': {'a': vectora, 'b': vectorb}})
+            r = requests.post(db_url, json={'operation': 'lint', 'options': {'a': vectora, 'b': vectorb}})
         if r.ok:
             n = r.json()
             result = n['result']
@@ -134,9 +136,9 @@ def taylor_approximation():
         x0 = request.form['x0']
         order = request.form['order']
         if request.cookies.get('jwt'):
-            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/taylor_approximation', json={'operation': 'taprox', 'options': {'f': function, 'x0': x0, 'order': order}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
+            r = requests.post(db_url, json={'operation': 'taprox', 'options': {'f': function, 'x0': x0, 'order': order}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
-            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/taylor_approximation', json={'operation': 'taprox', 'options': {'f': function, 'x0': x0, 'order': order}})
+            r = requests.post(db_url, json={'operation': 'taprox', 'options': {'f': function, 'x0': x0, 'order': order}})
         if r.ok:
             n = r.json()
             result = n['result']
@@ -146,22 +148,7 @@ def taylor_approximation():
 @app.route('/status/<task_id>')
 def status(task_id):
     r = requests.get("https://pno3cwa2.student.cs.kuleuven.be/api/task/status?task_id="+task_id)
-    n = {
-  "task_id": "000",
-  "status": "0",
-  "pc": "string",
-  "input_values": {
-    "operation": "int",
-    "options": {
-      "f": "sin(x)",
-      "a": 1.5,
-      "order": 1
-    }
-  },
-  "result": '0.07073',
-  "error" : '1',
-  "uuid": "string"
-}
+    n = r.json
     operation = n['input_values']['operation']
     options = n['input_values']['options']
     result = n['result']
