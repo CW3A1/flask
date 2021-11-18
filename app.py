@@ -171,18 +171,22 @@ def status(task_id):
 @app.route('/math/heat_equation',methods=['POST','GET'])
 def heat_equation():
     if request.method == 'POST':
-        function = request.form['f']
-        punt = request.form['og']
-        orde = request.form['orde']
+        L_X = request.form['L_X']
+        L_Y = request.form['L_Y']
+        H = request.form['H']
+        ALPHA = request.form['ALPHA']
+        T = request.form['T']
+        FPS = request.form['FPS']
+        BC = request.form['BC']
         if request.cookies.get('jwt'):
-            r = requests.post(db_url, json={'operation': 'diff', 'options': {'f': function, 'a': punt, 'order': orde}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
+            r = requests.post(db_url, json={'operation': 'heateq', 'options': {'L_X': L_X, 'L_Y': L_Y, 'H': H, 'ALPHA': ALPHA, 'T': T, 'FPS': FPS, 'BOUNDARY_CONDITION': BC}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
-            r = requests.post(db_url, json={'operation': 'diff', 'options': {'f': function, 'a': punt, 'order': orde}})
+            r = requests.post(db_url, json={'operation': 'heateq', 'options': {'L_X': L_X, 'L_Y': L_Y, 'H': H, 'ALPHA': ALPHA, 'T': T, 'FPS': FPS, 'BOUNDARY_CONDITION': BC}})
         if r.ok:
             n = r.json()
             result = n['result']
             return render_template('results/resultloading.html', result=result)
-    return render_template('maths/differentiation.html')
+    return render_template('maths/heat_equation.html')
 @app.route('/gif')
 def gif():
     return render_template('giftest.html')
