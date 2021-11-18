@@ -78,12 +78,12 @@ def integration():
 def differentiation():
     if request.method == 'POST':
         function = request.form['f']
-        punt = request.form['a']
+        punt = request.form['og']
         orde = request.form['orde']
         if request.cookies.get('jwt'):
             r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/differentiation', json={'operation': 'diff', 'options': {'f': function, 'a': punt, 'order': orde}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
-            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/differentiation', json={'operation': 'diff', 'options': {'f': function, 'a': punt, 'a': orde}})
+            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/differentiation', json={'operation': 'diff', 'options': {'f': function, 'a': punt, 'order': orde}})
         if r.ok:
             n = r.json()
             result = n['result']
