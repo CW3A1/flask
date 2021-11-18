@@ -151,7 +151,7 @@ def status(task_id):
   "status": "0",
   "pc": "string",
   "input_values": {
-    "operation": "diff",
+    "operation": "int",
     "options": {
       "f": "sin(x)",
       "a": 1.5,
@@ -159,6 +159,7 @@ def status(task_id):
     }
   },
   "result": '0.07073',
+  "error" : '1',
   "uuid": "string"
 }
     operation = n['input_values']['operation']
