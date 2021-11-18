@@ -35,6 +35,11 @@ def securityHeaders(response):
 def home():
     return render_template('home.html')
 
+@app.route('/loading')
+def loading():
+    return render_template('results/resultloading.html')
+
+
 @app.route('/')
 @app.route('/openfoam')
 def openfoam():
