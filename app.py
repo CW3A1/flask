@@ -90,6 +90,10 @@ def differentiation():
             return render_template('results/resultloading.html', result=result)
     return render_template('maths/differentiation.html')
 
+@app.route('/math/results/resultdifferentiation')
+def resultdifferentiation():
+    return render_template('maths/results/resultdifferentiation')
+
 @app.route('/math/optimization',methods=['POST','GET'])
 def optimization():
     if request.method == 'POST':

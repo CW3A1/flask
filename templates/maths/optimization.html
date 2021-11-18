@@ -1,7 +1,27 @@
 {% extends "template.html" %}
 {% block content %}
 
-
+<div class="login_form border-2 border-blue-500 p-10 pt-5 shadow-sm mx-auto flex rounded" style="width: 1000px;position: relative;top:100px;">
+    <div class="sec flex-1">
+        <form method='POST' action="#">
+            <span class="flex shadow-md mb-5 text-xs">
+                <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Function</span>
+                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="f" type="number" required placeholder="    e.g. x^2-3*x " name="f" value="f">
+            </span>
+            <span class="flex shadow-md mb-5 text-xs">
+                <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Ondergrens</span>
+                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="og" type="number" required placeholder="    e.g. 1" name="og" value="og">
+            </span>
+            <span class="flex shadow-md mb-5 text-xs">
+                <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Bovengrens</span>
+                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="bg" type="number" required placeholder="    e.g. 5" name="bg" value="bg">
+            </span>
+            
+                <button href="{{ url_for('optimization') }}" class="border-2 border-blue-500 hover:bg-blue-500 hover:text-white text-blue-500 block text-center p-3 px-4 text-sm rounded w-full cursor-pointer font-bold" type="submit">INTEGRATE</button>
+            
+        </form>
+    </div>
+</div>
 
 
 

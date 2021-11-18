@@ -23,9 +23,10 @@
               <div class="ml-10 flex items-baseline space-x-4">
                 <a href="{{ url_for('home') }}"
                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                  <!-- 
                 <a href="{{ url_for('integration') }}"
                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Function</a>
-                
+                  -->
                   <div>
                     <div x-data="{ dropdownOpen: false }" class="relative my-32">
                       <button @click="dropdownOpen = !dropdownOpen" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
@@ -41,7 +42,7 @@
                         <a href="{{ url_for('integration') }}" class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
                           Integration
                         </a>
-                        <a href="#" class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
+                        <a href="{{ url_for('optimization') }}" class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
                           Optimization
                         </a>
                         <a href="#" class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
