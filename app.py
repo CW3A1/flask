@@ -113,7 +113,7 @@ def optimization():
             vectory = vector[1]
             vectorz = vector[2]
             return render_template('results/resultloading.html', result=result)
-    return render_template('maths/optimization.html', f = function, a= punt, result=result)
+    return render_template('maths/optimization.html')
 
 @app.route('/math/lagrange_interpolation',methods=['POST','GET'])
 def lagrange_interpolation():
