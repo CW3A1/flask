@@ -1,18 +1,25 @@
 {% extends "template.html" %}
 {% block content %}
-<body>
     <h1 class="text-gray-800 font-serif text-xl text-center">
         The integral of {{options['f']}} with b = {{options['bovengrens']}} and a = {{options['ondergrens']}} is:
-    <h1>
+    </h1>
     <div class="sec flex-1">
         <span class="flex shadow-md mb-5 text-base">                
             <span class="bg-blue-500 w-125 font-bold text-center text-gray-200 p-3 px-5 rounded-l">The result of the calculation is:</span>
             <h1 class="font-serif text-lg" style="position: relative;left: 30px;">{{result}}</h1>
         </span>
     </div>
+    <div>
         <span class="flex shadow-md mb-5 text-base"> 
             <span class="bg-blue-500 w-110 font-bold text-center text-gray-200 p-3 px-5 rounded-l">With an error of approximately:</span>
             <h1 class="font-serif text-lg" style="position: relative;left: 30px;">{{error}}</h1>
             </span>
     
+            <span class="bg-blue-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">The result of the calculation is:</span>
+        <h1 class="font-serif text-lg" style="position: relative;left: 30px;">{{result}}</h1>
+        <span class="flex shadow-md mb-5 text-base">
+            <span class="bg-blue-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">With an error of approximately:</span>
+        <h1 class="font-serif text-lg" style="position: relative;left: 30px;">{{error}}</h1>
+        </span>
+    </div>
 {% endblock %}
