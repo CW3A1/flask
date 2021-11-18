@@ -133,7 +133,21 @@ def lagrange_interpolation():
 @app.route('/status/<task_id>')
 def status(task_id):
     r = requests.get("https://pno3cwa2.student.cs.kuleuven.be/api/task/status?task_id="+task_id)
-    n = r.json()
+    n = {
+  "task_id": "string",
+  "status": "0",
+  "pc": "string",
+  "input_values": {
+    "operation": "diff",
+    "options": {
+      "f": "sin(x)",
+      "a": 0,
+      "order": 1
+    }
+  },
+  "result": {},
+  "uuid": "string"
+}
     operation = n['input_values']['operation']
     options = n['input_values']['options']
     result = n['result']
