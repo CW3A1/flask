@@ -57,6 +57,7 @@ def robots():
 def integration():
     if request.method == 'POST':
         function = request.form['f']
+        
         print(function)
         bg = request.form['bg']
         og = request.form['og']
