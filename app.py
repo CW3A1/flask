@@ -1,4 +1,3 @@
-
 import json
 import threading
 import time
@@ -8,7 +7,7 @@ import requests
 
 from flask import (Flask, Response, flash, json, make_response,
                    render_template, request, url_for, redirect)
-from orjson import loads
+from json import loads
 
 app = Flask(__name__)
 app.secret_key = uuid4().hex
@@ -91,10 +90,6 @@ def differentiation():
             return render_template('results/resultloading.html', result=result)
     return render_template('maths/differentiation.html')
 
-@app.route('/math/results/resultdifferentiation')
-def resultdifferentiation():
-    return render_template('results/resultdifferentiation.html')
-
 @app.route('/math/optimization',methods=['POST','GET'])
 def optimization():
     if request.method == 'POST':
@@ -119,17 +114,34 @@ def optimization():
 @app.route('/math/lagrange_interpolation',methods=['POST','GET'])
 def lagrange_interpolation():
     if request.method == 'POST':
-        vectora = loads("[" + request.form['a'] + "]")
-        vectorb = loads("[" + request.form['b'] + "]")
+        vectora = loads("[" + request.form['xval'] + "]")
+        vectorb = loads("[" + request.form['yval'] + "]")
+        print(vectora, vectorb)
         if request.cookies.get('jwt'):
-            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/integration', json={'operation': 'int', 'options': {'a': vectora, 'b': vectorb}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
+            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/lagrange_interpolation', json={'operation': 'lint', 'options': {'a': vectora, 'b': vectorb}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
-            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/integration', json={'operation': 'int', 'options': {'a': vectora, 'b': vectorb}})
+            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/lagrange_interpolation', json={'operation': 'lint', 'options': {'a': vectora, 'b': vectorb}})
         if r.ok:
             n = r.json()
             result = n['result']
             return render_template('results/resultlloading.html', result=result)
     return render_template('maths/lagrange_interpolation.html')
+
+@app.route('/math/taylor_approximation',methods=['POST','GET'])
+def taylor_approximation():
+    if request.method == 'POST':
+        function = request.form['f']
+        x0 = request.form['x0']
+        order = request.form['order']
+        if request.cookies.get('jwt'):
+            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/taylor_approximation', json={'operation': 'taprox', 'options': {'f': function, 'x0': x0, 'order': order}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
+        else:
+            r = requests.post('http://eeklo.cs.kotnet.kuleuven.be:12000/num_math/taylor_approximation', json={'operation': 'taprox', 'options': {'f': function, 'x0': x0, 'order': order}})
+        if r.ok:
+            n = r.json()
+            result = n['result']
+            return render_template('results/resultlloading.html', result=result)
+    return render_template('maths/taylor_approximation.html')
 
 @app.route('/status/<task_id>')
 def status(task_id):
