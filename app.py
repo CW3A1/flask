@@ -159,6 +159,7 @@ def status(task_id):
     }
   },
   "result": '0.07073',
+  "error" : '1',
   "uuid": "string"
 }
     operation = n['input_values']['operation']
