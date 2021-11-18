@@ -5,11 +5,11 @@
         <form method='POST' action="#">
             <span class="flex shadow-md mb-5 text-xs">
                 <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">X-values</span>
-                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="f" type="text" required placeholder="    e.g. 0,2,6,4,1 " name="xvalues">
+                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="xval" type="text" required placeholder="    e.g. 0,2,6,4,1 " name="xval">
             </span>
             <span class="flex shadow-md mb-5 text-xs">
                 <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Y-values</span>
-                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="og" type="text" required placeholder="    e.g. 3,5,6,1,8" name="yvalues">
+                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="yval" type="text" required placeholder="    e.g. 3,5,6,1,8" name="yval">
             </span>
             <span class="border-2 border-blue-500 hover:bg-blue-500 hover:text-white mt-3 text-blue-500 block text-center p-3 px-4 text-sm rounded cursor-pointer font-bold">
                 <button type="submit" href="{{ url_for('lagrange_interpolation') }}">Interpolate</button>
