@@ -28,11 +28,11 @@
           </svg>
         Processing
     </button>
-    <h1>{{taskid}}</h1>
+    <h1>Task-id: {{taskid}}</h1>
     <h3>Elapsed time:</h3>
     <h1 id="pending"></h1>
     <p id="status"></p>
 </body>
-<script src="{{url_for('static', filename='pending.js')}}"></script>
-<script src="{{url_for('static', filename='websocket.js')}}"></script>
+<script src="{{url_for('static', filename='pending.js')}}" ></script>
+<script src="{{url_for('static', filename='websocket.js')}}" data-taskid="{{taskid}}"></script>
 {% endblock %}

@@ -24,7 +24,7 @@ def injectVariables():
 #     global statusBeveren
 #     statusBeveren = dataBase['beveren']
 
-db_url = "http://pno3cwa2.student.cs.kuleuven.be/api/task/add"
+db_url = "https://pno3cwa2.student.cs.kuleuven.be/api/task/add"
 
 @app.after_request
 def securityHeaders(response):
@@ -60,12 +60,9 @@ def integration():
             r = requests.post(db_url, json={'operation': 'int', 'options': {'f': function, 'b': bg, 'a': og}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
             r = requests.post(db_url, json={'operation': 'int', 'options': {'f': function, 'b': bg, 'a': og}})
-        if r.ok:
-            n = r.json()
-            result = n['result']
-            error = n['error']
-            taskid = n['result']
-            return render_template('results/resultloading.html', taskid = taskid)
+        n = r.json()
+        taskid = n['task_id']
+        return render_template('results/resultloading.html', taskid = taskid)
     return render_template('maths/integration.html')
 
 
@@ -79,10 +76,9 @@ def differentiation():
             r = requests.post(db_url, json={'operation': 'diff', 'options': {'f': function, 'a': punt, 'order': orde}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
             r = requests.post(db_url, json={'operation': 'diff', 'options': {'f': function, 'a': punt, 'order': orde}})
-        if r.ok:
-            n = r.json()
-            result = n['result']
-            return render_template('results/resultloading.html', result=result)
+        n = r.json()
+        taskid = n['task_id']
+        return render_template('results/resultloading.html', taskid = taskid)
     return render_template('maths/differentiation.html')
 
 @app.route('/math/optimization',methods=['POST','GET'])
@@ -100,10 +96,9 @@ def optimization():
             r = requests.post(db_url, json={'operation': 'opt', 'options': {'f': function, 'xu': xupper, 'xl': xlower, 'yu': yupper, 'yl': ylower}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
             r = requests.post(db_url, json={'operation': 'opt', 'options': {'f': function, 'xu': xupper, 'xl': xlower, 'yu': yupper, 'yl': ylower}})
-        if r.ok:
-            n = r.json()
-            result = n['result']
-            return render_template('results/resultloading.html', result=result)
+        n = r.json()
+        taskid = n['task_id']
+        return render_template('results/resultloading.html', taskid = taskid)
     return render_template('maths/optimization.html')
 
 @app.route('/math/lagrange_interpolation',methods=['POST','GET'])
@@ -116,10 +111,9 @@ def lagrange_interpolation():
             r = requests.post(db_url, json={'operation': 'lint', 'options': {'a': vectora, 'b': vectorb}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
             r = requests.post(db_url, json={'operation': 'lint', 'options': {'a': vectora, 'b': vectorb}})
-        if r.ok:
-            n = r.json()
-            result = n['result']
-            return render_template('results/resultlloading.html', result=result)
+        n = r.json()
+        taskid = n['task_id']
+        return render_template('results/resultlloading.html', taskid = taskid)
     return render_template('maths/lagrange_interpolation.html')
 
 @app.route('/math/taylor_approximation',methods=['POST','GET'])
@@ -132,16 +126,15 @@ def taylor_approximation():
             r = requests.post(db_url, json={'operation': 'taprox', 'options': {'f': function, 'x0': x0, 'order': order}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
             r = requests.post(db_url, json={'operation': 'taprox', 'options': {'f': function, 'x0': x0, 'order': order}})
-        if r.ok:
-            n = r.json()
-            result = n['result']
-            return render_template('results/resultlloading.html', result=result)
+        n = r.json()
+        taskid = n['task_id']
+        return render_template('results/resultlloading.html', taskid = taskid)
     return render_template('maths/taylor_approximation.html')
 
 @app.route('/status/<task_id>')
 def status(task_id):
     r = requests.get("https://pno3cwa2.student.cs.kuleuven.be/api/task/status?task_id="+task_id)
-    n = r.json
+    n = r.json()
     operation = n['input_values']['operation']
     options = n['input_values']['options']
     result = n['result']
@@ -172,10 +165,9 @@ def heat_equation():
             r = requests.post(db_url, json={'operation': 'heateq', 'options': {'L_X': L_X, 'L_Y': L_Y, 'H': H, 'ALPHA': ALPHA, 'T': T, 'FPS': FPS, 'BOUNDARY_CONDITION': BC}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
         else:
             r = requests.post(db_url, json={'operation': 'heateq', 'options': {'L_X': L_X, 'L_Y': L_Y, 'H': H, 'ALPHA': ALPHA, 'T': T, 'FPS': FPS, 'BOUNDARY_CONDITION': BC}})
-        if r.ok:
-            n = r.json()
-            result = n['result']
-            return render_template('results/resultloading.html', result=result)
+        n = r.json()
+        taskid = n['task_id']
+        return render_template('results/resultloading.html', taskid = taskid)
     return render_template('maths/heat_equation.html')
 @app.route('/gif')
 def gif():
