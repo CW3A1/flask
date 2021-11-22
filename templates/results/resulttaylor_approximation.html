@@ -2,16 +2,11 @@
 {% block content %}
 <body>
     <h1 class="text-gray-800 font-serif text-xl text-center">
-        The integral of {{options['f']}} with b = {{options['bovengrens']}} and a = {{options['ondergrens']}} is:
+        The result of the taylor approximation of f(x)={{options['f']}} around {{options['x0']}} of order {{options['order']}} is:
     </h1>
     <div class="sec flex-1">
         <span class="flex shadow-md mb-5 text-base">
             <span class="bg-blue-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">Result:</span>
         <h1 class="font-serif text-lg" style="position: relative;left: 30px;">{{result['result']}}</h1>
-    </div>
-    <div class="sec flex-1">
-        <span class="flex shadow-md mb-5 text-base">
-            <span class="bg-blue-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">Error:</span>
-        <h1 class="font-serif text-lg" style="position: relative;left: 30px;">{{result['err']}}</h1>
     </div>
 {% endblock %}
