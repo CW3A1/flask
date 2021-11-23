@@ -26,7 +26,17 @@
     transform: translate(-50%,0%);
     background-color: transparent;
 }
-
+#grijs{
+	/*
+	position: absolute;
+	bottom: -47vh;
+	*/
+	width:100%;
+	border-color: tomato;
+	border-width: 2px;
+	height: 40vh;
+	z-index: -99999;
+}
 
 
 
