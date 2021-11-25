@@ -137,7 +137,10 @@ def taylor_approximation():
 
 @app.route('/status/<task_id>')
 def status(task_id):
-    r = requests.get("https://pno3cwa2.student.cs.kuleuven.be/api/task/status?task_id="+task_id)
+    if request.cookies.get('jwt'):
+        r = requests.get("https://pno3cwa2.student.cs.kuleuven.be/api/task/status?task_id="+task_id, headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
+    else:
+        r = requests.get("https://pno3cwa2.student.cs.kuleuven.be/api/task/status?task_id="+task_id)
     n = r.json()
     operation = n['input_values']['operation']
     options = n['input_values']['options']
@@ -179,6 +182,17 @@ def heat_equation():
 def gif():
     return render_template('giftest.html')
 # Dit is een test
+
+@app.route('/user/history')
+def history():
+    if request.cookies.get('jwt'):
+        r = requests.get('https://pno3cwa2.student.cs.kuleuven.be/api/user/tasks', headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
+        n = r.json()
+        if 'error' in n or 'detail' in n:
+            flash(n['error'] if 'error' in n else n['detail'], 'error')
+            return redirect(url_for('login'))
+        return render_template('history.html', tasks=n['tasks'])
+    return redirect(url_for('login'))
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
