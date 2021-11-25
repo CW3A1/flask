@@ -1,23 +1,26 @@
 {% extends "template.html" %}
 {% block content %}
-<div class="login_form border-2 border-blue-500 p-10 pt-5 shadow-sm mx-auto flex rounded" style="width: 1000px;position: relative;top:100px;">
+<link href="/static/css/differentiation.css" rel="stylesheet">
+<div id="blad" class="shadow-2xl justify-center">
+<div id="bovenblad" class="login_form border-2 border-blue-500 p-10 pt-5 shadow-sm mx-auto flex rounded" style="width: 1000px;position: relative;top:100px;">
     <div class="sec flex-1">
         <form method='POST' action="#">
             <h1 class="text-gray-800 font-serif text-2xl text-center">
                 Area Rectangle
             </h1>
                 <span class="flex shadow-md mb-5 text-xs">
-                    <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Length</span>
+                    <span class="bg-blue-500 w-28 font-bold text-center shadow-md text-white p-3 px-5 rounded-l">Length</span>
                         <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="og" type="number" required placeholder="    e.g. 5" name="og" value="og">
                     </span></span>
                 <span class="flex shadow-md mb-5 text-xs">
-                    <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Width</span>
+                    <span class="bg-blue-500 w-28 font-bold text-center shadow-md text-white p-3 px-5 rounded-l">Width</span>
                         <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="og" type="number" required placeholder="    e.g. 5" name="og" value="og">
                     </span></span>
                 <span class="flex shadow-md mb-5 text-xs">
-                    <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Step</span>
+                    <span class="bg-blue-500 w-28 font-bold text-center shadow-md text-white p-3 px-5 rounded-l">Step</span>
                         <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="og" type="number" required placeholder="    e.g. 0.4" name="og" value="og">
                     </span></span>
+                    <button type="submit" href="{{ url_for('heat_equation')}}" style="position: relative;left:50%;transform: translate(-50%,22%);width: 87%;" class="border-2 border-blue-500 hover:bg-blue-500 shadow-md hover:text-white mt-3 text-blue-500 block text-center p-3 px-4 text-sm rounded-2xl cursor-pointer font-bold">HEAT EQUATION </button>
         </form>
     </div>
 </div>

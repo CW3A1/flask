@@ -1,22 +1,24 @@
 {% extends "template.html" %}
 {% block content %}
-<div class="login_form border-2 border-orange-500 p-10 pt-5 shadow-sm mx-auto flex rounded" style="width: 1000px;position: relative;top:100px;">
+<link href="/static/css/differentiation.css" rel="stylesheet">
+<div id="blad" class="shadow-2xl justify-center">
+<div id="bovenblad" class="login_form border-2 border-blue-500 p-10 pt-5 shadow-xl mx-auto flex rounded-2xl" style="width: 700px;position: relative;top:100px;">
     <div class="sec flex-1">
         <form method='POST' action="#">
             <span class="flex shadow-md mb-5 text-xs">
-                <span class="bg-indigo-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Function</span>
+                <span class="bg-blue-500 w-28 font-bold text-center shadow-md text-white p-3 px-5 rounded-l">Function</span>
                     <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="f" type="text" required placeholder="    e.g. x^2-3*x " name="f">
             </span>
             <span class="flex shadow-md mb-5 text-xs">
-                <span class="bg-green-300 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Ondergrens</span>
+                <span class="bg-blue-500 w-28 font-bold text-center text-white shadow-md p-3 px-5 rounded-l">Ondergrens</span>
                     <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="og" type="number" required placeholder="    e.g. 1" name="og" value="og">
             </span>
             <span class="flex shadow-md mb-5 text-xs">
-                <span class="bg-yellow-400 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Bovengrens</span>
+                <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Bovengrens</span>
                     <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="bg" type="number" required placeholder="    e.g. 5" name="bg" value="bg">
             </span>
             
-                <button href="{{ url_for('integration') }}" class="border-2 border-blue-500 hover:bg-blue-500 hover:text-white mt-3 text-blue-500 block text-center p-3 px-4 text-sm rounded cursor-pointer font-bold" type="submit">INTEGRATE</button>
+                <button href="{{ url_for('integration') }}" style="position: relative;left:50%;transform: translate(-50%,22%);width: 87%;" class="border-2 border-blue-500 hover:bg-blue-500 shadow-md hover:text-white mt-3 text-blue-500 block text-center p-3 px-4 text-sm rounded-2xl cursor-pointer font-bold" type="submit">INTEGRATE</button>
             
         </form>
     </div>
