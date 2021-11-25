@@ -2,27 +2,61 @@
 {% block content %}
 <link href="/static/css/differentiation.css" rel="stylesheet">
 <div id="blad" class="shadow-2xl justify-center">
-<div id="bovenblad" class="login_form border-2 border-blue-500 p-10 pt-5 shadow-sm mx-auto flex rounded" style="width: 1000px;position: relative;top:100px;">
-    <div class="sec flex-1">
-        <form method='POST' action="#">
-            <h1 class="text-gray-800 font-serif text-2xl text-center">
-                Area Rectangle
-            </h1>
+    <div id="bovenblad" class="login_form border-2 border-blue-500 p-10 pt-5 shadow-sm mx-auto flex rounded"
+        style="width: 1000px;position: relative;top:100px;">
+        <div class="sec flex-1">
+            <form method='POST' action="#">
+                <h1 class="text-gray-800 font-serif text-2xl text-center">
+                    Area Rectangle
+                </h1>
                 <span class="flex shadow-md mb-5 text-xs">
-                    <span class="bg-blue-500 w-28 font-bold text-center shadow-md text-white p-3 px-5 rounded-l">Length</span>
-                        <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="og" type="number" required placeholder="    e.g. 5" name="og" value="og">
-                    </span></span>
+                    <span
+                        class="bg-blue-500 w-28 font-bold text-center shadow-md text-white p-3 px-5 rounded-l">Length (m)</span>
+                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="L_X" type="number" required
+                        placeholder="    e.g. 5" name="L_X" value="L_X" step="any">
+                </span></span>
                 <span class="flex shadow-md mb-5 text-xs">
-                    <span class="bg-blue-500 w-28 font-bold text-center shadow-md text-white p-3 px-5 rounded-l">Width</span>
-                        <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="og" type="number" required placeholder="    e.g. 5" name="og" value="og">
-                    </span></span>
+                    <span
+                        class="bg-blue-500 w-28 font-bold text-center shadow-md text-white p-3 px-5 rounded-l">Width (m)</span>
+                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="L_Y" type="number" required
+                        placeholder="    e.g. 5" name="L_Y" value="L_Y" step="any">
+                </span></span>
                 <span class="flex shadow-md mb-5 text-xs">
-                    <span class="bg-blue-500 w-28 font-bold text-center shadow-md text-white p-3 px-5 rounded-l">Step</span>
-                        <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="og" type="number" required placeholder="    e.g. 0.4" name="og" value="og">
-                    </span></span>
-                    <button type="submit" href="{{ url_for('heat_equation')}}" style="position: relative;left:50%;transform: translate(-50%,22%);width: 87%;" class="border-2 border-blue-500 hover:bg-blue-500 shadow-md hover:text-white mt-3 text-blue-500 block text-center p-3 px-4 text-sm rounded-2xl cursor-pointer font-bold">HEAT EQUATION </button>
-        </form>
+                    <span
+                        class="bg-blue-500 w-28 font-bold text-center shadow-md text-white p-3 px-5 rounded-l">Step</span>
+                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="H" type="number" required
+                        placeholder="    e.g. 0.4" name="H" value="H" step="any">
+                </span></span>
+                <span class="flex shadow-md mb-5 text-xs">
+                    <span
+                        class="bg-blue-500 w-28 font-bold text-center shadow-md text-white p-3 px-5 rounded-l">Thermal diffusivity coefficient (mm^2/s)</span>
+                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="ALPHA" type="number" required
+                        placeholder="    e.g. 10^6" name="ALPHA" value="ALPHA" step="any">
+                </span></span>
+                <span class="flex shadow-md mb-5 text-xs">
+                    <span
+                        class="bg-blue-500 w-28 font-bold text-center shadow-md text-white p-3 px-5 rounded-l">Time (s)</span>
+                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="T" type="number" required
+                        placeholder="    e.g. 5" name="T" value="T" step="1">
+                </span></span>
+                <span class="flex shadow-md mb-5 text-xs">
+                    <span
+                        class="bg-blue-500 w-28 font-bold text-center shadow-md text-white p-3 px-5 rounded-l">Frames per second</span>
+                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="FPS" type="number" required
+                        placeholder="    e.g. 15" name="FPS" value="FPS" step="1">
+                </span></span>
+                <span class="flex shadow-md mb-5 text-xs">
+                    <span
+                        class="bg-blue-500 w-28 font-bold text-center shadow-md text-white p-3 px-5 rounded-l">Boundary condition</span>
+                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="BC" type="text" required
+                        placeholder="    e.g. Flux r no" name="BC" value="BC">
+                </span></span>
+                <button type="submit" href="{{ url_for('heat_equation')}}"
+                    style="position: relative;left:50%;transform: translate(-50%,22%);width: 87%;"
+                    class="border-2 border-blue-500 hover:bg-blue-500 shadow-md hover:text-white mt-3 text-blue-500 block text-center p-3 px-4 text-sm rounded-2xl cursor-pointer font-bold">HEAT
+                    EQUATION </button>
+            </form>
+        </div>
     </div>
-</div>
 
-{% endblock %}
+    {% endblock %}

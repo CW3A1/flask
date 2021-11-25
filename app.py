@@ -117,14 +117,14 @@ def lagrange_interpolation():
             r = requests.post(db_url, json={'operation': 'lint', 'options': {'a': vectora, 'b': vectorb}})
         n = r.json()
         taskid = n['task_id']
-        return render_template('results/resultlloading.html', taskid = taskid)
+        return render_template('results/resultloading.html', taskid = taskid)
     return render_template('maths/lagrange_interpolation.html')
 
 @app.route('/math/taylor_approximation',methods=['POST','GET'])
 def taylor_approximation():
     if request.method == 'POST':
         function = request.form['f']
-        x0 = request.form['x0']
+        x0 = request.form['x']
         order = request.form['order']
         if request.cookies.get('jwt'):
             r = requests.post(db_url, json={'operation': 'taprox', 'options': {'f': function, 'x0': x0, 'order': order}},headers={'Authorization': 'Bearer '+request.cookies.get('jwt')})
@@ -132,7 +132,7 @@ def taylor_approximation():
             r = requests.post(db_url, json={'operation': 'taprox', 'options': {'f': function, 'x0': x0, 'order': order}})
         n = r.json()
         taskid = n['task_id']
-        return render_template('results/resultlloading.html', taskid = taskid)
+        return render_template('results/resultloading.html', taskid = taskid)
     return render_template('maths/taylor_approximation.html')
 
 @app.route('/status/<task_id>')
@@ -154,6 +154,8 @@ def status(task_id):
         return render_template('results/resultlagrange_interpolation.html', options = options, result = result)
     if operation == 'taprox':
         return render_template('results/resulttaylor_approximation.html', options = options, result = result)
+    if operation == 'heateq':
+        return render_template('results/resultheat_equation.html', options = options, result = result)
 
 @app.route('/math/heat_equation',methods=['POST','GET'])
 def heat_equation():
