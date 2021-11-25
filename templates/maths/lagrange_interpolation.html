@@ -1,8 +1,11 @@
 {% extends "template.html" %}
 {% block content %}
 <link href="/static/css/differentiation.css" rel="stylesheet">
-<div id="blad" class="shadow-2xl justify-center">
-<div id="bovenblad" class="login_form border-2 border-blue-500 p-10 pt-5 shadow-sm mx-auto flex rounded" style="width: 700px;position: relative;top:100px;">
+<div id="blad" style="position:relative;top:-10px;" class="shadow-2xl justify-center">
+<h1 style="position: relative;top: 10px;" class="text-gray-700 font-serif text-5xl text-center">
+   Lagrange interpolation
+</h1>
+<div id="bovenblad" class="login_form border-2 border-blue-500 p-10 pt-5 shadow-sm mx-auto flex rounded-2xl" style="width: 700px;position: relative;top:100px;">
     <div class="sec flex-1">
         <form method='POST' action="#">
             <p class="text-sm text-gray-400 font-serif text-center" style="position: relative;top: -5px;">Make sure to seperate the values by (only) a ','</p>
