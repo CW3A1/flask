@@ -2,10 +2,10 @@
 {% block content %}
 <body>
     <h1 class="text-gray-800 font-serif text-xl text-center">
-        The optimization of f(x)={{options['f']}} between {{options['xl']}} and {{options['xu']}} in the x-area and between {{options['yl']}} and {{options['yu']}} in the y-area is:</h1>
+        The optimization of f(x,y)={{options['f']}} between {{options['xl']}} and {{options['xu']}} in the x-area and between {{options['yl']}} and {{options['yu']}} in the y-area is:</h1>
     <div class="sec flex-1">
         <span class="flex shadow-md mb-5 text-base">
             <span class="bg-blue-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">Result:</span>
-        <h1 class="font-serif text-lg" style="position: relative;left: 30px;">{{result['vector']}}</h1>
+        <h1 class="font-serif text-lg" style="position: relative;left: 30px;">X = {{result['vector'][0]}}, Y = {{result['vector'][1]}} and f({{result['vector'][0]}},{{result['vector'][1]}}) = {{result['vector'][2]}}</h1>
     </div>
 {% endblock %}
