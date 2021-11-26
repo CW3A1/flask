@@ -1,0 +1,33 @@
+body{
+    background: linear-gradient(to right bottom, 
+    rgb(236, 236, 236),
+    rgb(179, 208, 219));
+}
+/*
+#geheel{
+    position:relative;
+    top:-5%;
+    width: 100%;
+    height: 160%;
+    z-index: -100;
+    background: linear-gradient(to right bottom, 
+    rgb(236, 236, 236),
+    rgb(179, 208, 219));
+}
+*/
+.overflow-hidden{
+    background: linear-gradient(to right bottom,rgb(45, 66, 90),rgb(2, 43, 58));
+}
+#titel{
+    justify-self: center;
+}
+.container{
+    position: relative;
+    top:10%;
+}
+#foto{
+    position: relative;
+
+    width: 90%;
+    height: 50%;
+}

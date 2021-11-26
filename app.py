@@ -37,7 +37,7 @@ def securityHeaders(response):
 def home():
     return render_template('home.html')
 
-@app.route('/Try_it')
+@app.route('/try_it')
 def mogelijkheden():
     return render_template('mogelijkheden.html')
 
