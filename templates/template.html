@@ -88,6 +88,8 @@
             <div class="ml-4 flex items-center md:ml-6">
                 {% if loggedIn %}
                   <div class="ml-10 flex items-baseline space-x-4">
+                    <a href="{{url_for('history')}}"
+                      class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md md\:text-sm font-serif font-medium">History</a>
                     <a href="{{url_for('logout')}}"
                       class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md md\:text-sm font-serif font-medium">Log out</a>
   {% endif %}
