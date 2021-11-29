@@ -1,13 +1,16 @@
 from json import loads
 
+from app import *
 from app import app
 from flask import flash, redirect, render_template, request, url_for
 from modules.environment import db_url
 from requests import get, post
 
+from routers.users import *
+
 
 @app.route("/math/integration",methods=["POST","GET"])
-def integration_():
+def integration():
     if request.method == "POST":
         function = request.form["f"]
         bg = request.form["bg"]
@@ -23,7 +26,7 @@ def integration_():
     return render_template("maths/integration.html")
 
 @app.route("/math/differentiation",methods=["POST","GET"])
-def differentiation_():
+def differentiation():
     if request.method == "POST":
         function = request.form["f"]
         punt = request.form["og"]
@@ -38,7 +41,7 @@ def differentiation_():
     return render_template("maths/differentiation.html")
 
 @app.route("/math/optimization",methods=["POST","GET"])
-def optimization_():
+def optimization():
     if request.method == "POST":
         xlower = request.form["xl"]
         xupper = request.form["xu"]
@@ -58,7 +61,7 @@ def optimization_():
     return render_template("maths/optimization.html")
 
 @app.route("/math/lagrange_interpolation",methods=["POST","GET"])
-def lagrange_interpolation_():
+def lagrange_interpolation():
     if request.method == "POST":
         vectora = loads("[" + request.form["xval"] + "]")
         vectorb = loads("[" + request.form["yval"] + "]")
@@ -73,7 +76,7 @@ def lagrange_interpolation_():
     return render_template("maths/lagrange_interpolation.html")
 
 @app.route("/math/taylor_approximation",methods=["POST","GET"])
-def taylor_approximation_():
+def taylor_approximation():
     if request.method == "POST":
         function = request.form["f"]
         x0 = request.form["x"]
@@ -88,7 +91,7 @@ def taylor_approximation_():
     return render_template("maths/taylor_approximation.html")
 
 @app.route("/status/<task_id>")
-def status_(task_id):
+def status(task_id):
     if request.cookies.get("jwt"):
         r = get("https://pno3cwa2.student.cs.kuleuven.be/api/task/status?task_id="+task_id, headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
     else:
@@ -113,19 +116,18 @@ def status_(task_id):
         return render_template("results/resultheat_equation.html", options = options, result = result)
 
 @app.route("/math/heat_equation",methods=["POST","GET"])
-def heat_equation_():
+def heat_equation():
     if request.method == "POST":
         L_X = request.form["L_X"]
         L_Y = request.form["L_Y"]
         H = request.form["H"]
-        ALPHA = request.form["ALPHA"]
         T = request.form["T"]
         FPS = request.form["FPS"]
         BC = request.form["BC"]
         if request.cookies.get("jwt"):
-            r = post(f"{db_url}/api/task/add", json={"operation": "heateq", "options": {"L_X": L_X, "L_Y": L_Y, "H": H, "ALPHA": ALPHA, "T": T, "FPS": FPS, "BOUNDARY_CONDITION": BC}},headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
+            r = post(f"{db_url}/api/task/add", json={"operation": "heateq", "options": {"L_X": L_X, "L_Y": L_Y, "H": H, "T": T, "FPS": FPS, "BOUNDARY_CONDITION": BC}},headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
         else:
-            r = post(f"{db_url}/api/task/add", json={"operation": "heateq", "options": {"L_X": L_X, "L_Y": L_Y, "H": H, "ALPHA": ALPHA, "T": T, "FPS": FPS, "BOUNDARY_CONDITION": BC}})
+            r = post(f"{db_url}/api/task/add", json={"operation": "heateq", "options": {"L_X": L_X, "L_Y": L_Y, "H": H, "T": T, "FPS": FPS, "BOUNDARY_CONDITION": BC}})
         n = r.json()
         taskid = n["task_id"]
         return render_template("results/resultloading.html", taskid = taskid)
