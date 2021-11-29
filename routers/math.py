@@ -121,14 +121,13 @@ def heat_equation():
         L_X = request.form["L_X"]
         L_Y = request.form["L_Y"]
         H = request.form["H"]
-        ALPHA = request.form["ALPHA"]
         T = request.form["T"]
         FPS = request.form["FPS"]
         BC = request.form["BC"]
         if request.cookies.get("jwt"):
-            r = post(f"{db_url}/api/task/add", json={"operation": "heateq", "options": {"L_X": L_X, "L_Y": L_Y, "H": H, "ALPHA": ALPHA, "T": T, "FPS": FPS, "BOUNDARY_CONDITION": BC}},headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
+            r = post(f"{db_url}/api/task/add", json={"operation": "heateq", "options": {"L_X": L_X, "L_Y": L_Y, "H": H, "T": T, "FPS": FPS, "BOUNDARY_CONDITION": BC}},headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
         else:
-            r = post(f"{db_url}/api/task/add", json={"operation": "heateq", "options": {"L_X": L_X, "L_Y": L_Y, "H": H, "ALPHA": ALPHA, "T": T, "FPS": FPS, "BOUNDARY_CONDITION": BC}})
+            r = post(f"{db_url}/api/task/add", json={"operation": "heateq", "options": {"L_X": L_X, "L_Y": L_Y, "H": H, "T": T, "FPS": FPS, "BOUNDARY_CONDITION": BC}})
         n = r.json()
         taskid = n["task_id"]
         return render_template("results/resultloading.html", taskid = taskid)

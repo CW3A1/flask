@@ -11,8 +11,6 @@ def injectVariables():
         return s.capitalize()
     return dict(loggedIn=True if request.cookies.get("jwt") else False, firstLetterCap=firstLetterCap)
 
-db_url = "https://pno3cwa2.student.cs.kuleuven.be/api/task/add"
-
 @app.after_request
 def securityHeaders(response):
     response.headers.add("Access-Control-Allow-Origin", "http://localhost:5000")
