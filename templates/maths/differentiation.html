@@ -22,7 +22,7 @@
             </span>
             <span class="flex shadow-md mb-5 text-xs">
                 <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Order</span>
-                <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="orde" step='1' type="number"
+                <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="orde" step='1' min='1' type="number"
                     required placeholder="    e.g. 1" name="orde" value="orde">
             </span>
             <button type="submit" href="{{ url_for('differentiation')}}"
