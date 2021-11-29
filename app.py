@@ -18,12 +18,6 @@ def injectVariables():
         return s.capitalize()
     return dict(loggedIn=True if request.cookies.get("jwt") else False, firstLetterCap=firstLetterCap)
 
-# def refresh():
-#     threading.Timer(5, refresh).start()
-#     dataBase = requests.get('https://pno3cwa2.student.cs.kuleuven.be/api/scheduler/status/beveren').json()
-#     global statusBeveren
-#     statusBeveren = dataBase['beveren']
-
 db_url = "https://pno3cwa2.student.cs.kuleuven.be/api/task/add"
 
 @app.after_request
@@ -178,10 +172,6 @@ def heat_equation():
         taskid = n['task_id']
         return render_template('results/resultloading.html', taskid = taskid)
     return render_template('maths/heat_equation.html')
-@app.route('/gif')
-def gif():
-    return render_template('giftest.html')
-# Dit is een test
 
 @app.route('/user/history')
 def history():
