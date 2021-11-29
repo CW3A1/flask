@@ -1,5 +1,6 @@
 from app import *
 from app import app
+from datetime import datetime, timedelta, timezone
 from flask import (flash, make_response, redirect, render_template, request,
                    url_for)
 from modules.environment import db_url
@@ -32,7 +33,7 @@ def login():
                 return render_template("login.html")
             else:
                 resp = make_response()
-                resp.set_cookie("jwt",value=n["jwt"])
+                resp.set_cookie("jwt",value=n["jwt"],max_age = datetime.now(tz=timezone.utc) + timedelta(days=1))
                 resp.headers.add("location", url_for("home"))
                 return resp, 302
     return render_template("login.html")
