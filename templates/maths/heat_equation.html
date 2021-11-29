@@ -43,8 +43,11 @@
                 <span class="flex shadow-md mb-5 text-xs">
                     <span
                         class="bg-blue-500 w-28 font-bold text-center shadow-md text-white p-3 px-5 rounded-l">Boundary condition</span>
-                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="BC" type="text" required
+                    <select class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="BC" type="text" required
                         placeholder="    e.g. Flux r no" name="BC" value="BC">
+                        <option value='NO_FLUX'>No Flux</option>
+                        <option value='NO_FLUX'>Flux</option>
+                        </select>
                 </span></span>
                 <button type="submit" href="{{ url_for('heat_equation')}}"
                     style="position: relative;left:50%;transform: translate(-50%,22%);width: 87%;"
