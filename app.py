@@ -1,13 +1,6 @@
-import json
-import threading
-import time
 from uuid import uuid4
 
-import requests
-
-from flask import (Flask, Response, flash, json, make_response,
-                   render_template, request, url_for, redirect)
-from json import loads
+from flask import Flask, Response, render_template, request
 
 app = Flask(__name__)
 app.secret_key = uuid4().hex
@@ -27,23 +20,11 @@ def securityHeaders(response):
     response.headers.add("Access-Control-Allow-Origin", "https://pno3cwa1.student.cs.kuleuven.be")
     return response
 
-@app.route('/')
-def home():
-    return render_template('home.html')
-
-@app.route('/try_it')
-def mogelijkheden():
-    return render_template('mogelijkheden.html')
-
-@app.route('/loading')
-def loading():
-    return render_template('results/resultloading.html')
-
 @app.errorhandler(404)
 def not_found(e):
     return render_template("404.html", title="404")
 
-@app.route('/robots.txt')
+@app.route("/robots.txt")
 def robots():
     return Response("User-agent: *\nDisallow: /", mimetype="text/plain")
 
@@ -202,29 +183,11 @@ def login():
                 return resp, 302
     return render_template('login.html')
 
-@app.route('/register', methods=['POST','GET'])
-def register():
-    if request.method == 'POST':
-        email = request.form['email']
-        pswd = request.form['password']
-        r = requests.post('https://pno3cwa2.student.cs.kuleuven.be/api/user/add', json={'email': email, 'password': pswd})
-        if r.ok:
-            n = r.json()
-            if 'error' in n:
-                flash(n['error'], 'error')
-                return render_template('register.html')
-            else:
-                resp = make_response()
-                resp.set_cookie('jwt', value=n['jwt'])
-                resp.headers.add('location', url_for('home'))
-                return resp, 302
-    return render_template('register.html')
+@app.route("/try_it")
+def mogelijkheden():
+    return render_template("mogelijkheden.html")
 
-@app.route('/logout')
-def logout():
-    resp = make_response()
-    resp.set_cookie('jwt', '', expires=0)
-    resp.headers.add('location', url_for('home'))
-    return resp, 302
+import routers.math, routers.users
 
-app.run(debug=True)
+if __name__ == '__main__':
+    app.run()
