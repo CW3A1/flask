@@ -6,7 +6,7 @@ from requests import get, post
 
 
 @app.route("/user/history")
-def history():
+def history_():
     if request.cookies.get("jwt"):
         r = get(f"{db_url}/api/user/tasks", headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
         n = r.json()
@@ -17,7 +17,7 @@ def history():
     return redirect(url_for("login"))
 
 @app.route("/login", methods=["POST", "GET"])
-def login():
+def login_():
     if request.method == "POST":
         email=request.form["email"]
         pswd=request.form["password"]
@@ -35,7 +35,7 @@ def login():
     return render_template("login.html")
 
 @app.route("/register", methods=["POST","GET"])
-def register():
+def register_():
     if request.method == "POST":
         email = request.form["email"]
         pswd = request.form["password"]
@@ -53,7 +53,7 @@ def register():
     return render_template("register.html")
 
 @app.route("/logout")
-def logout():
+def logout_():
     resp = make_response()
     resp.set_cookie("jwt", "", expires=0)
     resp.headers.add("location", url_for("home"))

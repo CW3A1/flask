@@ -7,7 +7,7 @@ from requests import get, post
 
 
 @app.route("/math/integration",methods=["POST","GET"])
-def integration():
+def integration_():
     if request.method == "POST":
         function = request.form["f"]
         bg = request.form["bg"]
@@ -23,7 +23,7 @@ def integration():
     return render_template("maths/integration.html")
 
 @app.route("/math/differentiation",methods=["POST","GET"])
-def differentiation():
+def differentiation_():
     if request.method == "POST":
         function = request.form["f"]
         punt = request.form["og"]
@@ -38,7 +38,7 @@ def differentiation():
     return render_template("maths/differentiation.html")
 
 @app.route("/math/optimization",methods=["POST","GET"])
-def optimization():
+def optimization_():
     if request.method == "POST":
         xlower = request.form["xl"]
         xupper = request.form["xu"]
@@ -58,7 +58,7 @@ def optimization():
     return render_template("maths/optimization.html")
 
 @app.route("/math/lagrange_interpolation",methods=["POST","GET"])
-def lagrange_interpolation():
+def lagrange_interpolation_():
     if request.method == "POST":
         vectora = loads("[" + request.form["xval"] + "]")
         vectorb = loads("[" + request.form["yval"] + "]")
@@ -73,7 +73,7 @@ def lagrange_interpolation():
     return render_template("maths/lagrange_interpolation.html")
 
 @app.route("/math/taylor_approximation",methods=["POST","GET"])
-def taylor_approximation():
+def taylor_approximation_():
     if request.method == "POST":
         function = request.form["f"]
         x0 = request.form["x"]
@@ -88,7 +88,7 @@ def taylor_approximation():
     return render_template("maths/taylor_approximation.html")
 
 @app.route("/status/<task_id>")
-def status(task_id):
+def status_(task_id):
     if request.cookies.get("jwt"):
         r = get("https://pno3cwa2.student.cs.kuleuven.be/api/task/status?task_id="+task_id, headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
     else:
@@ -113,7 +113,7 @@ def status(task_id):
         return render_template("results/resultheat_equation.html", options = options, result = result)
 
 @app.route("/math/heat_equation",methods=["POST","GET"])
-def heat_equation():
+def heat_equation_():
     if request.method == "POST":
         L_X = request.form["L_X"]
         L_Y = request.form["L_Y"]
