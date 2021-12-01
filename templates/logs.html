@@ -1,0 +1,12 @@
+{% extends 'template.html' %}
+{% block content %}
+
+{% for i in log_list["logs"] %}
+<div id="logs" class='flex flex-col' style="position:relative;left:20vw;top:5vh;">
+  <p>{{humanReadableTime(i["unix_time"])}}</p>
+  <p>{{i["text"]}}</p>
+  <p>&nbsp;</p>
+</div>
+{% endfor %}
+
+{% endblock %}
