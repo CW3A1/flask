@@ -1,3 +1,4 @@
 from os import getenv
 
-db_url = getenv('db_url')
+DB_URL = getenv('db_url')
+WS_URL = getenv('ws_url')
