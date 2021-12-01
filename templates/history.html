@@ -1,12 +1,58 @@
 {% extends 'template.html' %}
 {% block content %}
-
-{% for i in tasks %}
-<div class='flex flex-col' style="position:relative;left:20vw;top:5vh;">
-  <a href="{{ url_for('status',task_id=i['task_id']) }}" class="hover:text-blue-500">Task with ID = {{ i['task_id'] }}  </a>
-  <p>Operation: {{i['input_values']['operation']}}, Further details: {{i['input_values']['options']}} </p>
-  <p>&nbsp;</p>
+<div class="flex flex-col sm:px-6 lg:px-20 sm:pt-4 lg:pt-12">
+  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <div class=" shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Operation</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">PC</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+              <th scope="col" class="relative px-6 py-3">
+                <span class="sr-only">View</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            {% for i in tasks %}
+            <tr class="bg-gray-50">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="ml-4">
+                    <div class="text-sm font-medium text-gray-900">
+                      {{i['task_id']}}
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-500">{{i['input_values']['operation']}}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-500">{{i['pc']}}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-500">{{i['status']}}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-500">{{humanReadableTime(i['unix_time'])}}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                {% if i['status'] == 1 %}
+                <a href="{{url_for('status',task_id=i['task_id'])}}" class="text-indigo-600 hover:text-indigo-900">View</a>
+                {% endif %}
+              </td>
+              {% else %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
-{% endfor %}
-
 {% endblock %}
