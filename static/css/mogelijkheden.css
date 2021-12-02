@@ -34,3 +34,21 @@ body{
 footer{
     display: block;
 }
+.artikeltitel{
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;
+    font-weight: normal;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%,0px);
+
+}
+.voet{
+    position: relative;
+    top: -1vh;
+    height: 48px;
+}
+.voettekst{
+    color: rgba(255, 255, 255, 0.58);
+}
