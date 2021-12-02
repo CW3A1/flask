@@ -1,38 +1,19 @@
 {% extends "template.html" %}
 {% block content %}
-<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-<div class="flex items-center justify-center space-x-2 animate-bounce" style="position: relative;top:200px">
-    <div class="w-8 h-8 bg-blue-400 rounded-full"></div>
-    <div class="w-8 h-8 bg-blue-400 rounded-full"></div>
-    <div class="w-8 h-8 bg-blue-400 rounded-full"></div>
+<div class="bg-white overflow-hidden sm:rounded-lg px-10 py-6">
+    <h3 class="text-lg leading-6 font-medium text-gray-900">
+        Task ID:
+    </h3>
+    <h1 class="text-lg leading-6 font-medium text-gray-900">{{taskid}}</h1>
+    <h3 class="text-lg leading-6 font-medium text-gray-900">
+        Elapsed time:
+    </h3>
+    <p class="text-lg leading-6 font-medium text-gray-900" id="status"></p>
+    <span class="text-green-500 opacity-75 top-1/2 my-0 mx-auto block relative w-0 h-0" style="top: 50%;">
+        <i class="fas fa-circle-notch fa-spin fa-5x"></i>
+    </span>
 </div>
-<style>
-    
-.animate-spin {
-    animation: spin 1s linear infinite;
-    @keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-    }
-}
-</style>
-<body>
-    <button type="button" class="bg-rose-600" disabled>
-        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-          </svg>
-        Processing
-    </button>
-    <h1>Task-id: {{taskid}}</h1>
-    <h3>Elapsed time:</h3>
-    <h1 id="pending"></h1>
-    <p id="status"></p>
-</body>
-<script src="{{url_for('static', filename='pending.js')}}" ></script>
-<script src="{{url_for('static', filename='websocket.js')}}" data-taskid="{{taskid}}" ws-url="{{ws_url}}"></script>
+
+<script src="{{url_for('static', filename='js/pending.js')}}"></script>
+<script src="{{url_for('static', filename='js/websocket.js')}}" data-taskid="{{taskid}}" ws-url="{{ws_url}}"></script>
 {% endblock %}
