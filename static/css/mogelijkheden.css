@@ -31,4 +31,6 @@ body{
     width: 90%;
     height: 50%;
 }
-
+footer{
+    display: block;
+}

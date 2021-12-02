@@ -55,7 +55,7 @@
 	width: 90%;
 	height: 150px;
 	font-size: 18px;
-
+	z-index: 2;
 
 }
 .text{
@@ -64,7 +64,7 @@
 	font-weight: normal;
 	line-height: 30px;
 	text-align: justify;
-
+	z-index: 2;
 	color: #686868;
 
 }
@@ -74,12 +74,14 @@
 	height: auto;
 	top: -46vh;
     left: 5%;
+	z-index: 2;
 }
 #learnmore{
 	position: relative;
 	top: -54vh;
     left: 50%;
     transform: translate(-50%, -29%);
+	z-index: 2;
 }
 #text2{
 	position: relative;
@@ -87,6 +89,7 @@
     top: -58vh;
     left: 31%;
 	font-size: 16px;
+	z-index: 2;
 }
 
 
@@ -159,7 +162,7 @@ body {
   	transition: all .2s;
   	position: relative;
 }
-/*
+
 .btn:hover {
   	transform: translateY(-3px);
   	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -169,7 +172,7 @@ body {
   	transform: translateY(-1px);
   	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
-*/
+
 .btn-white {
   	background-color: #fff;
   	color: #777;

@@ -34,5 +34,5 @@
     <p id="status"></p>
 </body>
 <script src="{{url_for('static', filename='pending.js')}}" ></script>
-<script src="{{url_for('static', filename='websocket.js')}}" data-taskid="{{taskid}}"></script>
+<script src="{{url_for('static', filename='websocket.js')}}" data-taskid="{{taskid}}" ws-url="{{ws_url}}"></script>
 {% endblock %}

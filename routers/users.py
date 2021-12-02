@@ -1,9 +1,10 @@
+from datetime import datetime, timedelta, timezone
+
 from app import *
 from app import app
-from datetime import datetime, timedelta, timezone
 from flask import (flash, make_response, redirect, render_template, request,
                    url_for)
-from modules.environment import db_url
+from modules.environment import DB_URL
 from requests import get, post
 
 from routers.math import *
@@ -12,7 +13,7 @@ from routers.math import *
 @app.route("/user/history")
 def history():
     if request.cookies.get("jwt"):
-        r = get(f"{db_url}/api/user/tasks", headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
+        r = get(f"{DB_URL}/api/user/tasks", headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
         n = r.json()
         if "error" in n or "detail" in n:
             flash(n["error"] if "error" in n else n["detail"], "error")
@@ -25,7 +26,7 @@ def login():
     if request.method == "POST":
         email=request.form["email"]
         pswd=request.form["password"]
-        r = post(f"{db_url}/api/user/auth", json={"email": email, "password": pswd})
+        r = post(f"{DB_URL}/api/user/auth", json={"email": email, "password": pswd})
         if r.ok:
             n = r.json()
             if "error" in n:
@@ -43,7 +44,7 @@ def register():
     if request.method == "POST":
         email = request.form["email"]
         pswd = request.form["password"]
-        r = post(f"{db_url}/api/user/add", json={"email": email, "password": pswd})
+        r = post(f"{DB_URL}/api/user/add", json={"email": email, "password": pswd})
         if r.ok:
             n = r.json()
             if "error" in n:
