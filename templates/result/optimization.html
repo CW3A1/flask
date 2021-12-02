@@ -1,13 +1,70 @@
 {% extends "template.html" %}
 {% block content %}
-<link href="/static/css/differentiation.css" rel="stylesheet">
-<div id="blad" style="position:relative;top:-10px;" class="shadow-2xl justify-center">
-<body>
-    <h1 class="text-gray-800 font-serif text-xl text-center">
-        The optimization of f(x,y)={{options['f']}} between {{options['xl']}} and {{options['xu']}} in the x-area and between {{options['yl']}} and {{options['yu']}} in the y-area is:</h1>
-    <div class="sec flex-1">
-        <span class="flex shadow-md mb-5 text-base">
-            <span class="bg-blue-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">Result:</span>
-        <h1 class="font-serif text-lg" style="position: relative;left: 30px;">X = {{result['vector'][0]}}, Y = {{result['vector'][1]}} and f({{result['vector'][0]}},{{result['vector'][1]}}) = {{result['vector'][2]}}</h1>
+<div class="bg-white overflow-hidden sm:rounded-lg px-10">
+    <div class="px-4 py-5 sm:px-6">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Optimization
+        </h3>
     </div>
+    <div class="border-t border-gray-200">
+        <dl>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Function
+                </dt>
+                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                    {{options['f']}}
+                </div>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Lower bound for x
+                </dt>
+                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                    {{options['xl']}}
+                </div>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Upper bound for x
+                </dt>
+                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                    {{options['xu']}}
+                </div>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Lower bound for y
+                </dt>
+                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                    {{options['yl']}}
+                </div>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Upper bound for y
+                </dt>
+                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                    {{options['yu']}}
+                </div>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Result coordinates
+                </dt>
+                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                    ({{result['vector'][0]}}, {{result['vector'][1]}})
+                </div>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Function evaluation at result
+                </dt>
+                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                    {{result['vector'][2]}}
+                </div>
+            </div>
+        </dl>
+    </div>
+</div>
 {% endblock %}

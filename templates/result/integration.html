@@ -1,21 +1,62 @@
 {% extends "template.html" %}
 {% block content %}
-<link href="/static/css/differentiation.css" rel="stylesheet">
-<div id="blad" style="position:relative;top:-10px;" class="shadow-2xl justify-center">
-<body>
-    <h1 class="text-gray-800 font-serif text-xl text-center">
-        The integral of {{options['f']}} with b = {{options['b']}} and a = {{options['a']}} is:
-    </h1>
-    <div class="sec flex-1">
-        <span class="flex shadow-md mb-5 text-base">
-            <span class="bg-blue-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">Result:</span>
-        <h1 class="font-serif text-lg" style="position: relative;left: 30px;">{{result['result']}}</h1>
+<div class="bg-white overflow-hidden sm:rounded-lg px-10">
+    <div class="px-4 py-5 sm:px-6">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Integration
+        </h3>
     </div>
-    <div class="sec flex-1">
-        <span class="flex shadow-md mb-5 text-base">
-            <span class="bg-blue-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">Error:</span>
-        <h1 class="font-serif text-lg" style="position: relative;left: 30px;">{{result['err']}}</h1>
+    <div class="border-t border-gray-200">
+        <dl>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Function
+                </dt>
+                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                    {{options['f']}}
+                </div>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Lower bound
+                </dt>
+                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                    {{options['a']}}
+                </div>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Upper bound
+                </dt>
+                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                    {{options['b']}}
+                </div>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Result
+                </dt>
+                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                    {{result['result']}}
+                </div>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Max error on result
+                </dt>
+                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                    {{result['err']}}
+                </div>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Plot
+                </dt>
+                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                    <img src="{{result['link']}}" alt="Solution of the integral" height="500" width="500">
+                </div>
+            </div>
+        </dl>
     </div>
-    <img src="{{result['link']}}" alt="Solution of the integral" height="500" width="500">
-    </body>
+</div>
 {% endblock %}

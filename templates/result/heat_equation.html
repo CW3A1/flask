@@ -1,6 +1,22 @@
 {% extends "template.html" %}
 {% block content %}
-<link href="/static/css/differentiation.css" rel="stylesheet">
-<div id="blad" style="position:relative;top:-10px;" class="shadow-2xl justify-center">
-<img src="{{result['link']}}" alt="Solution of heat problem" height="1000" width="1000">
+<div class="bg-white overflow-hidden sm:rounded-lg px-10">
+    <div class="px-4 py-5 sm:px-6">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Heat equation
+        </h3>
+    </div>
+    <div class="border-t border-gray-200">
+        <dl>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Animation
+                </dt>
+                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                    <img src="{{result['link']}}" alt="Solution of the integral" height="500" width="500">
+                </div>
+            </div>
+        </dl>
+    </div>
+</div>
 {% endblock %}
