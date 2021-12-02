@@ -1,7 +1,7 @@
 {% extends 'template.html' %}
 {% block content %}
 <link href="/static/css/mogelijkheden.css" rel="stylesheet">
-
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Nova+Square" />
 <div id="geheel">
     <!--
     <ul id="eerste-lijst">
@@ -58,10 +58,10 @@
                 </a>
 
                 <header class="artikel flex items-center justify-between leading-tight p-2 md:p-4">
-                    <h1 class="artikeltitel text-lg">
+                    <a href="{{ url_for('mogelijkheden') }}" class="btn text-lg">
                             Integration
 
-                    </h1>
+                    </a>
                 </header>
 
                 <footer class="voet flex items-center justify-between leading-none p-2 md:p-4">

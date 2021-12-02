@@ -2,170 +2,103 @@
 <html lang="en">
 
 <head>
-  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@1.16.2/dist/full.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
   <meta charset="UTF-8">
   <title>P&O3</title>
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-  <!-- Hotjar Tracking Code for My site -->
-  <script>
-    (function (h, o, t, j, a, r) {
-      h.hj = h.hj || function () {
-        (h.hj.q = h.hj.q || []).push(arguments)
-      };
-      h._hjSettings = {
-        hjid: 2720749,
-        hjsv: 6
-      };
-      a = o.getElementsByTagName('head')[0];
-      r = o.createElement('script');
-      r.async = 1;
-      r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
-      a.appendChild(r);
-    })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
-  </script>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JWY7E5WZQ7"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-
-    gtag('config', 'G-JWY7E5WZQ7');
-  </script>
 </head>
 
-<body>
-  <div class="min-h-full">
-    <nav class="bg-gray-800">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
-          <div class="flex items-center">
-            <div class="flex-shrink-0">
-              <img src="{{ url_for('static', filename='images/logo.png') }}" width="120px">
-            </div>
-            <div class="hidden md:block">
-              <div class="ml-10 flex items-baseline space-x-4">
-                <a href="{{ url_for('home') }}"
-                  class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md md\:text-sm font-serif font-medium">Home</a>
-                <!-- 
-                <a href="{{ url_for('integration') }}"
-                  class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Function</a>
-                  -->
-                <div>
-                  <div x-data="{ dropdownOpen: false }" class="relative my-32">
-                    <button @click="dropdownOpen = !dropdownOpen"
-                      class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md md\:text-sm font-serif font-medium">
-                      Simulate
-                    </button>
-
-                    <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10">
-                    </div>
-
-                    <div x-show="dropdownOpen"
-                      class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
-                      <a href="{{ url_for('differentiation') }}"
-                        class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
-                        Differentiation
-                      </a>
-                      <a href="{{ url_for('integration') }}"
-                        class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
-                        Integration
-                      </a>
-                      <a href="{{ url_for('optimization') }}"
-                        class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
-                        Optimization
-                      </a>
-                      <a href="{{ url_for('lagrange_interpolation') }}"
-                        class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
-                        Lagrange Interpolation
-                      </a>
-                      <a href="{{ url_for('taylor_approximation') }}"
-                        class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
-                        Taylor Approximation
-                      </a>
-                      <a href="{{ url_for('heat_equation') }}"
-                        class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
-                        Heat Equation
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <div x-data="{ dropdownOpen: false }" class="relative my-32">
-                    <button @click="dropdownOpen = !dropdownOpen"
-                      class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md md\:text-sm font-serif font-medium">
-                      Symbolic
-                    </button>
-
-                    <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10">
-                    </div>
-
-                    <div x-show="dropdownOpen"
-                      class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
-                      <a href="{{ url_for('symdifferentiation') }}"
-                        class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
-                        Differentiation
-                      </a>
-                      <a href="{{ url_for('symintegration') }}"
-                        class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
-                        Integration
-                      </a>
-                      <a href="{{ url_for('symlimit') }}"
-                        class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
-                        Limit
-                      </a>
-                      <a href="{{ url_for('symsolve') }}"
-                        class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
-                        Solver
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="hidden md:block">
-            <div class="ml-4 flex items-center md:ml-6">
-              <div class="ml-10 flex items-baseline space-x-4">
-                <a href="{{url_for('logs')}}"
-                  class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md md\:text-sm font-serif font-medium">Logs</a>
-                {% if loggedIn %}
-                <a href="{{url_for('history')}}"
-                  class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md md\:text-sm font-serif font-medium">History</a>
-                <a href="{{url_for('logout')}}"
-                  class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md md\:text-sm font-serif font-medium">Log out</a>
-                {% endif %}
-                {% if not loggedIn %}
-                <a href="{{url_for('register')}}"
-                  class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md md\:text-sm font-serif font-medium">Register</a>
-                <a href="{{url_for('login')}}"
-                  class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md md\:text-sm font-serif font-medium">Log in</a>
-                {% endif %}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  </div>
-  </div>
-
-
-  </nav>
-  </div>
-
-  <main>
-    <div class="mx-auto sm:px-0 lg:px-0">
-      <div class="sm:px-0" style="height: 100vh;">
-        {% block content %}
-        {% endblock %}
+<nav>
+  <div class="navbar shadow-lg bg-neutral text-neutral-content">
+    <div class="flex-1 px-2 mx-2">
+      <a href="{{url_for('home')}}" class="btn btn-ghost btn-sm rounded-btn">Home</a>
+      <div class="invisible xl:visible">
+        <a href="{{url_for('differentiation')}}" class="btn btn-ghost btn-sm rounded-btn">Differentiation</a>
+        <a href="{{url_for('integration')}}" class="btn btn-ghost btn-sm rounded-btn">Integration</a>
+        <a href="{{url_for('optimization')}}" class="btn btn-ghost btn-sm rounded-btn">Optimization</a>
+        <a href="{{url_for('lagrange_interpolation')}}" class="btn btn-ghost btn-sm rounded-btn">Lagrange
+          Interpolation</a>
+        <a href="{{url_for('taylor_approximation')}}" class="btn btn-ghost btn-sm rounded-btn">Taylor Approximation</a>
+        <a href="{{url_for('heat_equation')}}" class="btn btn-ghost btn-sm rounded-btn">Heat Equation</a>
       </div>
     </div>
-  </main>
+    <div class="flex-none px-2 mx-2 lg:flex invisible xl:visible">
+      <div class="flex items-stretch">
+        <a href="{{url_for('logs')}}" class="btn btn-ghost btn-sm rounded-btn">Logs</a>
+        {% if loggedIn %}
+        <a href="{{url_for('history')}}" class="btn btn-ghost btn-sm rounded-btn">History</a>
+        <a href="{{url_for('logout')}}" class="btn btn-ghost btn-sm rounded-btn">Log out</a>
+        {% endif %}
+        {% if not loggedIn %}
+        <a href="{{url_for('register')}}" class="btn btn-ghost btn-sm rounded-btn">Register</a>
+        <a href="{{url_for('login')}}" class="btn btn-ghost btn-sm rounded-btn">Log in</a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="flex-none xl:invisible">
+      <button class="btn btn-square btn-ghost mobile-menu-button">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" x-show="!showMenu" viewBox="0 0 24 24"
+          class="inline-block w-6 h-6 stroke-current">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <ul class="mobile-menu shadow-lg bg-neutral text-neutral-content hidden w-100">
+    <li><a href="{{url_for('differentiation')}}" class="btn btn-ghost w-100">Differentiation</a></li>
+    <li><a href="{{url_for('integration')}}" class="btn btn-ghost w-100">Integration</a></li>
+    <li><a href="{{url_for('optimization')}}" class="btn btn-ghost w-100">Optimization</a></li>
+    <li><a href="{{url_for('lagrange_interpolation')}}" class="btn btn-ghost w-100">Lagrange Interpolation</a></li>
+    <li><a href="{{url_for('taylor_approximation')}}" class="btn btn-ghost w-100">Taylor Approximation</a></li>
+    <li><a href="{{url_for('heat_equation')}}" class="btn btn-ghost w-100">Heat Equation</a></li>
+    <li><a href="{{url_for('logs')}}" class="btn btn-ghost w-100">Logs</a></li>
+    {% if loggedIn %}
+    <li><a href="{{url_for('history')}}" class="btn btn-ghost w-100">History</a></li>
+    <li><a href="{{url_for('logout')}}" class="btn btn-ghost w-100">Log out</a></li>
+    {% endif %}
+    {% if not loggedIn %}
+    <li><a href="{{url_for('register')}}" class="btn btn-ghost w-100">Register</a></li>
+    <li><a href="{{url_for('login')}}" class="btn btn-ghost w-100">Log in</a></li>
+    {% endif %}
+  </ul>
+</nav>
+
+<body class="bg-white h-screen">
+  {% block content %}
+  {% endblock %}
 </body>
 
+<script>
+  const btn = document.querySelector("button.mobile-menu-button");
+  const menu = document.querySelector(".mobile-menu");
+  btn.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+  });
+</script>
+<script>
+  (function (h, o, t, j, a, r) {
+    h.hj = h.hj || function () {
+      (h.hj.q = h.hj.q || []).push(arguments)
+    };
+    h._hjSettings = {
+      hjid: 2720749,
+      hjsv: 6
+    };
+    a = o.getElementsByTagName('head')[0];
+    r = o.createElement('script');
+    r.async = 1;
+    r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+    a.appendChild(r);
+  })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JWY7E5WZQ7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-JWY7E5WZQ7');
+</script>
 </html>

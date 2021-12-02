@@ -1,24 +1,45 @@
 {% extends "template.html" %}
 {% block content %}
-<link href="/static/css/differentiation.css" rel="stylesheet">
-<h1 style="position: relative;top: 10px;" class="text-gray-700 font-serif text-5xl text-center">
-    Lagrange interpolation
- </h1>
-<div id="bovenblad" class="login_form border-2 border-blue-500 p-10 pt-5 shadow-sm mx-auto flex rounded-2xl" style="width: 700px;position: relative;top:100px;">
-    <div class="sec flex-1">
+<div class="bg-white overflow-hidden sm:rounded-lg px-10">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <strong class="font-bold">Error:</strong>
+        <span class="block sm:inline">{{ message }}</span>
+    </div>
+    <br>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="px-4 py-5 sm:px-6">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Lagrange interpolation
+        </h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+            Calculate an interpolating polynomial for given X- and Y-values using Lagrange interpolation.
+        </p>
+    </div>
+    <div class="border-t border-gray-200">
         <form method='POST' action="#">
-            <p class="text-sm text-gray-400 font-serif text-center" style="position: relative;top: -5px;">Make sure to seperate the values by (only) a ','</p>
-            <span class="flex shadow-md mb-5 text-xs">
-                <span class="bg-blue-500 w-28 font-bold text-center shadow-md text-white p-3 px-5 rounded-l">X-values</span>
-                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="xval" type="text" required placeholder="    e.g. 0,2,6,4,1 " name="xval">
-            </span>
-            <span class="flex shadow-md mb-5 text-xs">
-                <span class="bg-blue-500 w-28 font-bold text-center shadow-md text-white p-3 px-5 rounded-l">Y-values</span>
-                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="yval" type="text" required placeholder="    e.g. 3,5,6,1,8" name="yval">
-            </span>
-                <button style="position: relative;left:50%;transform: translate(-50%,22%);width: 87%;" class="border-2 border-blue-500 hover:bg-blue-500 shadow-md hover:text-white mt-3 text-blue-500 block text-center p-3 px-4 text-sm rounded-2xl cursor-pointer font-bold" href="{{ url_for('lagrange_interpolation') }}">INTERPOLATE</button>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    X-values
+                </dt>
+                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                    <input class="input input-ghost" id="xval" type="text" required placeholder="0, 2, 6, 4, 1" name="xval">
+                </div>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Y-values
+                </dt>
+                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                    <input class="input input-ghost" id="yval" type="text" required placeholder="3, 5, 6, 1, 8" name="yval">
+                </div>
+            </div>
+            <button class="btn btn-block btn-primary">Calculate</button>
         </form>
     </div>
 </div>
-<div id="blad" style="position:fixed;top: 0%;" class="shadow-2xl justify-center"></div>
 {% endblock %}
