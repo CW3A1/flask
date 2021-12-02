@@ -47,7 +47,8 @@ def optimization():
         ylower = request.form["yl"]
         yupper = request.form["yu"]
         function = request.form["f"]
-        if xlower > xupper or ylower > yupper:
+        print(xlower,xupper,ylower,yupper,function)
+        if float(xlower) > float(xupper) or float(ylower) > float(yupper):
             flash("Lower X or Y limit was greater than upper X or Y limit! ")
             return redirect(url_for("optimization"))
         if request.cookies.get("jwt"):
