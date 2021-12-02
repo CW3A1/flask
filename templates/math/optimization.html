@@ -1,55 +1,74 @@
 {% extends "template.html" %}
 {% block content %}
-{% with messages = get_flashed_messages() %}
+<div class="bg-white overflow-hidden sm:rounded-lg px-10">
+    {% with messages = get_flashed_messages() %}
     {% if messages %}
     {% for message in messages %}
     <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-      <strong class="font-bold">Error:</strong>
-      <span class="block sm:inline">{{ message }}</span>
+        <strong class="font-bold">Error:</strong>
+        <span class="block sm:inline">{{ message }}</span>
     </div>
     <br>
     {% endfor %}
     {% endif %}
     {% endwith %}
-<link href="/static/css/differentiation.css" rel="stylesheet">
-<h1 style="position: relative;top: 10px;" class="text-gray-700 font-serif text-5xl text-center">
-    Optimization
-</h1>
-<div id="bovenblad" class="login_form border-2 border-blue-500 p-10 pt-5 shadow-xl mx-auto flex rounded-2xl" style="width: 700px;position: relative;top:100px;">
-    <div class="sec flex-1">
+    <div class="px-4 py-5 sm:px-6">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Optimization
+        </h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+            Calculate the global minimum of a 2D-function in a rectangular area using dual annealing.
+        </p>
+    </div>
+    <div class="border-t border-gray-200">
         <form method='POST' action="#">
-            <span class="flex shadow-md mb-5 text-xs">
-                <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Function</span>
-                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="f" type="text" required placeholder="    e.g. x^2-3*x " name="f">
-            </span>
-            <h1 class="text-gray-400 font-serif text-2xl text-center">
-                X-axis area
-            </h1>
-            <span class="flex shadow-md mb-5 text-xs">
-                <span class="bg-blue-500 w-28 font-bold text-center text-white shadow-md p-3 px-5 rounded-l">Lower limit</span>
-                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="xl" type="number" step='any' required placeholder="    e.g. -1" name="xl" value="xl">
-            </span>
-            <span class="flex shadow-md mb-5 text-xs">
-                <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Upper limit</span>
-                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="xu" type="number" step='any' required placeholder="    e.g. 1" name="xu" value="xu">
-            </span>
-            <h1 class="text-gray-400 font-serif text-2xl text-center">
-                Y-axis area
-            </h1>
-            <span class="flex shadow-md mb-5 text-xs">
-                <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Lower limit</span>
-                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="yl" type="number" step='any' required placeholder="    e.g. -2" name="yl" value="yl">
-            </span>
-            <span class="flex shadow-md mb-5 text-xs">
-                <span class="bg-blue-500 w-28 font-bold text-center text-white p-3 px-5 rounded-l">Upper limit</span>
-                    <input class="field text-sm text-gray-600 p-2 px-3 rounded-r w-full" id="yu" type="number" step='any' required placeholder="    e.g. 5" name="yu" value="yu">
-            </span>
-            
-                <button href="{{ url_for('optimization') }}" style="position: relative;left:50%;transform: translate(-50%,22%);width: 87%;" class="border-2 border-blue-500 hover:bg-blue-500 shadow-md hover:text-white mt-3 text-blue-500 block text-center p-3 px-4 text-sm rounded-2xl cursor-pointer font-bold">OPTIMIZE</button>
-            
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Function
+                </dt>
+                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                    <input type="text" class="input input-ghost" id="f" type="text" required placeholder="sin(x^y)"
+                        name="f">
+                </div>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Lower bound for x
+                </dt>
+                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                    <input type="number" class="input input-ghost" id="xl" step="any" type="number" required
+                        placeholder="0" name="xl" value="xl" step="any">
+                </div>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Upper bound for x
+                </dt>
+                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                    <input type="number" class="input input-ghost" id="xu" step="any" type="number" required
+                        placeholder="1" name="xu" value="xu" step="any">
+                </div>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Lower bound for y
+                </dt>
+                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                    <input type="number" class="input input-ghost" id="yl" step="any" type="number" required
+                        placeholder="0" name="yl" value="yl" step="any">
+                </div>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Upper bound for y
+                </dt>
+                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                    <input type="number" class="input input-ghost" id="yu" step="any" type="number" required
+                        placeholder="1" name="yu" value="yu" step="any">
+                </div>
+            </div>
+            <button class="btn btn-block btn-primary">Calculate</button>
         </form>
     </div>
-</div>
-<div id="blad" style="position:fixed; top:0%;" class="shadow-2xl justify-center">
 </div>
 {% endblock %}
