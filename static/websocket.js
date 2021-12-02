@@ -1,4 +1,4 @@
-var ws = new WebSocket("wss://pno3cwa2.student.cs.kuleuven.be/ws");
+var ws = new WebSocket(document.currentScript.getAttribute('ws-url'));
 var taskid = document.currentScript.getAttribute('data-taskid');
 var domain = window.location.origin
 ws.onmessage = function(event) {
