@@ -29,7 +29,6 @@ def integration():
         function = request.form["f"]
         bg = request.form["bg"]
         og = request.form["og"]
-        print(function,bg,og)
         if request.cookies.get("jwt"):
             r = post(f"{DB_URL}/api/task/add", json={"operation": "int", "options": {"f": function, "b": bg, "a": og}},headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
         else:
