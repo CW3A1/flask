@@ -27,4 +27,3 @@ def sym_solver(function):
     a = sym.solve(symfunc)
     return a
 
-

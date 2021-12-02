@@ -107,6 +107,61 @@ def heat_equation():
         return render_template("result/loading.html", taskid = taskid, ws_url = WS_URL)
     return render_template("math/heat_equation.html")
 
+@app.route("/math/symdifferentiation",methods=["POST","GET"])
+def symdifferentiation():
+    if request.method == "POST":
+        function = request.form["f"]
+        orde = request.form["orde"]
+        if request.cookies.get("jwt"):
+            r = post(f"{DB_URL}/api/task/add", json={"operation": "symdiff", "options": {"f": function, "order": orde}},headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
+        else:
+            r = post(f"{DB_URL}/api/task/add", json={"operation": "diff", "options": {"f": function, "order": orde}})
+        n = r.json()
+        taskid = n["task_id"]
+        return render_template("result/loading.html", taskid = taskid, ws_url = WS_URL)
+    return render_template("math/symdifferentiation.html")
+
+@app.route("/math/symintegration",methods=["POST","GET"])
+def symintegration():
+    if request.method == "POST":
+        function = request.form["f"]
+        if request.cookies.get("jwt"):
+            r = post(f"{DB_URL}/api/task/add", json={"operation": "symint", "options": {"f": function}},headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
+        else:
+            r = post(f"{DB_URL}/api/task/add", json={"operation": "symint", "options": {"f": function}})
+        n = r.json()
+        taskid = n["task_id"]
+        return render_template("result/loading.html", taskid = taskid, ws_url = WS_URL)
+    return render_template("math/symintegration.html")
+
+@app.route("/math/symlimit",methods=["POST","GET"])
+def symlimit():
+    if request.method == "POST":
+        function = request.form["f"]
+        x0 = request.form["x0"]
+        dir = request.form["dir"]
+        if request.cookies.get("jwt"):
+            r = post(f"{DB_URL}/api/task/add", json={"operation": "symlimit", "options": {"f": function, "x0": x0, "dir": dir}},headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
+        else:
+            r = post(f"{DB_URL}/api/task/add", json={"operation": "symlimit", "options": {"f": function, "x0": x0, "dir": dir}})
+        n = r.json()
+        taskid = n["task_id"]
+        return render_template("result/loading.html", taskid = taskid, ws_url = WS_URL)
+    return render_template("math/symlimit.html")
+
+@app.route("/math/symsolve",methods=["POST","GET"])
+def symsolve():
+    if request.method == "POST":
+        function = request.form["f"]
+        if request.cookies.get("jwt"):
+            r = post(f"{DB_URL}/api/task/add", json={"operation": "symsolve", "options": {"f": function}},headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
+        else:
+            r = post(f"{DB_URL}/api/task/add", json={"operation": "symsolve", "options": {"f": function}})
+        n = r.json()
+        taskid = n["task_id"]
+        return render_template("result/loading.html", taskid = taskid, ws_url = WS_URL)
+    return render_template("math/symsolve.html")
+
 @app.route("/status/<task_id>")
 def status(task_id):
     if request.cookies.get("jwt"):
