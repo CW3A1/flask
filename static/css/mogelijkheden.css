@@ -52,7 +52,3 @@ footer{
 .voettekst{
     color: rgba(255, 255, 255, 0.58);
 }
-.knop:hover{
-    transform: translateY(-3px);
-    box-shadow: -10 10px 20px rgb(0, 0, 0, 20%);
-}
