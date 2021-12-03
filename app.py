@@ -11,11 +11,13 @@ app.secret_key = uuid4().hex
 
 @app.context_processor
 def injectVariables():
+    def firstLetterCap(s: str):
+        return s.capitalize()
     def humanReadableTime(nanotime):
         dt = datetime.fromtimestamp(nanotime // 1000000000)
         s = dt.strftime('%Y-%m-%d %H:%M:%S')
         return s
-    return dict(loggedIn=True if request.cookies.get("jwt") else False, humanReadableTime=humanReadableTime)
+    return dict(loggedIn=True if request.cookies.get("jwt") else False, firstLetterCap=firstLetterCap, humanReadableTime=humanReadableTime)
 
 @app.after_request
 def securityHeaders(response):
