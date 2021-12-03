@@ -1,6 +1,6 @@
 {% extends "template.html" %}
 {% block content %}
-<div class="bg-white overflow-hidden sm:rounded-lg px-10">
+<div class="overflow-hidden sm:rounded-lg px-10">
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     {% for message in messages %}
@@ -22,19 +22,19 @@
     </div>
     <div class="border-t border-gray-200">
         <form method='POST' action="#">
-            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <div class="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">
                     X-values
                 </dt>
-                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                <div class="form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
                     <input class="input input-ghost" id="xval" type="text" required placeholder="0, 2, 6, 4, 1" name="xval">
                 </div>
             </div>
-            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <div class="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">
                     Y-values
                 </dt>
-                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                <div class="form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
                     <input class="input input-ghost" id="yval" type="text" required placeholder="3, 5, 6, 1, 8" name="yval">
                 </div>
             </div>
