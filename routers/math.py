@@ -191,4 +191,16 @@ def status(task_id):
         if operation == "heateq":
             return render_template("result.html", operation="Heat equation",
             blocks={"Horizontal length": options['L_X'], "Vertical length": options['L_Y'], "Meshgrid step size": options['H'], "Animation duration": options['T'], "Animation FPS": options['FPS'], "Boundary condition": options['BC'], "Animation": f"<img src='{result['link']}' alt='Animation of the heat distribution' height='500' width='500'>"})
+        if operation == "symdiff":
+            return render_template("result.html", operation="Symbolic differentiation",
+            blocks={"Function": options['f'], "Order": options['order'], "Result": result['result']})
+        if operation == "symint":
+            return render_template("result.html", operation="Symbolic integration",
+            blocks={"Function": options['f'], "Result": result['result']})
+        if operation == "symlimit":
+            return render_template("result.html", operation="Symbolic limit",
+            blocks={"Function": options['f'], "X0": options['x0'], "Direction": options['dir'], "Result": result['result']})
+        if operation == "symsolve":
+            return render_template("result.html", operation="Symbolic solver",
+            blocks={"Function": options['f'], "Result": result['result']})
     return "Unauthorized"
