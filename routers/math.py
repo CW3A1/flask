@@ -8,181 +8,187 @@ from requests import get, post
 
 from routers.users import *
 
-@app.route("/math/differentiation",methods=["POST","GET"])
+@app.route("/math/differentiation", methods=["POST","GET"])
 def differentiation():
     if request.method == "POST":
-        function = request.form["f"]
-        punt = request.form["og"]
-        orde = request.form["orde"]
-        if request.cookies.get("jwt"):
-            r = post(f"{DB_URL}/api/task/add", json={"operation": "diff", "options": {"f": function, "a": punt, "order": orde}},headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
-        else:
-            r = post(f"{DB_URL}/api/task/add", json={"operation": "diff", "options": {"f": function, "a": punt, "order": orde}})
-        n = r.json()
-        taskid = n["task_id"]
-        return render_template("result/loading.html", taskid = taskid, ws_url = WS_URL)
+        payload = {
+            "operation": "diff",
+            "options": {
+                "f": request.form["f"],
+                "a": request.form["og"],
+                "order": request.form["orde"]
+            }
+        }
+        r = post(f"{DB_URL}/api/task/add", json=payload, headers={"Authorization": "Bearer " + request.cookies.get("jwt")} if request.cookies.get("jwt") else {}).json()
+        return render_template("loading.html", taskid=r["task_id"], ws_url=WS_URL)
     return render_template("math/differentiation.html")
 
-@app.route("/math/integration",methods=["POST","GET"])
+@app.route("/math/integration", methods=["POST","GET"])
 def integration():
     if request.method == "POST":
-        function = request.form["f"]
-        bg = request.form["bg"]
-        og = request.form["og"]
-        if request.cookies.get("jwt"):
-            r = post(f"{DB_URL}/api/task/add", json={"operation": "int", "options": {"f": function, "b": bg, "a": og}},headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
-        else:
-            r = post(f"{DB_URL}/api/task/add", json={"operation": "int", "options": {"f": function, "b": bg, "a": og}})
-        n = r.json()
-        taskid = n["task_id"]
-        return render_template("result/loading.html", taskid = taskid, ws_url = WS_URL)
+        payload = {
+            "operation": "int",
+            "options": {
+                "f": request.form["f"],
+                "a": request.form["og"],
+                "b": request.form["bg"]
+            }
+        }
+        r = post(f"{DB_URL}/api/task/add", json=payload, headers={"Authorization": "Bearer " + request.cookies.get("jwt")} if request.cookies.get("jwt") else {}).json()
+        return render_template("loading.html", taskid=r["task_id"], ws_url=WS_URL)
     return render_template("math/integration.html")
 
-@app.route("/math/optimization",methods=["POST","GET"])
+@app.route("/math/optimization", methods=["POST","GET"])
 def optimization():
     if request.method == "POST":
-        xlower = request.form["xl"]
-        xupper = request.form["xu"]
-        ylower = request.form["yl"]
-        yupper = request.form["yu"]
-        function = request.form["f"]
-        print(xlower,xupper,ylower,yupper,function)
-        if float(xlower) > float(xupper) or float(ylower) > float(yupper):
-            flash("Lower X or Y limit was greater than upper X or Y limit! ")
+        payload = {
+            "operation": "opt",
+            "options": {
+                "f": request.form["f"],
+                "xl": request.form["xl"],
+                "xu": request.form["xu"],
+                "yl": request.form["yl"],
+                "yu": request.form["yu"]
+            }
+        }
+        if float(payload["options"]["xl"]) > float(payload["options"]["xu"]) or float(payload["options"]["yl"]) > float(payload["options"]["yu"]):
+            flash("Lower X or Y limit was greater than upper X or Y limit!")
             return redirect(url_for("optimization"))
-        if request.cookies.get("jwt"):
-            r = post(f"{DB_URL}/api/task/add", json={"operation": "opt", "options": {"f": function, "xu": xupper, "xl": xlower, "yu": yupper, "yl": ylower}},headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
-        else:
-            r = post(f"{DB_URL}/api/task/add", json={"operation": "opt", "options": {"f": function, "xu": xupper, "xl": xlower, "yu": yupper, "yl": ylower}})
-        n = r.json()
-        taskid = n["task_id"]
-        return render_template("result/loading.html", taskid = taskid, ws_url = WS_URL)
+        r = post(f"{DB_URL}/api/task/add", json=payload, headers={"Authorization": "Bearer " + request.cookies.get("jwt")} if request.cookies.get("jwt") else {}).json()
+        return render_template("loading.html", taskid=r["task_id"], ws_url=WS_URL)
     return render_template("math/optimization.html")
 
-@app.route("/math/lagrange_interpolation",methods=["POST","GET"])
+@app.route("/math/lagrange_interpolation", methods=["POST","GET"])
 def lagrange_interpolation():
     if request.method == "POST":
-        vectora = loads("[" + request.form["xval"] + "]")
-        vectorb = loads("[" + request.form["yval"] + "]")
-        print(vectora, vectorb)
-        if request.cookies.get("jwt"):
-            r = post(f"{DB_URL}/api/task/add", json={"operation": "lint", "options": {"a": vectora, "b": vectorb}},headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
-        else:
-            r = post(f"{DB_URL}/api/task/add", json={"operation": "lint", "options": {"a": vectora, "b": vectorb}})
-        n = r.json()
-        taskid = n["task_id"]
-        return render_template("result/loading.html", taskid = taskid, ws_url = WS_URL)
+        payload = {
+            "operation": "lint",
+            "options": {
+                "a": loads("[" + request.form["xval"] + "]"),
+                "b": loads("[" + request.form["yval"] + "]")
+            }
+        }
+        if len(payload["options"]["a"]) != len(payload["options"]["b"]):
+            flash("Length of X- and Y-values must be equal!")
+            return redirect(url_for("lagrange_interpolation"))
+        r = post(f"{DB_URL}/api/task/add", json=payload, headers={"Authorization": "Bearer " + request.cookies.get("jwt")} if request.cookies.get("jwt") else {}).json()
+        return render_template("loading.html", taskid=r["task_id"], ws_url=WS_URL)
     return render_template("math/lagrange_interpolation.html")
 
-@app.route("/math/taylor_approximation",methods=["POST","GET"])
+@app.route("/math/taylor_approximation", methods=["POST","GET"])
 def taylor_approximation():
     if request.method == "POST":
-        function = request.form["f"]
-        x0 = request.form["x"]
-        order = request.form["order"]
-        if request.cookies.get("jwt"):
-            r = post(f"{DB_URL}/api/task/add", json={"operation": "taprox", "options": {"f": function, "x0": x0, "order": order}},headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
-        else:
-            r = post(f"{DB_URL}/api/task/add", json={"operation": "taprox", "options": {"f": function, "x0": x0, "order": order}})
-        n = r.json()
-        taskid = n["task_id"]
-        return render_template("result/loading.html", taskid = taskid, ws_url = WS_URL)
+        payload = {
+            "operation": "taprox",
+            "options": {
+                "f": request.form["f"],
+                "x0": request.form["x"],
+                "order": request.form["order"]
+            }
+        }
+        r = post(f"{DB_URL}/api/task/add", json=payload, headers={"Authorization": "Bearer " + request.cookies.get("jwt")} if request.cookies.get("jwt") else {}).json()
+        return render_template("loading.html", taskid=r["task_id"], ws_url=WS_URL)
     return render_template("math/taylor_approximation.html")
 
-@app.route("/math/heat_equation",methods=["POST","GET"])
+@app.route("/math/heat_equation", methods=["POST","GET"])
 def heat_equation():
     if request.method == "POST":
-        L_X = request.form["L_X"]
-        L_Y = request.form["L_Y"]
-        H = request.form["H"]
-        T = request.form["T"]
-        FPS = request.form["FPS"]
-        BC = request.form["BC"]
-        if request.cookies.get("jwt"):
-            r = post(f"{DB_URL}/api/task/add", json={"operation": "heateq", "options": {"L_X": L_X, "L_Y": L_Y, "H": H, "T": T, "FPS": FPS, "BOUNDARY_CONDITION": BC}},headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
-        else:
-            r = post(f"{DB_URL}/api/task/add", json={"operation": "heateq", "options": {"L_X": L_X, "L_Y": L_Y, "H": H, "T": T, "FPS": FPS, "BOUNDARY_CONDITION": BC}})
-        n = r.json()
-        taskid = n["task_id"]
-        return render_template("result/loading.html", taskid = taskid, ws_url = WS_URL)
+        payload = {
+            "operation": "heateq",
+            "options": {
+                "L_X": request.form["L_X"],
+                "L_Y": request.form["L_Y"],
+                "H": request.form["H"],
+                "T": request.form["T"],
+                "FPS": request.form["FPS"],
+                "BC": request.form["BC"],
+            }
+        }
+        r = post(f"{DB_URL}/api/task/add", json=payload, headers={"Authorization": "Bearer " + request.cookies.get("jwt")} if request.cookies.get("jwt") else {}).json()
+        return render_template("loading.html", taskid=r["task_id"], ws_url=WS_URL)
     return render_template("math/heat_equation.html")
 
-@app.route("/math/symdifferentiation",methods=["POST","GET"])
+@app.route("/math/symdifferentiation", methods=["POST","GET"])
 def symdifferentiation():
     if request.method == "POST":
-        function = request.form["f"]
-        orde = request.form["orde"]
-        if request.cookies.get("jwt"):
-            r = post(f"{DB_URL}/api/task/add", json={"operation": "symdiff", "options": {"f": function, "order": orde}},headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
-        else:
-            r = post(f"{DB_URL}/api/task/add", json={"operation": "diff", "options": {"f": function, "order": orde}})
-        n = r.json()
-        taskid = n["task_id"]
-        return render_template("result/loading.html", taskid = taskid, ws_url = WS_URL)
+        payload = {
+            "operation": "symdiff",
+            "options": {
+                "f": request.form["f"],
+                "order": request.form["orde"]
+            }
+        }
+        r = post(f"{DB_URL}/api/task/add", json=payload, headers={"Authorization": "Bearer " + request.cookies.get("jwt")} if request.cookies.get("jwt") else {}).json()
+        return render_template("loading.html", taskid=r["task_id"], ws_url=WS_URL)
     return render_template("math/symdifferentiation.html")
 
-@app.route("/math/symintegration",methods=["POST","GET"])
+@app.route("/math/symintegration", methods=["POST","GET"])
 def symintegration():
     if request.method == "POST":
-        function = request.form["f"]
-        if request.cookies.get("jwt"):
-            r = post(f"{DB_URL}/api/task/add", json={"operation": "symint", "options": {"f": function}},headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
-        else:
-            r = post(f"{DB_URL}/api/task/add", json={"operation": "symint", "options": {"f": function}})
-        n = r.json()
-        taskid = n["task_id"]
-        return render_template("result/loading.html", taskid = taskid, ws_url = WS_URL)
+        payload = {
+            "operation": "symint",
+            "options": {
+                "f": request.form["f"]
+            }
+        }
+        r = post(f"{DB_URL}/api/task/add", json=payload, headers={"Authorization": "Bearer " + request.cookies.get("jwt")} if request.cookies.get("jwt") else {}).json()
+        return render_template("loading.html", taskid=r["task_id"], ws_url=WS_URL)
     return render_template("math/symintegration.html")
 
-@app.route("/math/symlimit",methods=["POST","GET"])
+@app.route("/math/symlimit", methods=["POST","GET"])
 def symlimit():
     if request.method == "POST":
-        function = request.form["f"]
-        x0 = request.form["x0"]
-        dir = request.form["dir"]
-        if request.cookies.get("jwt"):
-            r = post(f"{DB_URL}/api/task/add", json={"operation": "symlimit", "options": {"f": function, "x0": x0, "dir": dir}},headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
-        else:
-            r = post(f"{DB_URL}/api/task/add", json={"operation": "symlimit", "options": {"f": function, "x0": x0, "dir": dir}})
-        n = r.json()
-        taskid = n["task_id"]
-        return render_template("result/loading.html", taskid = taskid, ws_url = WS_URL)
+        payload = {
+            "operation": "symlimit",
+            "options": {
+                "f": request.form["f"],
+                "x0": request.form["x0"],
+                "dir": request.form["dir"]
+            }
+        }
+        r = post(f"{DB_URL}/api/task/add", json=payload, headers={"Authorization": "Bearer " + request.cookies.get("jwt")} if request.cookies.get("jwt") else {}).json()
+        return render_template("loading.html", taskid=r["task_id"], ws_url=WS_URL)
     return render_template("math/symlimit.html")
 
-@app.route("/math/symsolve",methods=["POST","GET"])
+@app.route("/math/symsolve", methods=["POST","GET"])
 def symsolve():
     if request.method == "POST":
-        function = request.form["f"]
-        if request.cookies.get("jwt"):
-            r = post(f"{DB_URL}/api/task/add", json={"operation": "symsolve", "options": {"f": function}},headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
-        else:
-            r = post(f"{DB_URL}/api/task/add", json={"operation": "symsolve", "options": {"f": function}})
-        n = r.json()
-        taskid = n["task_id"]
-        return render_template("result/loading.html", taskid = taskid, ws_url = WS_URL)
+        payload = {
+            "operation": "symsolve",
+            "options": {
+                "f": request.form["f"]
+            }
+        }
+        r = post(f"{DB_URL}/api/task/add", json=payload, headers={"Authorization": "Bearer " + request.cookies.get("jwt")} if request.cookies.get("jwt") else {}).json()
+        return render_template("loading.html", taskid=r["task_id"], ws_url=WS_URL)
     return render_template("math/symsolve.html")
 
 @app.route("/status/<task_id>")
 def status(task_id):
-    if request.cookies.get("jwt"):
-        r = get(f"{DB_URL}/api/task/status?task_id="+task_id, headers={"Authorization": "Bearer "+request.cookies.get("jwt")})
-    else:
-        r = get(f"{DB_URL}/api/task/status?task_id="+task_id)
-    n = r.json()
-    operation = n["input_values"]["operation"]
-    options = n["input_values"]["options"]
-    result = n["result"]
-    if "error" in n["result"]:
-        return "There was an error running your task, no result found."
-    if operation == "diff":
-        return render_template("result/differentiation.html", options = options, result = result)
-    if operation == "int":
-        return render_template("result/integration.html", options = options, result = result)
-    if operation == "opt":
-        return render_template("result/optimization.html", options = options, result = result)
-    if operation == "lint":
-        return render_template("result/lagrange_interpolation.html", options = options, result = result)
-    if operation == "taprox":
-        return render_template("result/taylor_approximation.html", options = options, result = result)
-    if operation == "heateq":
-        return render_template("result/heat_equation.html", options = options, result = result)
+    r = get(f"{DB_URL}/api/task/status?task_id="+task_id, headers={"Authorization": "Bearer "+request.cookies.get("jwt")} if request.cookies.get("jwt") else {})
+    if r.ok:
+        n = r.json()
+        operation = n["input_values"]["operation"]
+        options = n["input_values"]["options"]
+        result = n["result"]
+        if "error" in n["result"]:
+            return "There was an error running your task, no result found."
+        if operation == "diff":
+            return render_template("result.html", operation="Differentiation",
+            blocks={"Function": options['f'], "Point": options['a'], "Order": options['order'], "Result": result['result']})
+        if operation == "int":
+            return render_template("result.html", operation="Integration",
+            blocks={"Function": options['f'], "Lower bound": options['a'], "Upper bound": options['b'], "Result": result['result'], "Max error on result": result['err'], "Plot": f"<img src='{result['link']}' alt='Integration of the given function' height='500' width='500'>"})
+        if operation == "opt":
+            return render_template("result.html", operation="Optimization",
+            blocks={"Lower bound for x": options['xl'], "Upper bound for x": options['xu'], "Lower bound for y": options['yl'], "Upper bound for y": options['yu'], "Result coordinates": f"({result['vector'][0]}, {result['vector'][1]})", "Function evaluation at result": result['vector'][2]})
+        if operation == "lint":
+            return render_template("result.html", operation="Lagrange interpolation",
+            blocks={"X-values": options['a'], "Y-values": options['b'], "Result": result['result'], "Plot": f"<img src='{result['link']}' alt='Interpolation of the given function' height='500' width='500'>"})
+        if operation == "taprox":
+            return render_template("result.html", operation="Taylor approximation",
+            blocks={"Function": options['f'], "Point": options['x0'], "Order": options['order'], "Result": result['result'], "Plot": f"<img src='{result['link']}' alt='Approximation of the Taylor polynomial' height='500' width='500'>"})
+        if operation == "heateq":
+            return render_template("result.html", operation="Heat equation",
+            blocks={"Horizontal length": options['L_X'], "Vertical length": options['L_Y'], "Meshgrid step size": options['H'], "Animation duration": options['T'], "Animation FPS": options['FPS'], "Boundary condition": options['BC'], "Animation": f"<img src='{result['link']}' alt='Animation of the heat distribution' height='500' width='500'>"})
+    return "Unauthorized"

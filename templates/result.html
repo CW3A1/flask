@@ -3,22 +3,22 @@
 <div class="overflow-hidden sm:rounded-lg px-10">
     <div class="px-4 py-5 sm:px-6">
         <h3 class="text-lg leading-6 font-medium text-gray-900">
-            Solve
+            {{operation}}
         </h3>
     </div>
     <div class="border-t border-gray-200">
-        <form method='POST' action="#">
+        <dl>
+            {% for block in blocks %}
             <div class="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">
-                    Function
+                    {{block}}
                 </dt>
                 <div class="form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
-                    <input type="text" class="input input-ghost" id="f" type="text" required placeholder="x^2-2"
-                        name="f">
+                    {{blocks[block]|safe}}
                 </div>
             </div>
-            <button class="btn btn-block btn-primary">Calculate</button>
-        </form>
+            {% endfor %}
+        </dl>
     </div>
 </div>
 {% endblock %}

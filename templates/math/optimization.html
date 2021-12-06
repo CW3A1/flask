@@ -1,6 +1,6 @@
 {% extends "template.html" %}
 {% block content %}
-<div class="bg-white overflow-hidden sm:rounded-lg px-10">
+<div class="overflow-hidden sm:rounded-lg px-10">
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     {% for message in messages %}
@@ -22,47 +22,47 @@
     </div>
     <div class="border-t border-gray-200">
         <form method='POST' action="#">
-            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <div class="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">
                     Function
                 </dt>
-                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                <div class="form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
                     <input type="text" class="input input-ghost" id="f" type="text" required placeholder="sin(x^y)"
                         name="f">
                 </div>
             </div>
-            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <div class="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">
                     Lower bound for x
                 </dt>
-                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                <div class="form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
                     <input type="number" class="input input-ghost" id="xl" step="any" type="number" required
                         placeholder="0" name="xl" value="xl" step="any">
                 </div>
             </div>
-            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <div class="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">
                     Upper bound for x
                 </dt>
-                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                <div class="form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
                     <input type="number" class="input input-ghost" id="xu" step="any" type="number" required
                         placeholder="1" name="xu" value="xu" step="any">
                 </div>
             </div>
-            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <div class="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">
                     Lower bound for y
                 </dt>
-                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                <div class="form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
                     <input type="number" class="input input-ghost" id="yl" step="any" type="number" required
                         placeholder="0" name="yl" value="yl" step="any">
                 </div>
             </div>
-            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <div class="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">
                     Upper bound for y
                 </dt>
-                <div class="bg-white form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
+                <div class="form-control mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
                     <input type="number" class="input input-ghost" id="yu" step="any" type="number" required
                         placeholder="1" name="yu" value="yu" step="any">
                 </div>

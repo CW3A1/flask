@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="bumblebee">
 
 <head>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@1.16.2/dist/full.css" rel="stylesheet" type="text/css" />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
+  <style>
+    html {
+      background-color: white !important;
+    }
+  </style>
   <meta charset="UTF-8">
   <title>P&O3</title>
 </head>
@@ -11,6 +16,7 @@
 <nav>
   <div class="navbar shadow-lg bg-neutral text-white">
     <div class="flex-1 px-2 mx-2">
+<<<<<<< HEAD
       <a href="{{url_for('home')}}" class="btn btn-sm text-white rounded-btn" style="z-index: 1;">Home</a>
       <div class="invisible xl:visible">
         <a href="{{url_for('differentiation')}}" class="btn btn-ghost text-white btn-sm rounded-btn" style="z-index: 1;">Differentiation</a>
@@ -20,9 +26,33 @@
           Interpolation</a>
         <a href="{{url_for('taylor_approximation')}}" class="btn btn-ghost btn-sm rounded-btn" style="z-index: 1;">Taylor Approximation</a>
         <a href="{{url_for('heat_equation')}}" class="btn btn-ghost btn-sm rounded-btn" style="z-index: 1;">Heat Equation</a>
+=======
+      <a href="{{url_for('home')}}" class="btn btn-ghost btn-sm rounded-btn">Home</a>
+      <div class="invisible lg:visible">
+        <div class="dropdown rounded-btn text-black">
+          <div tabindex="0" class="m-1 btn">Numerical Math</div> 
+          <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-72">
+            <li><a href="{{url_for('differentiation')}}" class="btn btn-ghost btn-sm rounded-btn">Differentiation</a></li> 
+            <li><a href="{{url_for('integration')}}" class="btn btn-ghost btn-sm rounded-btn">Integration</a></li> 
+            <li><a href="{{url_for('optimization')}}" class="btn btn-ghost btn-sm rounded-btn">Optimization</a></li> 
+            <li><a href="{{url_for('lagrange_interpolation')}}" class="btn btn-ghost btn-sm rounded-btn">Lagrange Interpolation</a></li> 
+            <li><a href="{{url_for('taylor_approximation')}}" class="btn btn-ghost btn-sm rounded-btn">Taylor Approximation</a></li> 
+            <li><a href="{{url_for('heat_equation')}}" class="btn btn-ghost btn-sm rounded-btn">Heat Equation</a></li> 
+          </ul>
+        </div>
+        <div class="dropdown rounded-btn text-black">
+          <div tabindex="0" class="m-1 btn">Symbolic Math</div> 
+          <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-72">
+            <li><a href="{{url_for('symdifferentiation')}}" class="btn btn-ghost btn-sm rounded-btn">Differentiation</a></li>
+            <li><a href="{{url_for('symintegration')}}" class="btn btn-ghost btn-sm rounded-btn">Integration</a></li>
+            <li><a href="{{url_for('symlimit')}}" class="btn btn-ghost btn-sm rounded-btn">Limit</a></li>
+            <li><a href="{{url_for('symsolve')}}" class="btn btn-ghost btn-sm rounded-btn">Solve</a></li>
+          </ul>
+        </div>
+>>>>>>> 74cc0f8b53840d120ba44e17efdd65fe1f0e20d5
       </div>
     </div>
-    <div class="flex-none px-2 mx-2 lg:flex invisible xl:visible">
+    <div class="flex-none px-2 mx-2 lg:flex invisible lg:visible">
       <div class="flex items-stretch">
         <a href="{{url_for('logs')}}" class="btn btn-ghost btn-sm rounded-btn" style="z-index: 1;">Logs</a>
         {% if loggedIn %}
@@ -35,7 +65,7 @@
         {% endif %}
       </div>
     </div>
-    <div class="flex-none xl:invisible">
+    <div class="flex-none lg:invisible">
       <button class="btn btn-square btn-ghost mobile-menu-button">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" x-show="!showMenu" viewBox="0 0 24 24"
           class="inline-block w-6 h-6 stroke-current">
@@ -45,6 +75,7 @@
     </div>
   </div>
   <ul class="mobile-menu shadow-lg bg-neutral text-neutral-content hidden w-100">
+<<<<<<< HEAD
     <li><a href="{{url_for('differentiation')}}" class="btn btn-ghost w-100" style="z-index: 1;">Differentiation</a></li>
     <li><a href="{{url_for('integration')}}" class="btn btn-ghost w-100" style="z-index: 1;">Integration</a></li>
     <li><a href="{{url_for('optimization')}}" class="btn btn-ghost w-100" style="z-index: 1;">Optimization</a></li>
@@ -52,6 +83,19 @@
     <li><a href="{{url_for('taylor_approximation')}}" class="btn btn-ghost w-100" style="z-index: 1;">Taylor Approximation</a></li>
     <li><a href="{{url_for('heat_equation')}}" class="btn btn-ghost w-100" style="z-index: 1;">Heat Equation</a></li>
     <li><a href="{{url_for('logs')}}" class="btn btn-ghost w-100" style="z-index: 1;">Logs</a></li>
+=======
+    <li><a href="{{url_for('differentiation')}}" class="btn btn-ghost w-100">Numerical Differentiation</a></li>
+    <li><a href="{{url_for('integration')}}" class="btn btn-ghost w-100">Numerical Integration</a></li>
+    <li><a href="{{url_for('optimization')}}" class="btn btn-ghost w-100">Numerical Optimization</a></li>
+    <li><a href="{{url_for('lagrange_interpolation')}}" class="btn btn-ghost w-100">Numerical Lagrange Interpolation</a></li>
+    <li><a href="{{url_for('taylor_approximation')}}" class="btn btn-ghost w-100">Numerical Taylor Approximation</a></li>
+    <li><a href="{{url_for('heat_equation')}}" class="btn btn-ghost w-100">Numerical Heat Equation</a></li>
+    <li><a href="{{url_for('symdifferentiation')}}" class="btn btn-ghost w-100">Symbolic Differentiation</a></li>
+    <li><a href="{{url_for('symintegration')}}" class="btn btn-ghost w-100">Symbolic Integration</a></li>
+    <li><a href="{{url_for('symlimit')}}" class="btn btn-ghost w-100">Symbolic Limit</a></li>
+    <li><a href="{{url_for('symsolve')}}" class="btn btn-ghost w-100">Symbolic Solve</a></li>
+    <li><a href="{{url_for('logs')}}" class="btn btn-ghost w-100">Logs</a></li>
+>>>>>>> 74cc0f8b53840d120ba44e17efdd65fe1f0e20d5
     {% if loggedIn %}
     <li><a href="{{url_for('history')}}" class="btn btn-ghost w-100" style="z-index: 1;">History</a></li>
     <li><a href="{{url_for('logout')}}" class="btn btn-ghost w-100" style="z-index: 1;">Log out</a></li>
@@ -63,7 +107,7 @@
   </ul>
 </nav>
 
-<body class="bg-white h-screen">
+<body class="h-screen">
   {% block content %}
   {% endblock %}
 </body>
