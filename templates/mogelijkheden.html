@@ -58,7 +58,7 @@
                 </a>
 
                 <header class="artikel flex items-center justify-between leading-tight p-2 md:p-4">
-                    <a href="{{ url_for('mogelijkheden') }}" class="btn text-lg">
+                    <a href="{{ url_for('mogelijkheden') }}" class="artikeltitel text-lg">
                             Integration
 
                     </a>
@@ -116,7 +116,7 @@
             <article class="overflow-hidden rounded-lg shadow-lg">
 
                 <a href="#">
-                    <img alt="Placeholder" class="block h-auto w-full" src="https://picsum.photos/600/400/?random">
+                    <img alt="Placeholder" class="block h-auto w-full" src="{{ url_for('static', filename='images/lagrange.png') }}">
                 </a>
 
                 <header class="artikel flex items-center justify-between leading-tight p-2 md:p-4">

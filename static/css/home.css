@@ -14,7 +14,7 @@
     background-color: rgba(0, 0, 0, 0.2);
     mix-blend-mode: darken;
     opacity: 0.5;
-    z-index: 0;
+    z-index: -1;
     top: 0vh;
 }
 #blad{
@@ -70,7 +70,7 @@
 
 }
 .text{
-	font-family: Lato;
+	font-family: "Lato";
 	font-style: normal;
 	font-weight: normal;
 	line-height: 30px;
@@ -154,8 +154,11 @@ body {
   	font-weight: 700;
   	letter-spacing: 7.4px;
 }
-.btn:link,
-.btn:visited {
+.butn{
+	background-color: white;
+}
+.butn:link,
+.butn:visited {
   	text-decoration: none;
   	padding: 10px 20px;
   	display: inline-block;
@@ -164,17 +167,17 @@ body {
   	position: relative;
 }
 
-.btn:hover {
+.butn:hover {
   	transform: translateY(-3px);
   	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.btn:active {
+.butn:active {
   	transform: translateY(-1px);
   	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-.btn-white {
+.butn-white {
   	background-color: #fff;
   	color: #777;
 	font-size: 14px;
