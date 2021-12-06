@@ -9,29 +9,29 @@
 </head>
 
 <nav>
-  <div class="navbar shadow-lg bg-neutral text-neutral-content">
+  <div class="navbar shadow-lg bg-neutral text-white">
     <div class="flex-1 px-2 mx-2">
-      <a href="{{url_for('home')}}" class="btn btn-ghost btn-sm rounded-btn">Home</a>
+      <a href="{{url_for('home')}}" class="btn btn-sm text-white rounded-btn" style="z-index: 1;">Home</a>
       <div class="invisible xl:visible">
-        <a href="{{url_for('differentiation')}}" class="btn btn-ghost btn-sm rounded-btn">Differentiation</a>
-        <a href="{{url_for('integration')}}" class="btn btn-ghost btn-sm rounded-btn">Integration</a>
-        <a href="{{url_for('optimization')}}" class="btn btn-ghost btn-sm rounded-btn">Optimization</a>
-        <a href="{{url_for('lagrange_interpolation')}}" class="btn btn-ghost btn-sm rounded-btn">Lagrange
+        <a href="{{url_for('differentiation')}}" class="btn btn-ghost text-white btn-sm rounded-btn" style="z-index: 1;">Differentiation</a>
+        <a href="{{url_for('integration')}}" class="btn btn-ghost btn-sm text-white rounded-btn" style="z-index: 1;">Integration</a>
+        <a href="{{url_for('optimization')}}" class="btn btn-ghost btn-sm text-white rounded-btn" style="z-index: 1;">Optimization</a>
+        <a href="{{url_for('lagrange_interpolation')}}" class="btn btn-ghost text-white btn-sm rounded-btn" style="z-index: 1;">Lagrange
           Interpolation</a>
-        <a href="{{url_for('taylor_approximation')}}" class="btn btn-ghost btn-sm rounded-btn">Taylor Approximation</a>
-        <a href="{{url_for('heat_equation')}}" class="btn btn-ghost btn-sm rounded-btn">Heat Equation</a>
+        <a href="{{url_for('taylor_approximation')}}" class="btn btn-ghost btn-sm rounded-btn" style="z-index: 1;">Taylor Approximation</a>
+        <a href="{{url_for('heat_equation')}}" class="btn btn-ghost btn-sm rounded-btn" style="z-index: 1;">Heat Equation</a>
       </div>
     </div>
     <div class="flex-none px-2 mx-2 lg:flex invisible xl:visible">
       <div class="flex items-stretch">
-        <a href="{{url_for('logs')}}" class="btn btn-ghost btn-sm rounded-btn">Logs</a>
+        <a href="{{url_for('logs')}}" class="btn btn-ghost btn-sm rounded-btn" style="z-index: 1;">Logs</a>
         {% if loggedIn %}
-        <a href="{{url_for('history')}}" class="btn btn-ghost btn-sm rounded-btn">History</a>
-        <a href="{{url_for('logout')}}" class="btn btn-ghost btn-sm rounded-btn">Log out</a>
+        <a href="{{url_for('history')}}" class="btn btn-ghost btn-sm rounded-btn" style="z-index: 1;">History</a>
+        <a href="{{url_for('logout')}}" class="btn btn-ghost btn-sm rounded-btn" style="z-index: 1;">Log out</a>
         {% endif %}
         {% if not loggedIn %}
-        <a href="{{url_for('register')}}" class="btn btn-ghost btn-sm rounded-btn">Register</a>
-        <a href="{{url_for('login')}}" class="btn btn-ghost btn-sm rounded-btn">Log in</a>
+        <a href="{{url_for('register')}}" class="btn btn-ghost btn-sm rounded-btn" style="z-index: 1;">Register</a>
+        <a href="{{url_for('login')}}" class="btn btn-ghost btn-sm rounded-btn" style="z-index: 1;">Log in</a>
         {% endif %}
       </div>
     </div>
@@ -45,20 +45,20 @@
     </div>
   </div>
   <ul class="mobile-menu shadow-lg bg-neutral text-neutral-content hidden w-100">
-    <li><a href="{{url_for('differentiation')}}" class="btn btn-ghost w-100">Differentiation</a></li>
-    <li><a href="{{url_for('integration')}}" class="btn btn-ghost w-100">Integration</a></li>
-    <li><a href="{{url_for('optimization')}}" class="btn btn-ghost w-100">Optimization</a></li>
-    <li><a href="{{url_for('lagrange_interpolation')}}" class="btn btn-ghost w-100">Lagrange Interpolation</a></li>
-    <li><a href="{{url_for('taylor_approximation')}}" class="btn btn-ghost w-100">Taylor Approximation</a></li>
-    <li><a href="{{url_for('heat_equation')}}" class="btn btn-ghost w-100">Heat Equation</a></li>
-    <li><a href="{{url_for('logs')}}" class="btn btn-ghost w-100">Logs</a></li>
+    <li><a href="{{url_for('differentiation')}}" class="btn btn-ghost w-100" style="z-index: 1;">Differentiation</a></li>
+    <li><a href="{{url_for('integration')}}" class="btn btn-ghost w-100" style="z-index: 1;">Integration</a></li>
+    <li><a href="{{url_for('optimization')}}" class="btn btn-ghost w-100" style="z-index: 1;">Optimization</a></li>
+    <li><a href="{{url_for('lagrange_interpolation')}}" class="btn btn-ghost w-100" style="z-index: 1;">Lagrange Interpolation</a></li>
+    <li><a href="{{url_for('taylor_approximation')}}" class="btn btn-ghost w-100" style="z-index: 1;">Taylor Approximation</a></li>
+    <li><a href="{{url_for('heat_equation')}}" class="btn btn-ghost w-100" style="z-index: 1;">Heat Equation</a></li>
+    <li><a href="{{url_for('logs')}}" class="btn btn-ghost w-100" style="z-index: 1;">Logs</a></li>
     {% if loggedIn %}
-    <li><a href="{{url_for('history')}}" class="btn btn-ghost w-100">History</a></li>
-    <li><a href="{{url_for('logout')}}" class="btn btn-ghost w-100">Log out</a></li>
+    <li><a href="{{url_for('history')}}" class="btn btn-ghost w-100" style="z-index: 1;">History</a></li>
+    <li><a href="{{url_for('logout')}}" class="btn btn-ghost w-100" style="z-index: 1;">Log out</a></li>
     {% endif %}
     {% if not loggedIn %}
-    <li><a href="{{url_for('register')}}" class="btn btn-ghost w-100">Register</a></li>
-    <li><a href="{{url_for('login')}}" class="btn btn-ghost w-100">Log in</a></li>
+    <li><a href="{{url_for('register')}}" class="btn btn-ghost w-100" style="z-index: 1;">Register</a></li>
+    <li><a href="{{url_for('login')}}" class="btn btn-ghost w-100" style="z-index: 1;">Log in</a></li>
     {% endif %}
   </ul>
 </nav>
