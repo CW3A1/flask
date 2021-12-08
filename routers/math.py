@@ -202,5 +202,5 @@ def status(task_id):
             blocks={"Function": options['f'], "X0": options['x0'], "Direction": options['dir'], "Result": result['result']})
         if operation == "symsolve":
             return render_template("result.html", operation="Roots",
-            blocks={"Function": options['f'], "Result": "<br>".join(result['result'])})
+            blocks={"Function": options['f'], "Result": "<li>" + "</li><li>".join(result['result']) + "</li>"})
     return "Unauthorized"
