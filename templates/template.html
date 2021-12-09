@@ -35,21 +35,21 @@
             <li><a href="{{url_for('symdifferentiation')}}" class="btn btn-ghost btn-sm rounded-btn">Differentiation</a></li>
             <li><a href="{{url_for('symintegration')}}" class="btn btn-ghost btn-sm rounded-btn">Integration</a></li>
             <li><a href="{{url_for('symlimit')}}" class="btn btn-ghost btn-sm rounded-btn">Limit</a></li>
-            <li><a href="{{url_for('symsolve')}}" class="btn btn-ghost btn-sm rounded-btn">Solve</a></li>
+            <li><a href="{{url_for('symsolve')}}" class="btn btn-ghost btn-sm rounded-btn">Roots</a></li>
           </ul>
         </div>
       </div>
     </div>
     <div class="flex-none px-2 mx-2 lg:flex invisible lg:visible">
       <div class="flex items-stretch">
-        <a href="{{url_for('logs')}}" class="btn btn-ghost btn-sm rounded-btn" style="z-index: 1;">Logs</a>
+        <a href="{{url_for('logs')}}" class="btn btn-ghost btn-sm rounded-btn">Logs</a>
         {% if loggedIn %}
-        <a href="{{url_for('history')}}" class="btn btn-ghost btn-sm rounded-btn" style="z-index: 1;">History</a>
-        <a href="{{url_for('logout')}}" class="btn btn-ghost btn-sm rounded-btn" style="z-index: 1;">Log out</a>
+        <a href="{{url_for('history')}}" class="btn btn-ghost btn-sm rounded-btn">History</a>
+        <a href="{{url_for('logout')}}" class="btn btn-ghost btn-sm rounded-btn">Log out</a>
         {% endif %}
         {% if not loggedIn %}
-        <a href="{{url_for('register')}}" class="btn btn-ghost btn-sm rounded-btn" style="z-index: 1;">Register</a>
-        <a href="{{url_for('login')}}" class="btn btn-ghost btn-sm rounded-btn" style="z-index: 1;">Log in</a>
+        <a href="{{url_for('register')}}" class="btn btn-ghost btn-sm rounded-btn">Register</a>
+        <a href="{{url_for('login')}}" class="btn btn-ghost btn-sm rounded-btn">Log in</a>
         {% endif %}
       </div>
     </div>
@@ -72,15 +72,15 @@
     <li><a href="{{url_for('symdifferentiation')}}" class="btn btn-ghost w-100">Symbolic Differentiation</a></li>
     <li><a href="{{url_for('symintegration')}}" class="btn btn-ghost w-100">Symbolic Integration</a></li>
     <li><a href="{{url_for('symlimit')}}" class="btn btn-ghost w-100">Symbolic Limit</a></li>
-    <li><a href="{{url_for('symsolve')}}" class="btn btn-ghost w-100">Symbolic Solve</a></li>
+    <li><a href="{{url_for('symsolve')}}" class="btn btn-ghost w-100">Symbolic Roots</a></li>
     <li><a href="{{url_for('logs')}}" class="btn btn-ghost w-100">Logs</a></li>
     {% if loggedIn %}
-    <li><a href="{{url_for('history')}}" class="btn btn-ghost w-100" style="z-index: 1;">History</a></li>
-    <li><a href="{{url_for('logout')}}" class="btn btn-ghost w-100" style="z-index: 1;">Log out</a></li>
+    <li><a href="{{url_for('history')}}" class="btn btn-ghost w-100">History</a></li>
+    <li><a href="{{url_for('logout')}}" class="btn btn-ghost w-100">Log out</a></li>
     {% endif %}
     {% if not loggedIn %}
-    <li><a href="{{url_for('register')}}" class="btn btn-ghost w-100" style="z-index: 1;">Register</a></li>
-    <li><a href="{{url_for('login')}}" class="btn btn-ghost w-100" style="z-index: 1;">Log in</a></li>
+    <li><a href="{{url_for('register')}}" class="btn btn-ghost w-100">Register</a></li>
+    <li><a href="{{url_for('login')}}" class="btn btn-ghost w-100">Log in</a></li>
     {% endif %}
   </ul>
 </nav>
