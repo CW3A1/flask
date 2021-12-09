@@ -184,19 +184,19 @@ def status(task_id):
             blocks={"Lower bound for x": options['xl'], "Upper bound for x": options['xu'], "Lower bound for y": options['yl'], "Upper bound for y": options['yu'], "Result coordinates": f"({result['vector'][0]}, {result['vector'][1]})", "Function evaluation at result": result['vector'][2]})
         if operation == "lint":
             return render_template("result.html", operation="Lagrange interpolation",
-            blocks={"X-values": options['a'], "Y-values": options['b'], "Result": result['result'], "Plot": f"<img src='{result['link']}' alt='Interpolation of the given function' height='500' width='500'>"})
+            blocks={"X-values": options['a'], "Y-values": options['b'], "Result": f"\({result['result']}\)", "Plot": f"<img src='{result['link']}' alt='Interpolation of the given function' height='500' width='500'>"})
         if operation == "taprox":
             return render_template("result.html", operation="Taylor approximation",
-            blocks={"Function": options['f'], "Point": options['x0'], "Order": options['order'], "Result": result['result'], "Plot": f"<img src='{result['link']}' alt='Approximation of the Taylor polynomial' height='500' width='500'>"})
+            blocks={"Function": options['f'], "Point": options['x0'], "Order": options['order'], "Result": f"\({result['result']}\)", "Plot": f"<img src='{result['link']}' alt='Approximation of the Taylor polynomial' height='500' width='500'>"})
         if operation == "heateq":
             return render_template("result.html", operation="Heat equation",
             blocks={"Horizontal length": options['L_X'], "Vertical length": options['L_Y'], "Meshgrid step size": options['H'], "Animation duration": options['T'], "Animation FPS": options['FPS'], "Boundary condition": options['BC'], "Animation": f"<img src='{result['link']}' alt='Animation of the heat distribution' height='500' width='500'>"})
         if operation == "symdiff":
             return render_template("result.html", operation="Differentiation",
-            blocks={"Function": options['f'], "Order": options['order'], "Result": result['result']})
+            blocks={"Function": options['f'], "Order": options['order'], "Result": f"\({result['result']}\)"})
         if operation == "symint":
             return render_template("result.html", operation="Integration",
-            blocks={"Function": options['f'], "Result": result['result']})
+            blocks={"Function": options['f'], "Result": f"\({result['result']}\)"})
         if operation == "symlimit":
             return render_template("result.html", operation="Limits",
             blocks={"Function": options['f'], "X0": options['x0'], "Direction": options['dir'], "Result": result['result']})
