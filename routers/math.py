@@ -175,32 +175,32 @@ def status(task_id):
             return "There was an error running your task, no result found."
         if operation == "diff":
             return render_template("result.html", operation="Differentiation",
-            blocks={"Function": options['f'], "Point": f"\({options['a']}\)", "Order": f"\({options['order']}\)", "Result": f"\({result['result']}\)", "Plot": f"<img src='{result['link']}' alt='Plot of the derivative' height='500' width='500'>"})
+            blocks={"Function": f"\({result['pstring']}\)", "Point": f"\({options['a']}\)", "Order": f"\({options['order']}\)", "Result": f"\({result['result']}\)", "Plot": f"<img src='{result['link']}' alt='Plot of the derivative' height='500' width='500'>"})
         if operation == "int":
             return render_template("result.html", operation="Integration",
-            blocks={"Function": options['f'], "Lower bound": f"\({options['a']}\)", "Upper bound": f"\({options['b']}\)", "Result": f"\({result['result']}\)", "Max error on result": result['err'], "Plot": f"<img src='{result['link']}' alt='Integration of the given function' height='500' width='500'>"})
+            blocks={"Function": f"\({result['pstring']}\)", "Lower bound": f"\({options['a']}\)", "Upper bound": f"\({options['b']}\)", "Result": f"\({result['result']}\)", "Max error on result": result['err'], "Plot": f"<img src='{result['link']}' alt='Integration of the given function' height='500' width='500'>"})
         if operation == "opt":
             return render_template("result.html", operation="Optimization",
-            blocks={"Function": options['f'], "Lower bound for x": f"\({options['xl']}\)", "Upper bound for x": f"\({options['xu']}\)", "Lower bound for y": f"\({options['yl']}\)", "Upper bound for y": f"\({options['yu']}\)", "Result coordinates": f"\(({result['vector'][0]}, {result['vector'][1]})\)", "Function evaluation at result": f"\({result['vector'][2]}\)"})
+            blocks={"Function": f"\({result['pstring']}\)", "Lower bound for x": f"\({options['xl']}\)", "Upper bound for x": f"\({options['xu']}\)", "Lower bound for y": f"\({options['yl']}\)", "Upper bound for y": f"\({options['yu']}\)", "Result coordinates": f"\(({result['vector'][0]}, {result['vector'][1]})\)", "Function evaluation at result": f"\({result['vector'][2]}\)"})
         if operation == "lint":
             return render_template("result.html", operation="Lagrange interpolation",
             blocks={"X-values": f"\({options['a']}\)", "Y-values": f"\({options['b']}\)", "Result": f"\({result['result']}\)", "Plot": f"<img src='{result['link']}' alt='Interpolation of the given function' height='500' width='500'>"})
         if operation == "taprox":
             return render_template("result.html", operation="Taylor approximation",
-            blocks={"Function": options['f'], "Point": f"\({options['x0']}\)", "Order": f"\({options['order']}\)", "Result": f"\({result['result']}\)", "Plot": f"<img src='{result['link']}' alt='Approximation of the Taylor polynomial' height='500' width='500'>"})
+            blocks={"Function": f"\({result['pstring']}\)", "Point": f"\({options['x0']}\)", "Order": f"\({options['order']}\)", "Result": f"\({result['result']}\)", "Plot": f"<img src='{result['link']}' alt='Approximation of the Taylor polynomial' height='500' width='500'>"})
         if operation == "heateq":
             return render_template("result.html", operation="Heat equation",
             blocks={"Horizontal length": f"\({options['L_X']}\)", "Vertical length": f"\({options['L_Y']}\)", "Meshgrid step size": f"\({options['H']}\)", "Animation duration": f"\({options['T']}\)", "Animation FPS": f"\({options['FPS']}\)", "Boundary condition": options['BC'], "Animation": f"<img src='{result['link']}' alt='Animation of the heat distribution' height='500' width='500'>"})
         if operation == "symdiff":
             return render_template("result.html", operation="Differentiation",
-            blocks={"Function": options['f'], "Order": f"\({options['o']}\)", "Result": f"\({result['result']}\)"})
+            blocks={"Function": f"\({result['pstring']}\)", "Order": f"\({options['o']}\)", "Result": f"\({result['result']}\)"})
         if operation == "symint":
             return render_template("result.html", operation="Integration",
-            blocks={"Function": options['f'], "Result": f"\({result['result']}\)"})
+            blocks={"Function": f"\({result['pstring']}\)", "Result": f"\({result['result']}\)"})
         if operation == "symlimit":
             return render_template("result.html", operation="Limits",
-            blocks={"Function": options['f'], "X0": f"\({options['x0']}\)", "Direction": f"\({options['dir']}\)", "Result": f"\({result['result']}\)"})
+            blocks={"Function": f"\({result['pstring']}\)", "X0": f"\({options['x0']}\)", "Direction": f"\({options['dir']}\)", "Result": f"\({result['result']}\)"})
         if operation == "symsolve":
             return render_template("result.html", operation="Roots",
-            blocks={"Function": options['f'], "Result": "<li>\(" + "\)</li><li>\(".join(result['result']) + "\)</li>"})
+            blocks={"Function": f"\({result['pstring']}\)", "Result": "<li>\(" + "\)</li><li>\(".join(result['result']) + "\)</li>"})
     return "Unauthorized"
