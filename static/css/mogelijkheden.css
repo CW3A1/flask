@@ -35,7 +35,7 @@ body{
 footer{
     display: block;
 }
-.artikeltitel,.btn{
+.artikeltitel/*,.btn*/{
     color: white;
     font-family: "Nova Square";
     font-size: 25px;
@@ -77,7 +77,7 @@ footer{
     top: 15vh;
 }
 
-
+/*
 
 .btn:link,
 .btn:visited {
@@ -103,4 +103,9 @@ footer{
   	background-color: #fff;
   	color: #777;
 	font-size: 14px;
+}
+*/
+.fotoss{
+    height: 196px;
+    width: 100%;
 }
