@@ -175,7 +175,7 @@ def status(task_id):
             return "There was an error running your task, no result found."
         if operation == "diff":
             return render_template("result.html", operation="Differentiation",
-            blocks={"Function": options['f'], "Point": options['a'], "Order": options['order'], "Result": result['result']})
+            blocks={"Function": options['f'], "Point": options['a'], "Order": options['order'], "Result": result['result'], "Plot": f"<img src='{result['link']}' alt='Plot of the derivative' height='500' width='500'>"})
         if operation == "int":
             return render_template("result.html", operation="Integration",
             blocks={"Function": options['f'], "Lower bound": options['a'], "Upper bound": options['b'], "Result": result['result'], "Max error on result": result['err'], "Plot": f"<img src='{result['link']}' alt='Integration of the given function' height='500' width='500'>"})
