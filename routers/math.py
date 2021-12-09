@@ -178,7 +178,7 @@ def status(task_id):
             blocks={"Function": f"\({result['pstring']}\)", "Point": f"\({options['a']}\)", "Order": f"\({options['order']}\)", "Result": f"\({result['result']}\)", "Plot": f"<img src='{result['link']}' alt='Plot of the derivative' height='500' width='500'>"})
         if operation == "int":
             return render_template("result.html", operation="Integration",
-            blocks={"Function": f"\({result['pstring']}\)", "Lower bound": f"\({options['a']}\)", "Upper bound": f"\({options['b']}\)", "Result": f"\({result['result']}\)", "Max error on result": result['err'], "Plot": f"<img src='{result['link']}' alt='Integration of the given function' height='500' width='500'>"})
+            blocks={"Function": f"\({result['pstring']}\)", "Lower bound": f"\({options['a']}\)", "Upper bound": f"\({options['b']}\)", "Result": f"\({result['result']}\)", "Max error on result": f"\({result['err']}\)", "Plot": f"<img src='{result['link']}' alt='Integration of the given function' height='500' width='500'>"})
         if operation == "opt":
             return render_template("result.html", operation="Optimization",
             blocks={"Function": f"\({result['pstring']}\)", "Lower bound for x": f"\({options['xl']}\)", "Upper bound for x": f"\({options['xu']}\)", "Lower bound for y": f"\({options['yl']}\)", "Upper bound for y": f"\({options['yu']}\)", "Result coordinates": f"\(({result['vector'][0]}, {result['vector'][1]})\)", "Function evaluation at result": f"\({result['vector'][2]}\)"})
