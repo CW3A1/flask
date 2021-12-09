@@ -193,7 +193,7 @@ def status(task_id):
             blocks={"Horizontal length": options['L_X'], "Vertical length": options['L_Y'], "Meshgrid step size": options['H'], "Animation duration": options['T'], "Animation FPS": options['FPS'], "Boundary condition": options['BC'], "Animation": f"<img src='{result['link']}' alt='Animation of the heat distribution' height='500' width='500'>"})
         if operation == "symdiff":
             return render_template("result.html", operation="Differentiation",
-            blocks={"Function": options['f'], "Order": options['order'], "Result": f"\({result['result']}\)"})
+            blocks={"Function": options['f'], "Order": options['o'], "Result": f"\({result['result']}\)"})
         if operation == "symint":
             return render_template("result.html", operation="Integration",
             blocks={"Function": options['f'], "Result": f"\({result['result']}\)"})
