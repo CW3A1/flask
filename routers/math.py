@@ -195,7 +195,7 @@ def status(task_id):
             return render_template("result.html", operation="Differentiation",
             blocks={"Function": options['f'], "Order": options['order'], "Result": result['result']})
         if operation == "symint":
-            return render_template("result.html", operation="Integratiojn",
+            return render_template("result.html", operation="Integration",
             blocks={"Function": options['f'], "Result": result['result']})
         if operation == "symlimit":
             return render_template("result.html", operation="Limits",

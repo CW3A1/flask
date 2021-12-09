@@ -53,20 +53,15 @@
 	display: block;
     position: relative;
     text-align: center;
-    top: -58%;
+    top: 14%;
     left: 19vw;
     background-color: darkgray;
     width: 30vw;
     height: 0.5px;
 }
 #text1{
-	position: relative;
-	left: 5%;
-	top: -54vh;
-	width: 90%;
-	height: 150px;
-	font-size: 18px;
-	z-index: 2;
+    font-size: 18px;
+    z-index: 2;
 
 }
 .text{
@@ -80,28 +75,24 @@
 
 }
 #kul{
-	position: relative;
-	width: 20%;
-	height: auto;
-	top: -46vh;
+	bottom: -93px;
+    position: relative;
+    width: 20%;
+    height: auto;
     left: 5%;
-	z-index: 2;
+    z-index: 2;
 }
 #learnmore{
 	position: relative;
-	top: -54vh;
     left: 50%;
-    transform: translate(-50%, -29%);
-	z-index: 2;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 #text2{
-	position: relative;
-    width: 63%;
-    top: -58vh;
-    left: 31%;
-	font-size: 16px;
-	z-index: 2;
+    font-size: 18px;
+    z-index: 2;
 }
+
 
 body {
   	line-height: 1.7;
@@ -109,12 +100,16 @@ body {
 }
 
 .header {
-  	height: 100vh;
-  	z-index: 1;
-	background-size: cover;
-  	background-position: top;
-  	position: relative;
-	  z-index: 1;
+	height: 200px;
+    width: 528px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 16px);
+    align-content: center;
+    background-size: cover;
+    background-position: top;
+    position: relative;
+    z-index: 1;
 }
 
 .brand-box {
@@ -126,11 +121,11 @@ body {
 .brand { font-size: 20px; }
 
 .text-box {
-  	position: absolute;
-  	top: 20%;
-  	left: 50%;
-  	transform: translate(-50%, -50%);
-  	text-align: center;
+	position: relative;
+    top: 110px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
 }
 
 .heading-primary {
@@ -181,4 +176,31 @@ body {
   	background-color: #fff;
   	color: #777;
 	font-size: 14px;
+}
+#text1div{
+	position: relative;
+    left: 5%;
+    top: 103px;
+    width: 90%;
+    height: 150px;
+}
+#text2div{
+	position: relative;
+    width: 65%;
+    top: -20px;
+    right: -30%;
+    transform: translate(0%, 0px);
+}
+#knop2{
+	position: relative;
+    height: 150px;
+    width: 90%;
+    top: 75px;
+    left: 50%;
+    transform: translate(-50%, 0px);
+}
+#divtextlogo{
+	width: 100%;
+    position: relative;
+    left: 0%;
 }
