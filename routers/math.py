@@ -115,7 +115,7 @@ def symdifferentiation():
             "operation": "symdiff",
             "options": {
                 "f": request.form["f"],
-                "order": request.form["orde"]
+                "o": request.form["orde"]
             }
         }
         r = post(f"{DB_URL}/api/task/add", json=payload, headers={"Authorization": "Bearer " + request.cookies.get("jwt")} if request.cookies.get("jwt") else {}).json()
