@@ -57,7 +57,25 @@ footer{
     transform: translateY(20px)
     
 }
-
+.categorie{
+    text-transform: uppercase;
+    font-family: monospace;
+    letter-spacing: 2px;
+    font-style: normal;
+	font-weight: normal;
+    font-size: 36px;
+    color: #1c394db3;
+    text-align: center;
+    position: relative;
+}
+#symbolic{
+    position: relative;
+    top: 20vh;
+}
+#symbolict{
+    position: relative;
+    top: 15vh;
+}
 
 
 
