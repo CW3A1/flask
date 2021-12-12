@@ -101,7 +101,7 @@ def heat_equation():
                 "H": request.form["H"],
                 "T": request.form["T"],
                 "FPS": request.form["FPS"],
-                "BC": request.form["BC"],
+                "BOUNDARY_CONDITION": request.form["BC"],
             }
         }
         r = post(f"{DB_URL}/api/task/add", json=payload, headers={"Authorization": "Bearer " + request.cookies.get("jwt")} if request.cookies.get("jwt") else {}).json()
@@ -190,7 +190,7 @@ def status(task_id):
             blocks={"Function": f"\({result['pstring']}\)", "Point": f"\({options['x0']}\)", "Order": f"\({options['order']}\)", "Result": f"\({result['result']}\)", "Plot": f"<img src='{result['link']}' alt='Approximation of the Taylor polynomial' height='500' width='500'>"})
         if operation == "heateq":
             return render_template("result.html", operation="Heat equation",
-            blocks={"Horizontal length": f"\({options['L_X']}\)", "Vertical length": f"\({options['L_Y']}\)", "Meshgrid step size": f"\({options['H']}\)", "Animation duration": f"\({options['T']}\)", "Animation FPS": f"\({options['FPS']}\)", "Boundary condition": options['BC'], "Animation": f"<img src='{result['link']}' alt='Animation of the heat distribution' height='500' width='500'>"})
+            blocks={"Horizontal length": f"\({options['L_X']}\)", "Vertical length": f"\({options['L_Y']}\)", "Meshgrid step size": f"\({options['H']}\)", "Animation duration": f"\({options['T']}\)", "Animation FPS": f"\({options['FPS']}\)", "Boundary condition": options['BOUNDARY_CONDITION'], "Animation": f"<img src='{result['link']}' alt='Animation of the heat distribution' height='500' width='500'>"})
         if operation == "symdiff":
             return render_template("result.html", operation="Differentiation",
             blocks={"Function": f"\({result['pstring']}\)", "Order": f"\({options['o']}\)", "Result": f"\({result['result']}\)"})
