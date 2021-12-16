@@ -5,6 +5,9 @@
     filter:brightness(80%);
     z-index: -99999;
 }
+/* Set the background color of body to tan */
+  /* On screens that are 992px or less, set the background color to blue */
+
 #achtergrond{
     position: fixed;
     background-attachment: fixed;
@@ -17,6 +20,22 @@
     z-index: -1;
     top: 0vh;
 }
+
+@media screen and (max-width: 900px) {
+    #achtergrond{
+        position: fixed;
+        background-attachment: fixed;
+        width: max-content;
+        height: 100vh;
+        background-repeat: no-repeat;
+        mix-blend-mode: darken;
+        background-color: gray;
+        opacity: 0;
+        z-index: -1;
+        top: 0vh;
+    } 
+}
+
 #blad{
     position: relative;
     top:12vw;

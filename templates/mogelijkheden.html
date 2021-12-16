@@ -19,31 +19,29 @@
 
         <!-- Column -->
         <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
-
             <!-- Article -->
-            <article class="overflow-hidden rounded-lg shadow-lg">
+                <button href="{{url_for('differentiation')}}" class="overflow-hidden rounded-lg shadow-lg">
 
-                <a href="#">
-                    <img alt="Placeholder" class="block h-auto w-full" src="{{ url_for('static', filename='images/differentiation.png') }}">
-                </a>
+                    <div href="#">
+                        <img alt="Placeholder" class="block h-auto w-full" src="{{ url_for('static', filename='images/differentiation.png') }}">
+                    </div>
 
-                <header class="artikel flex items-center justify-between leading-tight p-2 md:p-4">
-                    <h1 class="artikeltitel text-lg">
+                    <header class="artikel flex items-center justify-between leading-tight p-2 md:p-4">
+                        <a href="{{url_for('heat_equation')}}" class="artikeltitel text-lg">
 
-                            Differentiation
-                    </h1>
-                </header>
+                                Differentiation
+                        </a>
+                    </header>
 
-                <footer class="voet flex items-center justify-between leading-none p-2 md:p-4">
-                        <p class="voettekst ml-2 text-sm">
-                            Calculate the derivative of a funtion in any point, with any order and receive visual results.
-                        </p>
-                    
-                </footer>
+                    <footer class="voet flex items-center justify-between leading-none p-2 md:p-4">
+                            <p class="voettekst ml-2 text-sm">
+                                Calculate the derivative of a funtion in any point, with any order and receive visual results.
+                            </p>
+                        
+                    </footer>
 
-            </article>
-
-            <!-- END Article -->
+                </button>
+                        <!-- END Article -->
 
         </div>
         <!-- END Column -->
@@ -180,7 +178,7 @@
         <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
 
             <!-- Article -->
-            <article class="overflow-hidden rounded-lg shadow-lg">
+            <article class="overflow-hidden rounded-lg shadow-lg" href="">
 
                 <a href="#">
                     <img alt="Placeholder" class="block h-auto w-full" src="{{ url_for('static', filename='images/heatequation.png') }}">
